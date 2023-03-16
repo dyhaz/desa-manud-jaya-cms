@@ -3,7 +3,7 @@ export interface Table {
     name: string;
     position: string;
     office: string;
-    age: number;
+    age: any;
     date: string;
     salary: string;
 }

@@ -75,7 +75,7 @@ export class AdvancedtableComponent implements OnInit {
   };
 
   ngOnInit() {
-    this.breadCrumbItems = [{ label: 'Tables' }, { label: 'Advanced Table', active: true }];
+    this.breadCrumbItems = [{ label: 'Tables' }, { label: 'Program Desa', active: true }];
     /**
      * fetch data
      */

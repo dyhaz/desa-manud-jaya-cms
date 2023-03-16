@@ -48,4 +48,4 @@ Thumbs.db
 
 
 # Theme Files
-/src/assets/scss/**/*.scss
+# /src/assets/scss/**/*.scss

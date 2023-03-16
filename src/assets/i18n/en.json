@@ -268,10 +268,10 @@
       }
     },
     "TABLES": {
-      "TEXT": "Tables",
+      "TEXT": "Data Induk",
       "LIST": {
         "BASIC": "Basic Tables",
-        "ADVANCED": "Advanced Table"
+        "ADVANCED": "Program Desa"
       }
     },
     "CHARTS": {
