@@ -14,7 +14,8 @@ export const environment = {
     messagingSenderId: '',
     appId: '',
     measurementId: ''
-  }
+  },
+  apiUrl: 'https://api.simanud.asia/api'
 };
 
 
