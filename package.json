@@ -8,9 +8,88 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "build-prod": "node --max_old_space_size=8000 ./node_modules/@angular/cli/bin/ng build --prod"
+    "build-prod": "node --max_old_space_size=8000 ./node_modules/@angular/cli/bin/ng build --prod",
+    "openapi": "openapi --input https://api.simanud.asia/docs/api-docs.json --output ./src/app/core/http/api --client angular"
   },
   "private": true,
+  "overrides": {
+    "openapi-typescript-codegen": {
+      "@angular/common": "13.0.2",
+      "@angular/core": "13.0.2"
+    },
+    "@agm/core": {
+      "@angular/common": "13.0.2",
+      "@angular/core": "13.0.2"
+    },
+    "@angular/fire": {
+      "@angular/common": "13.0.2",
+      "@angular/core": "13.0.2",
+      "@angular/platform-browser": "13.0.2",
+      "@angular/platform-browser-dynamic": "13.0.2"
+    },
+    "@fullcalendar/angular": {
+      "@angular/common": "13.0.2",
+      "@angular/core": "13.0.2"
+    },
+    "@ng-bootstrap/ng-bootstrap": {
+      "@angular/common": "13.0.2",
+      "@angular/core": "13.0.2",
+      "@angular/forms": "13.0.2",
+      "@angular/localize": "13.0.2"
+    },
+    "@ng-select/ng-select": {
+      "@angular/common": "13.0.2",
+      "@angular/core": "13.0.2",
+      "@angular/forms": "13.0.2"
+    },
+    "@nicky-lenaers/ngx-scroll-to": {
+      "@angular/common": "13.0.2",
+      "@angular/core": "13.0.2",
+      "tslib": "2.3.0"
+    },
+    "karma-jasmine-html-reporter": {
+      "jasmine-core": "3.6.0"
+    },
+    "ng-apexcharts": {
+      "@angular/common": "13.0.2",
+      "@angular/core": "13.0.2"
+    },
+    "ng-chartist": {
+      "@types/chartist": "0.11.0",
+      "@angular/common": "13.0.2",
+      "@angular/core": "13.0.2"
+    },
+    "ng2-smart-table": {
+      "@angular/common": "13.0.2",
+      "@angular/core": "13.0.2",
+      "@angular/forms": "13.0.2"
+    },
+    "ngx-chartist": {
+      "@angular/common": "13.0.2",
+      "@angular/core": "13.0.2"
+    },
+    "ngx-cookie-service": {
+      "@angular/common": "13.0.2",
+      "@angular/core": "13.0.2"
+    },
+    "ngx-owl-carousel-o": {
+      "@angular/common": "13.0.2",
+      "@angular/core": "13.0.2"
+    },
+    "ngx-ui-switch": {
+      "@angular/common": "13.0.2",
+      "@angular/core": "13.0.2",
+      "@angular/forms": "13.0.2"
+    },
+    "ngx-youtube-player": {
+      "@angular/common": "13.0.2",
+      "@angular/core": "13.0.2"
+    },
+    "simplebar-angular": {
+      "@angular/common": "13.0.2",
+      "@angular/core": "13.0.2"
+    }
+  },
   "dependencies": {
     "@agm/core": "^1.1.0",
     "@angular/animations": "^13.0.2",
@@ -95,6 +174,7 @@
     "karma-coverage-istanbul-reporter": "~3.0.2",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "^1.5.0",
+    "openapi-typescript-codegen": "^0.23.0",
     "protractor": "~7.0.0",
     "ts-node": "~7.0.0",
     "typescript": "~4.4.4"
