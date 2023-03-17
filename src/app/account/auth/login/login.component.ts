@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { AuthenticationService } from '../../../core/services/auth.service';
+// import { AuthenticationService } from '../../../core/services/auth.service';
 import { AuthfakeauthenticationService } from '../../../core/services/authfake.service';
 
 import { ActivatedRoute, Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 
 import { environment } from '../../../../environments/environment';
+import { AuthenticationService } from "../../../core/http/api";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -29,13 +31,19 @@ export class LoginComponent implements OnInit {
   year: number = new Date().getFullYear();
 
   // tslint:disable-next-line: max-line-length
-  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private authenticationService: AuthenticationService,
-    private authFackservice: AuthfakeauthenticationService) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private route: ActivatedRoute,
+    private router: Router,
+    // private authenticationService: AuthenticationService,
+    private authFackservice: AuthfakeauthenticationService,
+    private auth: AuthenticationService
+  ) { }
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
-      email: ['admin@themesbrand.com', [Validators.required, Validators.email]],
-      password: ['123456', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required]],
     });
 
     // reset login status
@@ -51,7 +59,7 @@ export class LoginComponent implements OnInit {
   /**
    * Form submit
    */
-  onSubmit() {
+  async onSubmit() {
     this.submitted = true;
 
     // stop here if form is invalid
@@ -59,12 +67,21 @@ export class LoginComponent implements OnInit {
       return;
     } else {
       if (environment.defaultauth === 'firebase') {
-        this.authenticationService.login(this.f.email.value, this.f.password.value).then((res: any) => {
+        // this.authenticationService.login(this.f.email.value, this.f.password.value).then((res: any) => {
+        //   this.router.navigate(['/dashboard']);
+        // })
+        //   .catch(error => {
+        //     this.error = error ? error : '';
+        //   });
+      } else if (environment.defaultauth === 'api') {
+        this.auth.login({
+          email: this.f.email.value,
+          password: this.f.password.value
+        }).subscribe(() => {
           this.router.navigate(['/dashboard']);
-        })
-          .catch(error => {
-            this.error = error ? error : '';
-          });
+        }, async (result) => {
+          await Swal.fire('Error', result);
+        });
       } else {
         this.authFackservice.login(this.f.email.value, this.f.password.value)
           .pipe(first())

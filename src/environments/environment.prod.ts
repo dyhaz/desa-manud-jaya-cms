@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  defaultauth: 'fackbackend',
+  defaultauth: 'api',
   firebaseConfig: {
     apiKey: '',
     authDomain: '',
@@ -10,5 +10,8 @@ export const environment = {
     messagingSenderId: '',
     appId: '',
     measurementId: ''
+  },
+  apiConfig: {
+    baseUrl: 'https://api.simanud.asia'
   }
 };

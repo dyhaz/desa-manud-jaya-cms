@@ -18,7 +18,7 @@ export class PelaksanaProgramService {
      * @returns any List of PelaksanaPrograms
      * @throws ApiError
      */
-    public bae725263241C5E29Db5Dd14Df557(): Observable<any> {
+    public getAllPelaksanaProgram(): Observable<any> {
         return __request(OpenAPI, this.http, {
             method: 'GET',
             url: '/api/pelaksana-program',
@@ -31,7 +31,7 @@ export class PelaksanaProgramService {
      * @returns any PelaksanaProgram created
      * @throws ApiError
      */
-    public b6Ef468Fac90Ce30Da497Ed9Bce68855(
+    public createPelaksanaProgram(
 requestBody: {
 nama_pelaksana: string;
 jabatan: string;
@@ -79,7 +79,7 @@ id: any,
      * @returns any Success
      * @throws ApiError
      */
-    public c9042120752F7F4167E9(
+    public updatePelaksanaProgram(
 id: number,
 requestBody: {
 nama_pelaksana: string;

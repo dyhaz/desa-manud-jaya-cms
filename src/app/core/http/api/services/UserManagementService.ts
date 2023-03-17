@@ -26,7 +26,7 @@ export class UserManagementService {
     }
 
     /**
-     * Create a new user
+     * createUser
      * @param requestBody 
      * @returns any User created
      * @throws ApiError

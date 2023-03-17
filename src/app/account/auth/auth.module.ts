@@ -14,6 +14,7 @@ import { Recoverpwd2Component } from './recoverpwd2/recoverpwd2.component';
 
 import { AuthRoutingModule } from './auth-routing';
 import { PasswordresetComponent } from './passwordreset/passwordreset.component';
+import { AuthenticationService } from '../../core/http/api';
 
 @NgModule({
   declarations: [LoginComponent, Login2Component, SignupComponent, PasswordresetComponent, Register2Component, Recoverpwd2Component],
@@ -25,6 +26,9 @@ import { PasswordresetComponent } from './passwordreset/passwordreset.component'
     UIModule,
     AuthRoutingModule,
     CarouselModule
+  ],
+  providers: [
+    AuthenticationService
   ]
 })
 export class AuthModule { }

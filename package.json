@@ -9,7 +9,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "build-prod": "node --max_old_space_size=8000 ./node_modules/@angular/cli/bin/ng build --prod",
-    "openapi": "openapi --input https://api.simanud.asia/docs/api-docs.json --output ./src/app/core/http/api --client angular"
+    "openapi": "openapi --input https://api.simanud.asia/docs/api-docs.json --output ./src/app/core/http/api --request ./src/app/core/request.ts --client angular"
   },
   "private": true,
   "overrides": {

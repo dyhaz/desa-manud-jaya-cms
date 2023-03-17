@@ -56,7 +56,7 @@ password: string;
      * @returns any Email verified successfully
      * @throws ApiError
      */
-    public c21085A5063650Bfdc146Fad8261Ce(
+    public verifyEmail(
 token: string,
 ): Observable<{
 message?: string;

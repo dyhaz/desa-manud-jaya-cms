@@ -22,9 +22,42 @@ export class ProgramDesaService {
     public getProgramDesa(): Observable<any> {
         return __request(OpenAPI, this.http, {
             method: 'GET',
-            url: '/api/program',
+            url: '/api/program-desa',
             errors: {
                 400: `Bad request`,
+            },
+        });
+    }
+
+    /**
+     * Store new ProgramDesa
+     * Returns ProgramDesa data
+     * @param requestBody 
+     * @param accept Header to indicate the requested content type
+     * @returns any Successful operation
+     * @throws ApiError
+     */
+    public storeProgramDesa(
+requestBody: {
+nama_program: string;
+deskripsi_program: string;
+tanggal_mulai: string;
+tanggal_selesai: string;
+anggaran?: string;
+foto?: string;
+},
+accept: string = 'application/json',
+): Observable<any> {
+        return __request(OpenAPI, this.http, {
+            method: 'POST',
+            url: '/api/program-desa',
+            headers: {
+                'Accept': accept,
+            },
+            body: requestBody,
+            mediaType: 'application/json',
+            errors: {
+                422: `Validation error`,
             },
         });
     }
@@ -41,7 +74,7 @@ id: number,
 ): Observable<any> {
         return __request(OpenAPI, this.http, {
             method: 'GET',
-            url: '/api/program_desa/{id}',
+            url: '/api/program-desa/{id}',
             path: {
                 'id': id,
             },
@@ -56,6 +89,7 @@ id: number,
      * Returns updated ProgramDesa data
      * @param id ProgramDesa ID
      * @param requestBody 
+     * @param accept Header to indicate the requested content type
      * @returns any Successful operation
      * @throws ApiError
      */
@@ -66,13 +100,19 @@ nama_program: string;
 deskripsi_program: string;
 tanggal_mulai: string;
 tanggal_selesai: string;
+anggaran?: string;
+foto?: string;
 },
+accept: string = 'application/json',
 ): Observable<any> {
         return __request(OpenAPI, this.http, {
             method: 'PUT',
-            url: '/api/program_desa/{id}',
+            url: '/api/program-desa/{id}',
             path: {
                 'id': id,
+            },
+            headers: {
+                'Accept': accept,
             },
             body: requestBody,
             mediaType: 'application/json',
@@ -83,42 +123,24 @@ tanggal_selesai: string;
     }
 
     /**
-     * Store new ProgramDesa
-     * Returns ProgramDesa data
-     * @param requestBody 
-     * @returns any Successful operation
-     * @throws ApiError
-     */
-    public storeProgramDesa(
-requestBody: {
-nama_program: string;
-deskripsi_program: string;
-tanggal_mulai: string;
-tanggal_selesai: string;
-},
-): Observable<any> {
-        return __request(OpenAPI, this.http, {
-            method: 'POST',
-            url: '/api/program_desa',
-            body: requestBody,
-            mediaType: 'application/json',
-        });
-    }
-
-    /**
      * Delete by ID
      * @param id 
+     * @param accept Header to indicate the requested content type
      * @returns void 
      * @throws ApiError
      */
     public deleteProgram(
 id: any,
+accept: string = 'application/json',
 ): Observable<void> {
         return __request(OpenAPI, this.http, {
             method: 'DELETE',
-            url: '/api/program/{id}',
+            url: '/api/program-desa/{id}',
             path: {
                 'id': id,
+            },
+            headers: {
+                'Accept': accept,
             },
             errors: {
                 404: `Program record not found`,
