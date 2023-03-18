@@ -77,8 +77,8 @@ export class LoginComponent implements OnInit {
         this.auth.login({
           email: this.f.email.value,
           password: this.f.password.value
-        }).subscribe((user) => {
-          localStorage.setItem('currentUser', JSON.stringify(user));
+        }).subscribe((response) => {
+          localStorage.setItem('currentUser', JSON.stringify(response.user));
           this.router.navigate(['/dashboard']);
         }, async (result) => {
           await Swal.fire('Error', result);
