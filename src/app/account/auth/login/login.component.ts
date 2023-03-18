@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 // import { AuthenticationService } from '../../../core/services/auth.service';
-import { AuthfakeauthenticationService } from '../../../core/services/authfake.service';
+import { AuthfakeauthenticationService } from '@core/services/authfake.service';
 
 import { ActivatedRoute, Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 
-import { environment } from '../../../../environments/environment';
-import { AuthenticationService } from "../../../core/http/api";
+import { environment } from '@environments/environment';
+import { AuthenticationService } from '@core/http/api';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
   error = '';
   returnUrl: string;
 
-  // set the currenr year
+  // set the current year
   year: number = new Date().getFullYear();
 
   // tslint:disable-next-line: max-line-length
@@ -77,7 +77,8 @@ export class LoginComponent implements OnInit {
         this.auth.login({
           email: this.f.email.value,
           password: this.f.password.value
-        }).subscribe(() => {
+        }).subscribe((user) => {
+          localStorage.setItem('currentUser', JSON.stringify(user));
           this.router.navigate(['/dashboard']);
         }, async (result) => {
           await Swal.fire('Error', result);

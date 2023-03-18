@@ -16,7 +16,11 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { scrollPositionRestoration: 'top', relativeLinkResolution: 'legacy' })],
+  imports: [RouterModule.forRoot(routes, {
+    enableTracing: true,
+    scrollPositionRestoration: 'top',
+    relativeLinkResolution: 'legacy'
+  })],
   exports: [RouterModule]
 })
 

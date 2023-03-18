@@ -21,6 +21,12 @@ export class AuthGuard implements CanActivate {
                 // logged in so return true
                 return true;
             }
+        } else if (environment.defaultauth === 'api') {
+          const currentUser = localStorage.getItem('currentUser');
+          if (currentUser) {
+            // logged in so return true
+            return true;
+          }
         } else {
             const currentUser = this.authFackservice.currentUserValue;
             if (currentUser) {
