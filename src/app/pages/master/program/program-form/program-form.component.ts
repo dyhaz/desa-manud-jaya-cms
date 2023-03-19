@@ -4,6 +4,7 @@ import { DatePipe, DecimalPipe } from '@angular/common';
 import { Table } from "@pages/master/program/program.model";
 import Swal from "sweetalert2";
 import { ProgramDesaService } from "@core/http/api";
+import { DropzoneConfigInterface } from "ngx-dropzone-wrapper";
 
 @Component({
   selector: 'app-program-form',
@@ -25,6 +26,16 @@ export class ProgramFormComponent implements OnInit {
     anggaran: ''
   };
   public today = new Date();
+  config: DropzoneConfigInterface = {
+    // Change this to your upload POST address:
+    maxFilesize: 50,
+    acceptedFiles: 'image/*',
+    method: 'POST',
+    uploadMultiple: false,
+    accept: (file) => {
+      this.onAccept(file);
+    }
+  };
 
   constructor(
     private programDesa: ProgramDesaService,
@@ -34,9 +45,36 @@ export class ProgramFormComponent implements OnInit {
 
 
   ngOnInit(): void {
-
+    if (!this.program) {
+      this.program = {
+        program_id: 0,
+        deskripsi_program: '',
+        nama_program: '',
+        tanggal_selesai: '',
+        tanggal_mulai: '',
+        foto: '',
+        anggaran: ''
+      };
+    }
   }
 
+  onAccept(file: any) {
+    const fileToBase64 = (file:File):Promise<string> => {
+      return new Promise<string> ((resolve,reject)=> {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result.toString());
+        reader.onerror = error => reject(error);
+      })
+    }
+
+    fileToBase64(file)
+      .then(result=>{
+         // To remove data url part
+        this.program.foto =  result.replace('data:', '')
+          .replace(/^.+,/, '');
+      });
+  }
 
   async save() {
     try {

@@ -33,7 +33,16 @@ export class UserFormComponent implements OnInit {
 
 
   ngOnInit(): void {
-
+    if (!this.user) {
+      this.user = {
+        id: 0,
+        photo: '',
+        email: '',
+        name: '',
+        created_at: '',
+        password: ''
+      };
+    }
   }
 
 

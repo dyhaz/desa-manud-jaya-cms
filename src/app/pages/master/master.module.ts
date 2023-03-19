@@ -12,9 +12,9 @@ import { TablesModule } from '@pages/tables/tables.module';
 import { AdvancedSortableDirective } from '@pages/tables/advancedtable/advanced-sortable.directive';
 import { ProgramDesaService, UserManagementService } from '@core/http/api';
 import { ProgramFormComponent } from '@pages/master/program/program-form/program-form.component';
-import { UserService } from '@pages/master/user/user.service';
 import { UserManagementComponent } from '@pages/master/user/user.component';
 import { UserFormComponent } from '@pages/master/user/user-form/user-form.component';
+import { DropzoneModule } from "ngx-dropzone-wrapper";
 
 @NgModule({
   declarations: [ProgramComponent, ProgramFormComponent, UserManagementComponent, UserFormComponent, AdvancedSortableDirective],
@@ -28,7 +28,8 @@ import { UserFormComponent } from '@pages/master/user/user-form/user-form.compon
     FormsModule,
     Ng2SmartTableModule,
     MasterRoutingModule,
-    TablesModule
+    TablesModule,
+    DropzoneModule
   ],
   providers: [
     ProgramDesaService,
