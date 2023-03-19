@@ -36,6 +36,24 @@
             </div>
           </div>
           <div class="mb-3 row">
+            <label for="anggaran-input" class="col-md-2 col-form-label">Anggaran</label>
+            <div class="col-md-10">
+              <input class="form-control" type="text" [(ngModel)]="program.anggaran"
+                     id="anggaran-input" currencyMask [options]="{ prefix: 'Rp ', thousands: '.', decimal: ',' }">
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label for="anggaran-input" class="col-md-2 col-form-label">Status</label>
+            <div class="col-md-10">
+                <div class="form-check mb-4">
+                  <input [(ngModel)]="program.status" class="form-check-input" type="checkbox" id="horizontalLayout-Check">
+                  <label class="form-check-label" for="horizontalLayout-Check">
+                    Aktif
+                  </label>
+                </div>
+            </div>
+          </div>
+          <div class="mb-3 row">
             <label class="col-md-4 col-form-label">Foto</label>
             <div class="col-md-12">
               <div>

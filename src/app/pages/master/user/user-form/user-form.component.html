@@ -17,13 +17,19 @@
           <div class="mb-3 row">
             <label for="email-text-input" class="col-md-2 col-form-label">Email</label>
             <div class="col-md-10">
-                <input id="email-text-input" [(ngModel)]="user.email" class="form-control" placeholder="Email" />
+                <input id="email-text-input" readonly [(ngModel)]="user.email" class="form-control" placeholder="Email" />
             </div>
           </div>
           <div class="mb-3 row">
-            <label for="password-input" class="col-md-2 col-form-label">Password</label>
+            <label for="phone-text-input" class="col-md-2 col-form-label">Nomor Telepon</label>
             <div class="col-md-10">
-              <input class="form-control" type="password" placeholder="Password" [(ngModel)]="user.password"
+              <input maxlength="20" id="phone-text-input" [(ngModel)]="user.phone" class="form-control" placeholder="Nomor Telepon" />
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label for="password-input" class="col-md-2 col-form-label">Kata Sandi</label>
+            <div class="col-md-10">
+              <input class="form-control" type="password" placeholder="Kata Sandi" [(ngModel)]="user.password"
                      id="password-input">
             </div>
           </div>

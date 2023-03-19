@@ -21,7 +21,8 @@ export class UserFormComponent implements OnInit {
     email: '',
     name: '',
     created_at: '',
-    password: ''
+    password: '',
+    phone: ''
   };
   public today = new Date();
 
@@ -40,7 +41,8 @@ export class UserFormComponent implements OnInit {
         email: '',
         name: '',
         created_at: '',
-        password: ''
+        password: '',
+        phone: ''
       };
     }
   }
@@ -52,7 +54,8 @@ export class UserFormComponent implements OnInit {
         await this.userManagementService.updateUser({
           email: this.user.email,
           name: this.user.name,
-          password: this.user.password
+          password: this.user.password,
+          phone: this.user.phone
         }, this.user.id).toPromise();
         Swal.fire('Updated!', 'Saved successfully.', 'success');
         this.modal.dismiss();
@@ -60,7 +63,8 @@ export class UserFormComponent implements OnInit {
         await this.userManagementService.createUser({
           name: this.user.name,
           email: this.user.email,
-          password: this.user.password
+          password: this.user.password,
+          phone: this.user.phone
         }).toPromise();
         Swal.fire('Created!', 'Saved successfully.', 'success');
         this.modal.dismiss();

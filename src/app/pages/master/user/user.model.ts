@@ -6,6 +6,7 @@ export interface Table {
     created_at: string;
     id: number;
     password?: string;
+    phone?: string;
 }
 
 // Search Data

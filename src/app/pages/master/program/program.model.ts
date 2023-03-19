@@ -7,6 +7,8 @@ export interface Table {
     foto: string;
     anggaran: string;
     program_id: number;
+    status?: boolean;
+    updated_at?: string;
 }
 
 // Search Data

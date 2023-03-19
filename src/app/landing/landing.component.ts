@@ -1,10 +1,10 @@
-import { Component, OnInit, ElementRef, OnDestroy } from '@angular/core';
-import { interval, Observable } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { interval } from 'rxjs';
 import { map } from 'rxjs/internal/operators';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { ProgramDesaService } from "@core/http/api";
 import Swal from 'sweetalert2';
-import { DomSanitizer } from "@angular/platform-browser";
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-landing',
@@ -71,7 +71,7 @@ export class LandingComponent implements OnInit {
 
   constructor(
     private programDesa: ProgramDesaService,
-    public domSanitizer: DomSanitizer,
+    public domSanitizer: DomSanitizer
   ) {
 
   }
@@ -148,5 +148,13 @@ export class LandingComponent implements OnInit {
    */
   onSectionChange(sectionId: string) {
     this.currentSection = sectionId;
+  }
+
+  showModal(modal: HTMLDivElement) {
+    modal.setAttribute('style', 'display: block !important; opacity: 100');
+  }
+
+  closeModal(modal: HTMLDivElement) {
+    modal.setAttribute('style', 'display: none !important; opacity: 0');
   }
 }

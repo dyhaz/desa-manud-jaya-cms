@@ -15,22 +15,24 @@ import { ProgramFormComponent } from '@pages/master/program/program-form/program
 import { UserManagementComponent } from '@pages/master/user/user.component';
 import { UserFormComponent } from '@pages/master/user/user-form/user-form.component';
 import { DropzoneModule } from "ngx-dropzone-wrapper";
+import { CurrencyMaskModule } from "ng2-currency-mask";
 
 @NgModule({
   declarations: [ProgramComponent, ProgramFormComponent, UserManagementComponent, UserFormComponent, AdvancedSortableDirective],
-  imports: [
-    CommonModule,
-    UIModule,
-    NgbPaginationModule,
-    NgbTypeaheadModule,
-    NgbCollapseModule,
-    NgbDropdownModule,
-    FormsModule,
-    Ng2SmartTableModule,
-    MasterRoutingModule,
-    TablesModule,
-    DropzoneModule
-  ],
+    imports: [
+        CommonModule,
+        UIModule,
+        NgbPaginationModule,
+        NgbTypeaheadModule,
+        NgbCollapseModule,
+        NgbDropdownModule,
+        FormsModule,
+        Ng2SmartTableModule,
+        MasterRoutingModule,
+        TablesModule,
+        DropzoneModule,
+        CurrencyMaskModule
+    ],
   providers: [
     ProgramDesaService,
     UserManagementService,

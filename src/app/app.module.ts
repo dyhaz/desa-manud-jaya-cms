@@ -26,6 +26,7 @@ import { JwtInterceptor } from './core/helpers/jwt.interceptor';
 import { FakeBackendInterceptor } from './core/helpers/fake-backend';
 import { LandingComponent } from './landing/landing.component';
 import { ProgramDesaService } from "@core/http/api";
+import { CurrencyMaskModule } from 'ng2-currency-mask';
 
 if (environment.defaultauth === 'firebase') {
   initFirebaseBackend(environment.firebaseConfig);

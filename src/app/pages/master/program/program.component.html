@@ -50,6 +50,8 @@
 <!--                  <th sortable="office" (sort)="onSort($event)">Pelaksana</th>-->
                   <th sortable="tanggal_mulai" (sort)="onSort($event)">Tanggal Mulai</th>
                   <th sortable="tanggal_selesai" (sort)="onSort($event)">Tanggal Selesai</th>
+                  <th sortable="anggaran" (sort)="onSort($event)">Anggaran</th>
+                  <th sortable="updated_at" (sort)="onSort($event)">Diupdate pada</th>
                   <th>Actions</th>
                 </tr>
               </thead>
@@ -71,6 +73,12 @@
                   </td>
                   <td>
                     <ngb-highlight [result]="table.tanggal_selesai" [term]="service.searchTerm"></ngb-highlight>
+                  </td>
+                  <td>
+                    <ngb-highlight [result]="table.anggaran" [term]="service.searchTerm"></ngb-highlight>
+                  </td>
+                  <td>
+                    <ngb-highlight [result]="datePipe.transform(table.updated_at, 'yyyy-MM-dd')" [term]="service.searchTerm"></ngb-highlight>
                   </td>
                   <td>
                     <div ngbDropdown placement="bottom-left">

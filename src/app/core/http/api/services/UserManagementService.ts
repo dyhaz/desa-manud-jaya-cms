@@ -36,6 +36,7 @@ requestBody: {
 name: string;
 email: string;
 password: string;
+phone?: string;
 },
 ): Observable<any> {
         return __request(OpenAPI, this.http, {
@@ -83,6 +84,7 @@ requestBody: {
 name: string;
 email: string;
 password: string;
+phone?: string;
 },
 id?: any,
 ): Observable<any> {

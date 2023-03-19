@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChildren, QueryList, ViewChild, TemplateRef, ChangeDetectorRef } from '@angular/core';
-import { DecimalPipe } from '@angular/common';
+import { DatePipe, DecimalPipe } from '@angular/common';
 
 import { Observable } from 'rxjs';
 
@@ -42,7 +42,8 @@ export class ProgramComponent implements OnInit {
     public service: ProgramService,
     private programDesa: ProgramDesaService,
     private modalService: NgbModal,
-    private changeDetectorRef: ChangeDetectorRef
+    private changeDetectorRef: ChangeDetectorRef,
+    public datePipe: DatePipe
   ) {
     this.tables$ = service.tables$;
     this.total$ = service.total$;
