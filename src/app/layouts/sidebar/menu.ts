@@ -31,6 +31,12 @@ export const MENU: MenuItem[] = [
                         label: 'MENUITEMS.TABLES.LIST.ADVANCED',
                         link: '/master/program',
                         parentId: 110
+                    },
+                    {
+                      id: 113,
+                      label: 'MENUITEMS.TABLES.LIST.USERS',
+                      link: '/master/user',
+                      parentId: 110
                     }
                 ]
             }

@@ -18,7 +18,7 @@ export class UserManagementService {
      * @returns any List of users
      * @throws ApiError
      */
-    public c457726701591D1183B53Aa71Fc13441(): Observable<any> {
+    public getUsers(): Observable<any> {
         return __request(OpenAPI, this.http, {
             method: 'GET',
             url: '/api/users',
@@ -26,12 +26,12 @@ export class UserManagementService {
     }
 
     /**
-     * createUser
+     * Create a new user
      * @param requestBody 
      * @returns any User created
      * @throws ApiError
      */
-    public a0265360B2014512D6Dbfaf0E7(
+    public createUser(
 requestBody: {
 name: string;
 email: string;
@@ -78,7 +78,7 @@ id: any,
      * @returns any Success
      * @throws ApiError
      */
-    public b9091397C8B25F12C6Adb74Be6Ce3A5A(
+    public updateUser(
 requestBody: {
 name: string;
 email: string;

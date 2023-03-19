@@ -1,0 +1,38 @@
+<div class="modal-header">
+  <h5 class="modal-title mt-0">{{ mode === 'edit' ? 'Update' : 'Tambah' }} User</h5>
+  <button type="button" class="close" aria-hidden="true" (click)="modal.dismiss('Cross click')">×</button>
+</div>
+<div class="modal-body">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+
+          <div class="mb-3 row">
+            <label for="name-text-input" class="col-md-2 col-form-label">Nama</label>
+            <div class="col-md-10">
+              <input class="form-control" [(ngModel)]="user.name" type="text" placeholder="Nama" value="" id="name-text-input">
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label for="email-text-input" class="col-md-2 col-form-label">Email</label>
+            <div class="col-md-10">
+                <input id="email-text-input" [(ngModel)]="user.email" class="form-control" placeholder="Email" />
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label for="password-input" class="col-md-2 col-form-label">Password</label>
+            <div class="col-md-10">
+              <input class="form-control" type="password" placeholder="Password" [(ngModel)]="user.password"
+                     id="password-input">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> <!-- end col -->
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+  <button type="button" class="btn btn-primary" (click)="save()">Save changes</button>
+</div>

@@ -271,7 +271,8 @@
       "TEXT": "Data Induk",
       "LIST": {
         "BASIC": "Basic Tables",
-        "ADVANCED": "Program Desa"
+        "ADVANCED": "Program Desa",
+        "USERS": "Pengguna"
       }
     },
     "CHARTS": {

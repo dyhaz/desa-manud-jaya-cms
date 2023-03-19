@@ -10,11 +10,14 @@ import { ProgramComponent } from './program/program.component';
 import { MasterRoutingModule } from '@pages/master/master-routing.module';
 import { TablesModule } from '@pages/tables/tables.module';
 import { AdvancedSortableDirective } from '@pages/tables/advancedtable/advanced-sortable.directive';
-import { ProgramDesaService } from '@core/http/api';
+import { ProgramDesaService, UserManagementService } from '@core/http/api';
 import { ProgramFormComponent } from '@pages/master/program/program-form/program-form.component';
+import { UserService } from '@pages/master/user/user.service';
+import { UserManagementComponent } from '@pages/master/user/user.component';
+import { UserFormComponent } from '@pages/master/user/user-form/user-form.component';
 
 @NgModule({
-  declarations: [ProgramComponent, ProgramFormComponent, AdvancedSortableDirective],
+  declarations: [ProgramComponent, ProgramFormComponent, UserManagementComponent, UserFormComponent, AdvancedSortableDirective],
   imports: [
     CommonModule,
     UIModule,
@@ -29,6 +32,7 @@ import { ProgramFormComponent } from '@pages/master/program/program-form/program
   ],
   providers: [
     ProgramDesaService,
+    UserManagementService,
     DatePipe
   ]
 })
