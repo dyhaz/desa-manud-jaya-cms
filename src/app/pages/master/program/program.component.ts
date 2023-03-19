@@ -5,10 +5,9 @@ import { Observable } from 'rxjs';
 
 import { Table } from './program.model';
 
-import { tableData, editableTable } from './data';
-
 import { ProgramService } from './program.service';
 import { AdvancedSortableDirective, SortEvent } from '../../tables/advancedtable/advanced-sortable.directive';
+import { ProgramDesaService } from "@core/http/api";
 
 @Component({
   selector: 'app-program',
@@ -29,50 +28,17 @@ export class ProgramComponent implements OnInit {
   hideme: boolean[] = [];
   tables$: Observable<Table[]>;
   total$: Observable<number>;
-  editableTable: any;
 
   @ViewChildren(AdvancedSortableDirective) headers: QueryList<AdvancedSortableDirective>;
   public isCollapsed = true;
 
-  constructor(public service: ProgramService) {
+  constructor(
+    public service: ProgramService,
+    private programDesa: ProgramDesaService
+  ) {
     this.tables$ = service.tables$;
     this.total$ = service.total$;
   }
-
-  settings = {
-    columns: {
-      id: {
-        title: 'ID',
-      },
-      name: {
-        title: 'Full Name',
-        filter: {
-          type: 'list',
-          config: {
-            selectText: 'Select...',
-            list: [
-              { value: 'Glenna Reichert', title: 'Glenna Reichert' },
-              { value: 'Kurtis Weissnat', title: 'Kurtis Weissnat' },
-              { value: 'Chelsey Dietrich', title: 'Chelsey Dietrich' },
-            ],
-          },
-        },
-      },
-      email: {
-        title: 'Email',
-        filter: {
-          type: 'completer',
-          config: {
-            completer: {
-              data: editableTable,
-              searchFields: 'email',
-              titleField: 'email',
-            },
-          },
-        },
-      },
-    },
-  };
 
   ngOnInit() {
     this.breadCrumbItems = [{ label: 'Tables' }, { label: 'Program Desa', active: true }];
@@ -90,9 +56,9 @@ export class ProgramComponent implements OnInit {
   /**
    * fetches the table value
    */
-  _fetchData() {
-    this.tableData = tableData;
-    this.editableTable = editableTable;
+  async _fetchData() {
+    const result = await this.programDesa.getProgramDesa().toPromise();
+    this.tableData = result.data;
     for (let i = 0; i <= this.tableData.length; i++) {
       this.hideme.push(true);
     }

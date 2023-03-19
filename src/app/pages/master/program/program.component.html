@@ -36,11 +36,11 @@
               <thead>
                 <tr>
                   <th></th>
-                  <th sortable="name" (sort)="onSort($event)">Nama Program</th>
-                  <th sortable="position" (sort)="onSort($event)">Deskripsi</th>
-                  <th sortable="office" (sort)="onSort($event)">Pelaksana</th>
-                  <th sortable="age" (sort)="onSort($event)">Tanggal Mulai</th>
-                  <th sortable="date" (sort)="onSort($event)">Tanggal Selesai</th>
+                  <th sortable="nama_program" (sort)="onSort($event)">Nama Program</th>
+                  <th sortable="deskripsi_program" (sort)="onSort($event)">Deskripsi</th>
+<!--                  <th sortable="office" (sort)="onSort($event)">Pelaksana</th>-->
+                  <th sortable="tanggal_mulai" (sort)="onSort($event)">Tanggal Mulai</th>
+                  <th sortable="tanggal_selesai" (sort)="onSort($event)">Tanggal Selesai</th>
                   <th>Actions</th>
                 </tr>
               </thead>
@@ -52,19 +52,16 @@
                     </a>
                   </td>
                   <td>
-                    <ngb-highlight [result]="table.name" [term]="service.searchTerm"></ngb-highlight>
+                    <ngb-highlight [result]="table.nama_program" [term]="service.searchTerm"></ngb-highlight>
                   </td>
                   <td>
-                    <ngb-highlight [result]="table.position" [term]="service.searchTerm"></ngb-highlight>
+                    <ngb-highlight [result]="table.deskripsi_program" [term]="service.searchTerm"></ngb-highlight>
                   </td>
                   <td>
-                    <ngb-highlight [result]="table.office" [term]="service.searchTerm"></ngb-highlight>
+                    <ngb-highlight [result]="table.tanggal_mulai" [term]="service.searchTerm"></ngb-highlight>
                   </td>
                   <td>
-                    <ngb-highlight [result]="table.age" [term]="service.searchTerm"></ngb-highlight>
-                  </td>
-                  <td>
-                    <ngb-highlight [result]="table.date" [term]="service.searchTerm"></ngb-highlight>
+                    <ngb-highlight [result]="table.tanggal_selesai" [term]="service.searchTerm"></ngb-highlight>
                   </td>
                   <td>
                     <div ngbDropdown placement="bottom-left">
@@ -79,30 +76,30 @@
                   </td>
                 </tr>
 
-                <tr *ngIf="!hideme[i]" class="sub-table no-bg">
-                  <td align="center"> </td>
-                  <td colspan="15" class="p-0">
-                    <table class="table mb-0 table-striped">
-                      <thead class="bg-dark text-white">
-                        <tr>
-                          <th>CountryName</th>
-                          <th>Price/Unit</th>
-                          <th>Sales Account</th>
-                          <th>Buy Account</th>
+<!--                <tr *ngIf="!hideme[i]" class="sub-table no-bg">-->
+<!--                  <td align="center"> </td>-->
+<!--                  <td colspan="15" class="p-0">-->
+<!--                    <table class="table mb-0 table-striped">-->
+<!--                      <thead class="bg-dark text-white">-->
+<!--                        <tr>-->
+<!--                          <th>CountryName</th>-->
+<!--                          <th>Price/Unit</th>-->
+<!--                          <th>Sales Account</th>-->
+<!--                          <th>Buy Account</th>-->
 
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr *ngFor="let table of tables$ | async; let i = index">
-                          <td>{{table.name}}</td>
-                          <td>{{table.name}}</td>
-                          <td>{{table.name}}</td>
-                          <td>{{table.name}}</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </td>
-                </tr>
+<!--                        </tr>-->
+<!--                      </thead>-->
+<!--                      <tbody>-->
+<!--                        <tr *ngFor="let table of tables$ | async; let i = index">-->
+<!--                          <td>{{table.nama_program}}</td>-->
+<!--                          <td>{{table.nama_program}}</td>-->
+<!--                          <td>{{table.nama_program}}</td>-->
+<!--                          <td>{{table.nama_program}}</td>-->
+<!--                        </tr>-->
+<!--                      </tbody>-->
+<!--                    </table>-->
+<!--                  </td>-->
+<!--                </tr>-->
               </tbody>
             </table>
           </div>

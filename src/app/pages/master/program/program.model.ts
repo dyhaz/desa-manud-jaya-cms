@@ -1,11 +1,11 @@
 // Table data
 export interface Table {
-    name: string;
-    position: string;
-    office: string;
-    age: any;
-    date: string;
-    salary: string;
+    nama_program: string;
+    deskripsi_program: string;
+    tanggal_mulai: string;
+    tanggal_selesai: string;
+    foto: string;
+    anggaran: string;
 }
 
 // Search Data

@@ -17,7 +17,7 @@
             <img src="assets/images/logo-light.svg" alt="" height="22">
           </span>
           <span class="logo-lg">
-            <img src="assets/images/logo-light.png" alt="" height="19">
+            <img src="assets/images/logo-light.png" alt="" height="50">
           </span>
         </a>
       </div>
@@ -416,7 +416,7 @@
                       <div class="col-lg-4"><a class="dropdown-item side-nav-link-ref" routerLinkActive="active" [routerLink]="item.subItems[i + 2]?.link">{{item.subItems[i + 2]?.label | translate}}</a></div>
                   </div>
               </div>
-              
+
                 <div class="dropdown" *ngIf="hasItems(subitem)">
                   <a class="dropdown-item dropdown-toggle" href="javascript: void(0);"
                     (click)="onMenuClick($event)">{{ subitem.label | translate }}

@@ -9,7 +9,8 @@ import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 import { ProgramComponent } from './program/program.component';
 import { MasterRoutingModule } from '@pages/master/master-routing.module';
 import { TablesModule } from '@pages/tables/tables.module';
-import { AdvancedSortableDirective } from "@pages/tables/advancedtable/advanced-sortable.directive";
+import { AdvancedSortableDirective } from '@pages/tables/advancedtable/advanced-sortable.directive';
+import { ProgramDesaService } from '@core/http/api';
 
 @NgModule({
   declarations: [ProgramComponent, AdvancedSortableDirective],
@@ -24,6 +25,9 @@ import { AdvancedSortableDirective } from "@pages/tables/advancedtable/advanced-
     Ng2SmartTableModule,
     MasterRoutingModule,
     TablesModule
+  ],
+  providers: [
+    ProgramDesaService
   ]
 })
 export class MasterModule { }
