@@ -99,7 +99,7 @@ export class ProgramComponent implements OnInit {
     }
   }
 
-  openModal(table: Table) {
+  openModal(table?: Table) {
     this.selected = table;
     this.modalService.open(this.editmodal);
   }
