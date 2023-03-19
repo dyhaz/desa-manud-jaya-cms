@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChildren, QueryList, ViewChild, TemplateRef } from '@angular/core';
+import { Component, OnInit, ViewChildren, QueryList, ViewChild, TemplateRef, ChangeDetectorRef } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
 
 import { Observable } from 'rxjs';
@@ -10,6 +10,7 @@ import { AdvancedSortableDirective, SortEvent } from '../../tables/advancedtable
 import { ProgramDesaService } from '@core/http/api';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import Swal from "sweetalert2";
+import { ProgramFormComponent } from '@pages/master/program/program-form/program-form.component';
 
 @Component({
   selector: 'app-program',
@@ -26,11 +27,13 @@ export class ProgramComponent implements OnInit {
   breadCrumbItems: Array<{}>;
   // Table data
   tableData: Table[];
+
   public selected: any;
   hideme: boolean[] = [];
   tables$: Observable<Table[]>;
   total$: Observable<number>;
   @ViewChild('content') editmodal: TemplateRef<any>;
+  @ViewChild('form') form: ProgramFormComponent;
 
   @ViewChildren(AdvancedSortableDirective) headers: QueryList<AdvancedSortableDirective>;
   public isCollapsed = true;
@@ -38,7 +41,8 @@ export class ProgramComponent implements OnInit {
   constructor(
     public service: ProgramService,
     private programDesa: ProgramDesaService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private changeDetectorRef: ChangeDetectorRef
   ) {
     this.tables$ = service.tables$;
     this.total$ = service.total$;
@@ -50,6 +54,7 @@ export class ProgramComponent implements OnInit {
      * fetch data
      */
     this._fetchData();
+    this.changeDetectorRef.detectChanges();
   }
 
   changeValue(i) {
@@ -94,7 +99,8 @@ export class ProgramComponent implements OnInit {
     }
   }
 
-  openModal() {
+  openModal(table: Table) {
+    this.selected = table;
     this.modalService.open(this.editmodal);
   }
 }

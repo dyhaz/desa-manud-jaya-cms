@@ -69,7 +69,7 @@
                         aria-expanded="true"></i>
                       <div class="dropdown-menu dropdown-menu-end" ngbDropdownMenu>
                         <a class="dropdown-item" href="javascript: void(0);" (click)="deleteItem(table)"><i class="mdi mdi-trash-can"></i>Delete</a>
-                        <a class="dropdown-item" href="javascript: void(0);" (click)="openModal()"><i
+                        <a class="dropdown-item" href="javascript: void(0);" (click)="openModal(table)"><i
                             class="mdi mdi-account-edit"></i>Edit</a>
                       </div>
                     </div>
@@ -137,50 +137,5 @@
   </div>
 </div>
 <ng-template #content role="document" let-modal>
-  <div class="modal-header">
-    <h5 class="modal-title mt-0">Update Program</h5>
-    <button type="button" class="close" aria-hidden="true" (click)="modal.dismiss('Cross click')">×</button>
-  </div>
-  <div class="modal-body">
-    <div class="row">
-      <div class="col-12">
-        <div class="card">
-          <div class="card-body">
-
-            <div class="mb-3 row">
-              <label for="nama-program-text-input" class="col-md-2 col-form-label">Nama Program</label>
-              <div class="col-md-10">
-                <input class="form-control" type="text" placeholder="Nama Program" value="" id="nama-program-text-input">
-              </div>
-            </div>
-            <div class="mb-3 row">
-              <label for="deskripsi-text-input" class="col-md-2 col-form-label">Deskripsi</label>
-              <div class="col-md-10">
-                <textarea id="deskripsi-text-input" class="form-control" id="example-textarea" rows="3"
-                          placeholder="Write some note.."></textarea>
-              </div>
-            </div>
-            <div class="mb-3 row">
-              <label for="tanggal-mulai-datetime-local-input" class="col-md-2 col-form-label">Tanggal Mulai</label>
-              <div class="col-md-10">
-                <input class="form-control" type="datetime-local" value="2019-08-19T13:45:00"
-                       id="tanggal-mulai-datetime-local-input">
-              </div>
-            </div>
-            <div class="mb-3 row">
-              <label for="tanggal-selesai-datetime-local-input" class="col-md-2 col-form-label">Tanggal Selesai</label>
-              <div class="col-md-10">
-                <input class="form-control" type="datetime-local" value="2019-08-19T13:45:00"
-                       id="tanggal-selesai-datetime-local-input">
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> <!-- end col -->
-    </div>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
-    <button type="button" class="btn btn-primary">Save changes</button>
-  </div>
+  <app-program-form [mode]="selected ? 'edit' : 'add'" [program]="selected" [modal]="modal"></app-program-form>
 </ng-template>

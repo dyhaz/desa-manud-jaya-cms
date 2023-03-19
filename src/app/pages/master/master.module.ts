@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { UIModule } from '@shared/ui/ui.module';
@@ -11,9 +11,10 @@ import { MasterRoutingModule } from '@pages/master/master-routing.module';
 import { TablesModule } from '@pages/tables/tables.module';
 import { AdvancedSortableDirective } from '@pages/tables/advancedtable/advanced-sortable.directive';
 import { ProgramDesaService } from '@core/http/api';
+import { ProgramFormComponent } from '@pages/master/program/program-form/program-form.component';
 
 @NgModule({
-  declarations: [ProgramComponent, AdvancedSortableDirective],
+  declarations: [ProgramComponent, ProgramFormComponent, AdvancedSortableDirective],
   imports: [
     CommonModule,
     UIModule,
@@ -27,7 +28,8 @@ import { ProgramDesaService } from '@core/http/api';
     TablesModule
   ],
   providers: [
-    ProgramDesaService
+    ProgramDesaService,
+    DatePipe
   ]
 })
 export class MasterModule { }

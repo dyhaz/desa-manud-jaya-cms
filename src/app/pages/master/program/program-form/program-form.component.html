@@ -1,0 +1,46 @@
+<div class="modal-header">
+  <h5 class="modal-title mt-0">Update Program</h5>
+  <button type="button" class="close" aria-hidden="true" (click)="modal.dismiss('Cross click')">×</button>
+</div>
+<div class="modal-body">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+
+          <div class="mb-3 row">
+            <label for="nama-program-text-input" class="col-md-2 col-form-label">Nama Program</label>
+            <div class="col-md-10">
+              <input class="form-control" [(ngModel)]="program.nama_program" type="text" placeholder="Nama Program" value="" id="nama-program-text-input">
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label for="deskripsi-text-input" class="col-md-2 col-form-label">Deskripsi</label>
+            <div class="col-md-10">
+                <textarea id="deskripsi-text-input" [(ngModel)]="program.deskripsi_program" class="form-control" id="example-textarea" rows="3"
+                          placeholder="Write some note.."></textarea>
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label for="tanggal-mulai-date-input" class="col-md-2 col-form-label">Tanggal Mulai</label>
+            <div class="col-md-10">
+              <input class="form-control" type="date" [(ngModel)]="program.tanggal_mulai" value="{{ datePipe.transform(today, 'yyyy-MM-dd') }}"
+                     id="tanggal-mulai-date-input">
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label for="tanggal-selesai-date-input" class="col-md-2 col-form-label">Tanggal Selesai</label>
+            <div class="col-md-10">
+              <input class="form-control" type="date" [(ngModel)]="program.tanggal_selesai" value="{{ datePipe.transform(today, 'yyyy-MM-dd') }}"
+                     id="tanggal-selesai-date-input">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> <!-- end col -->
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+  <button type="button" class="btn btn-primary" (click)="save()">Save changes</button>
+</div>
