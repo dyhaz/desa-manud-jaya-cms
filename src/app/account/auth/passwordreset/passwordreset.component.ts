@@ -2,8 +2,10 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { AuthenticationService } from '../../../core/services/auth.service';
-import { environment } from '../../../../environments/environment';
+// import { AuthenticationService } from '@core/services/auth.service';
+import { environment } from '@environments/environment';
+import { AuthenticationService } from "@core/http/api";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-passwordreset',
@@ -26,7 +28,12 @@ export class PasswordresetComponent implements OnInit, AfterViewInit {
   year: number = new Date().getFullYear();
 
   // tslint:disable-next-line: max-line-length
-  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private authenticationService: AuthenticationService) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private route: ActivatedRoute,
+    private router: Router,
+    private authenticationService: AuthenticationService,
+  ) { }
 
   ngOnInit() {
 
@@ -44,7 +51,7 @@ export class PasswordresetComponent implements OnInit, AfterViewInit {
   /**
    * On submit form
    */
-  onSubmit() {
+  async onSubmit() {
     this.success = '';
     this.submitted = true;
 
@@ -53,10 +60,19 @@ export class PasswordresetComponent implements OnInit, AfterViewInit {
       return;
     }
     if (environment.defaultauth === 'firebase') {
-      this.authenticationService.resetPassword(this.f.email.value)
-        .catch(error => {
-          this.error = error ? error : '';
-        });
+      // this.authenticationService.resetPassword(this.f.email.value)
+      //   .catch(error => {
+      //     this.error = error ? error : '';
+      //   });
+    } else {
+      try {
+        await this.authenticationService.sendEmailVerificationLink({
+          email: this.f.email.value
+        }).toPromise();
+        Swal.fire('Email sent!', 'Please check your inbox for instructions of how to reset your password', 'success');
+      } catch (e) {
+        Swal.fire('Error', e);
+      }
     }
   }
 }
