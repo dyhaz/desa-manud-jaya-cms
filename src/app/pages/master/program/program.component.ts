@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
+import { Component, OnInit, ViewChildren, QueryList, ViewChild, TemplateRef } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
 
 import { Observable } from 'rxjs';
@@ -7,7 +7,9 @@ import { Table } from './program.model';
 
 import { ProgramService } from './program.service';
 import { AdvancedSortableDirective, SortEvent } from '../../tables/advancedtable/advanced-sortable.directive';
-import { ProgramDesaService } from "@core/http/api";
+import { ProgramDesaService } from '@core/http/api';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-program',
@@ -28,13 +30,15 @@ export class ProgramComponent implements OnInit {
   hideme: boolean[] = [];
   tables$: Observable<Table[]>;
   total$: Observable<number>;
+  @ViewChild('content') editmodal: TemplateRef<any>;
 
   @ViewChildren(AdvancedSortableDirective) headers: QueryList<AdvancedSortableDirective>;
   public isCollapsed = true;
 
   constructor(
     public service: ProgramService,
-    private programDesa: ProgramDesaService
+    private programDesa: ProgramDesaService,
+    private modalService: NgbModal
   ) {
     this.tables$ = service.tables$;
     this.total$ = service.total$;
@@ -78,5 +82,19 @@ export class ProgramComponent implements OnInit {
     });
     this.service.sortColumn = column;
     this.service.sortDirection = direction;
+  }
+
+  async deleteItem(table: Table) {
+    try {
+      await this.programDesa.deleteProgram(table.program_id).toPromise();
+      await Swal.fire('Deleted!', 'Program has been deleted.', 'success');
+      await this._fetchData();
+    } catch (e) {
+      await Swal.fire('Error', e);
+    }
+  }
+
+  openModal() {
+    this.modalService.open(this.editmodal);
   }
 }

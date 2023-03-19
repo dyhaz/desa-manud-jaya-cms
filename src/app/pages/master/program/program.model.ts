@@ -6,6 +6,7 @@ export interface Table {
     tanggal_selesai: string;
     foto: string;
     anggaran: string;
+    program_id: number;
 }
 
 // Search Data

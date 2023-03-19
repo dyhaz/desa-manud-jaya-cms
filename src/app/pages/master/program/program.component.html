@@ -35,7 +35,7 @@
               class="table table-bordered dt-responsive nowrap datatables no-footer dtr-inline">
               <thead>
                 <tr>
-                  <th></th>
+<!--                  <th></th>-->
                   <th sortable="nama_program" (sort)="onSort($event)">Nama Program</th>
                   <th sortable="deskripsi_program" (sort)="onSort($event)">Deskripsi</th>
 <!--                  <th sortable="office" (sort)="onSort($event)">Pelaksana</th>-->
@@ -46,11 +46,11 @@
               </thead>
               <tbody *ngFor="let table of tables$ | async;let i=index">
                 <tr>
-                  <td align="center">
-                    <a class="expand-row" (click)="changeValue(i)">
-                      +
-                    </a>
-                  </td>
+<!--                  <td align="center">-->
+<!--                    <a class="expand-row" (click)="changeValue(i)">-->
+<!--                      +-->
+<!--                    </a>-->
+<!--                  </td>-->
                   <td>
                     <ngb-highlight [result]="table.nama_program" [term]="service.searchTerm"></ngb-highlight>
                   </td>
@@ -68,8 +68,8 @@
                       <i class="mdi mdi-dots-vertical dropdown-toggle" ngbDropdownToggle data-toggle="dropdown"
                         aria-expanded="true"></i>
                       <div class="dropdown-menu dropdown-menu-end" ngbDropdownMenu>
-                        <a class="dropdown-item" href="javascript: void(0);"><i class="mdi mdi-plus"></i>Add</a>
-                        <a class="dropdown-item" href="javascript: void(0);"><i
+                        <a class="dropdown-item" href="javascript: void(0);" (click)="deleteItem(table)"><i class="mdi mdi-trash-can"></i>Delete</a>
+                        <a class="dropdown-item" href="javascript: void(0);" (click)="openModal()"><i
                             class="mdi mdi-account-edit"></i>Edit</a>
                       </div>
                     </div>
@@ -138,23 +138,46 @@
 </div>
 <ng-template #content role="document" let-modal>
   <div class="modal-header">
-    <h5 class="modal-title mt-0">Modal Heading</h5>
+    <h5 class="modal-title mt-0">Update Program</h5>
     <button type="button" class="close" aria-hidden="true" (click)="modal.dismiss('Cross click')">×</button>
   </div>
   <div class="modal-body">
-    <h5>Overflowing text to show scroll behavior</h5>
-    <p>Cras mattis consectetur purus sit amet fermentum.
-      Cras justo odio, dapibus ac facilisis in,
-      egestas eget quam. Morbi leo risus, porta ac
-      consectetur ac, vestibulum at eros.</p>
-    <p>Praesent commodo cursus magna, vel scelerisque
-      nisl consectetur et. Vivamus sagittis lacus vel
-      augue laoreet rutrum faucibus dolor auctor.</p>
-    <p>Aenean lacinia bibendum nulla sed consectetur.
-      Praesent commodo cursus magna, vel scelerisque
-      nisl consectetur et. Donec sed odio dui. Donec
-      ullamcorper nulla non metus auctor
-      fringilla.</p>
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-body">
+
+            <div class="mb-3 row">
+              <label for="nama-program-text-input" class="col-md-2 col-form-label">Nama Program</label>
+              <div class="col-md-10">
+                <input class="form-control" type="text" placeholder="Nama Program" value="" id="nama-program-text-input">
+              </div>
+            </div>
+            <div class="mb-3 row">
+              <label for="deskripsi-text-input" class="col-md-2 col-form-label">Deskripsi</label>
+              <div class="col-md-10">
+                <textarea id="deskripsi-text-input" class="form-control" id="example-textarea" rows="3"
+                          placeholder="Write some note.."></textarea>
+              </div>
+            </div>
+            <div class="mb-3 row">
+              <label for="tanggal-mulai-datetime-local-input" class="col-md-2 col-form-label">Tanggal Mulai</label>
+              <div class="col-md-10">
+                <input class="form-control" type="datetime-local" value="2019-08-19T13:45:00"
+                       id="tanggal-mulai-datetime-local-input">
+              </div>
+            </div>
+            <div class="mb-3 row">
+              <label for="tanggal-selesai-datetime-local-input" class="col-md-2 col-form-label">Tanggal Selesai</label>
+              <div class="col-md-10">
+                <input class="form-control" type="datetime-local" value="2019-08-19T13:45:00"
+                       id="tanggal-selesai-datetime-local-input">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> <!-- end col -->
+    </div>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
