@@ -40,6 +40,8 @@ export class HorizontaltopbarComponent implements OnInit, AfterViewInit {
     { text: 'Russian', flag: 'assets/images/flags/russia.jpg', lang: 'ru' },
   ];
 
+  public loginName = '';
+
   // tslint:disable-next-line: max-line-length
   constructor(@Inject(DOCUMENT) private document: any, private router: Router, private eventService: EventService, private authService: AuthenticationService,
     private authFackservice: AuthfakeauthenticationService,
@@ -258,6 +260,10 @@ export class HorizontaltopbarComponent implements OnInit, AfterViewInit {
    */
   initialize(): void {
     this.menuItems = MENU;
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    if (currentUser) {
+      this.loginName = currentUser.name;
+    }
   }
 
   /**

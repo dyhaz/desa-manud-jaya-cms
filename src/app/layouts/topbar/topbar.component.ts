@@ -7,6 +7,7 @@ import { environment } from '../../../environments/environment';
 import { CookieService } from 'ngx-cookie-service';
 import { LanguageService } from '../../core/services/language.service';
 import { TranslateService } from '@ngx-translate/core';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-topbar',
@@ -25,11 +26,15 @@ export class TopbarComponent implements OnInit {
   countryName;
   valueset;
 
+  public loginName = '';
+  public loginPhoto = '';
+
   constructor(@Inject(DOCUMENT) private document: any, private router: Router, private authService: AuthenticationService,
               private authFackservice: AuthfakeauthenticationService,
               public languageService: LanguageService,
               public translate: TranslateService,
-              public _cookiesService: CookieService) {
+              public _cookiesService: CookieService,
+              public domSanitizer: DomSanitizer) {
   }
 
   listLang = [
@@ -48,6 +53,12 @@ export class TopbarComponent implements OnInit {
   ngOnInit() {
     this.openMobileMenu = false;
     this.element = document.documentElement;
+
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    if (currentUser) {
+      this.loginName = currentUser.name;
+      this.loginPhoto = currentUser.photo ?? this.loginPhoto;
+    }
 
     this.cookieValue = this._cookiesService.get('lang');
     const val = this.listLang.filter(x => x.lang === this.cookieValue);
