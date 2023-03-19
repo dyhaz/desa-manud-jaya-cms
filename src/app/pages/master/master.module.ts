@@ -6,23 +6,24 @@ import { UIModule } from '@shared/ui/ui.module';
 import { NgbPaginationModule, NgbTypeaheadModule, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
-
-import { TablesRoutingModule } from './tables-routing.module';
-import { BasicComponent } from './basic/basic.component';
-import { AdvancedtableComponent } from './advancedtable/advancedtable.component';
+import { ProgramComponent } from './program/program.component';
+import { MasterRoutingModule } from '@pages/master/master-routing.module';
+import { TablesModule } from '@pages/tables/tables.module';
+import { AdvancedSortableDirective } from "@pages/tables/advancedtable/advanced-sortable.directive";
 
 @NgModule({
-  declarations: [BasicComponent, AdvancedtableComponent],
+  declarations: [ProgramComponent, AdvancedSortableDirective],
   imports: [
     CommonModule,
-    TablesRoutingModule,
     UIModule,
     NgbPaginationModule,
     NgbTypeaheadModule,
     NgbCollapseModule,
     NgbDropdownModule,
     FormsModule,
-    Ng2SmartTableModule
+    Ng2SmartTableModule,
+    MasterRoutingModule,
+    TablesModule
   ]
 })
-export class TablesModule { }
+export class MasterModule { }
