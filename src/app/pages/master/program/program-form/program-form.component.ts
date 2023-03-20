@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { ProgramService } from '@pages/master/program/program.service';
 import { DatePipe, DecimalPipe } from '@angular/common';
 import { Table } from '@pages/master/program/program.model';
@@ -13,8 +13,8 @@ import { DropzoneComponent, DropzoneConfigInterface } from 'ngx-dropzone-wrapper
   providers: [ProgramService, DecimalPipe]
 })
 
-export class ProgramFormComponent implements OnInit {
-  @ViewChild(DropzoneComponent) dropzone: DropzoneComponent;
+export class ProgramFormComponent implements OnInit, AfterViewInit {
+  @ViewChild('dropzone') dropzone: DropzoneComponent;
   @Input('modal') modal: any;
   @Input('mode') mode: 'edit'|'add' = 'add';
   @Input('program') program: Table = {
@@ -58,7 +58,11 @@ export class ProgramFormComponent implements OnInit {
         foto: '',
         anggaran: ''
       };
-    } else {
+    }
+  }
+
+  ngAfterViewInit(): void {
+    if (this.program) {
       this.addImageToDropzone('data:image/png;base64,' + this.program.foto);
     }
   }
@@ -69,9 +73,7 @@ export class ProgramFormComponent implements OnInit {
 
     const blob = new Blob([imageData], { type: 'image/png' });
     const imageFile = new File([blob], 'foto.png', { type: 'image/png' });
-    dropzone.addedFiles( imageFile );
-    dropzone.createThumbnailFromUrl( 'foto.png', imageData );
-    dropzone.complete( imageFile );
+    dropzone.addFile( imageFile );
   }
 
   onAccept(file: any) {
