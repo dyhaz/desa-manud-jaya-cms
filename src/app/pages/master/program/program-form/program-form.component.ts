@@ -1,10 +1,10 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, Input, OnInit, ViewChild } from "@angular/core";
 import { ProgramService } from "@pages/master/program/program.service";
 import { DatePipe, DecimalPipe } from '@angular/common';
 import { Table } from "@pages/master/program/program.model";
 import Swal from "sweetalert2";
 import { ProgramDesaService } from "@core/http/api";
-import { DropzoneConfigInterface } from "ngx-dropzone-wrapper";
+import { DropzoneComponent, DropzoneConfigInterface } from "ngx-dropzone-wrapper";
 
 @Component({
   selector: 'app-program-form',
@@ -14,6 +14,7 @@ import { DropzoneConfigInterface } from "ngx-dropzone-wrapper";
 })
 
 export class ProgramFormComponent implements OnInit {
+  @ViewChild(DropzoneComponent) dropzone: DropzoneComponent;
   @Input('modal') modal: any;
   @Input('mode') mode: 'edit'|'add' = 'add';
   @Input('program') program: Table = {
@@ -23,7 +24,8 @@ export class ProgramFormComponent implements OnInit {
     tanggal_selesai: '',
     tanggal_mulai: '',
     foto: '',
-    anggaran: ''
+    anggaran: '',
+    status: false
   };
   public today = new Date();
   config: DropzoneConfigInterface = {
@@ -32,6 +34,7 @@ export class ProgramFormComponent implements OnInit {
     acceptedFiles: 'image/*',
     method: 'POST',
     uploadMultiple: false,
+    autoProcessQueue: true,
     accept: (file) => {
       this.onAccept(file);
     }
@@ -55,7 +58,20 @@ export class ProgramFormComponent implements OnInit {
         foto: '',
         anggaran: ''
       };
+    } else {
+      this.addImageToDropzone('data:image/png;base64,' + this.program.foto);
     }
+  }
+
+  addImageToDropzone(imageData: string) {
+    // Get a reference ot the dropzone component
+    const dropzone = this.dropzone.directiveRef.dropzone();
+
+    const blob = new Blob([imageData], { type: 'image/png' });
+    const imageFile = new File([blob], 'foto.png', { type: 'image/png' });
+    dropzone.addedFiles( imageFile );
+    dropzone.createThumbnailFromUrl( 'foto.png', imageData );
+    dropzone.complete( imageFile );
   }
 
   onAccept(file: any) {
