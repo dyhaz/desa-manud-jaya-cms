@@ -5,6 +5,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { EventService } from '../../../core/services/event.service';
 
 import { ConfigService } from '../../../core/services/config.service';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-default',
@@ -22,8 +23,16 @@ export class DefaultComponent implements OnInit {
 
   isActive: string;
 
+  public loginName = '';
+  public loginPhoto = '';
+
   @ViewChild('content') content;
-  constructor(private modalService: NgbModal, private configService: ConfigService, private eventService: EventService) {
+  constructor(
+    private modalService: NgbModal,
+    private configService: ConfigService,
+    private eventService: EventService,
+    private router: Router
+  ) {
   }
 
   ngOnInit() {
@@ -50,6 +59,12 @@ export class DefaultComponent implements OnInit {
      * Fetches the data
      */
     this.fetchData();
+
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    if (currentUser) {
+      this.loginName = currentUser.name;
+      this.loginPhoto = currentUser.photo;
+    }
   }
 
   ngAfterViewInit() {
@@ -128,5 +143,9 @@ export class DefaultComponent implements OnInit {
    */
    changeLayout(layout: string) {
     this.eventService.broadcast('changeLayout', layout);
+  }
+
+  viewProfile() {
+    this.router.navigate(['/contacts/profile']);
   }
 }
