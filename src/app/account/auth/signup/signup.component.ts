@@ -6,6 +6,8 @@ import { AuthenticationService } from '../../../core/services/auth.service';
 import { environment } from '../../../../environments/environment';
 import { first } from 'rxjs/operators';
 import { UserProfileService } from '../../../core/services/user.service';
+import { UserManagementService } from '@core/http/api';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-signup',
@@ -23,8 +25,14 @@ export class SignupComponent implements OnInit {
   year: number = new Date().getFullYear();
 
   // tslint:disable-next-line: max-line-length
-  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private authenticationService: AuthenticationService,
-    private userService: UserProfileService) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private route: ActivatedRoute,
+    private router: Router,
+    private authenticationService: AuthenticationService,
+    private userService: UserProfileService,
+    private userManagementService: UserManagementService
+  ) { }
 
   ngOnInit() {
     this.signupForm = this.formBuilder.group({
@@ -40,7 +48,7 @@ export class SignupComponent implements OnInit {
   /**
    * On submit form
    */
-  onSubmit() {
+  async onSubmit() {
     this.submitted = true;
 
     // stop here if form is invalid
@@ -57,6 +65,18 @@ export class SignupComponent implements OnInit {
           .catch(error => {
             this.error = error ? error : '';
           });
+      } if (environment.defaultauth === 'api') {
+        try {
+          await this.userManagementService.createUser({
+            email: this.f.email.value,
+            password: this.f.password.value,
+            name: this.f.username.value,
+            phone: ''
+          }).toPromise();
+          Swal.fire('Created!', 'Saved successfully.', 'success');
+        } catch (e) {
+          Swal.fire('Error', e);
+        }
       } else {
         this.userService.register(this.signupForm.value)
           .pipe(first())
