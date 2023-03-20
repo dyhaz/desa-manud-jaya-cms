@@ -1,10 +1,10 @@
-import { Component, Input, OnInit, ViewChild } from "@angular/core";
-import { ProgramService } from "@pages/master/program/program.service";
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { ProgramService } from '@pages/master/program/program.service';
 import { DatePipe, DecimalPipe } from '@angular/common';
-import { Table } from "@pages/master/program/program.model";
-import Swal from "sweetalert2";
-import { ProgramDesaService } from "@core/http/api";
-import { DropzoneComponent, DropzoneConfigInterface } from "ngx-dropzone-wrapper";
+import { Table } from '@pages/master/program/program.model';
+import Swal from 'sweetalert2';
+import { ProgramDesaService } from '@core/http/api';
+import { DropzoneComponent, DropzoneConfigInterface } from 'ngx-dropzone-wrapper';
 
 @Component({
   selector: 'app-program-form',
