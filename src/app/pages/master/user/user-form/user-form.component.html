@@ -17,7 +17,7 @@
           <div class="mb-3 row">
             <label for="email-text-input" class="col-md-2 col-form-label">Email</label>
             <div class="col-md-10">
-                <input id="email-text-input" readonly [(ngModel)]="user.email" class="form-control" placeholder="Email" />
+                <input id="email-text-input" [readonly]="mode === 'edit'" [(ngModel)]="user.email" class="form-control" placeholder="Email" />
             </div>
           </div>
           <div class="mb-3 row">
