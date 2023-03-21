@@ -211,7 +211,7 @@ export class UserService {
         this.endIndex = this.totalRecords;
       }
     } catch (e) {
-      await Swal.fire('Error', e.message);
+      await Swal.fire('Error', e?.body?.error);
     }
 
     tables = tables?.slice(this._state.startIndex - 1, this._state.endIndex);

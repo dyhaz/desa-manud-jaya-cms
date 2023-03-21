@@ -13,9 +13,13 @@ import { ContactsRoutingModule } from './contacts-routing.module';
 import { UsergridComponent } from './usergrid/usergrid.component';
 import { UserlistComponent } from './userlist/userlist.component';
 import { ProfileComponent } from './profile/profile.component';
+import {
+  ChangePasswordFormComponent
+} from '@pages/contacts/profile/change-password-form/change-password-form.component';
+import { UserManagementService } from '@core/http/api';
 
 @NgModule({
-  declarations: [UsergridComponent, UserlistComponent, ProfileComponent],
+  declarations: [UsergridComponent, UserlistComponent, ProfileComponent, ChangePasswordFormComponent],
   imports: [
     CommonModule,
     ContactsRoutingModule,
@@ -25,6 +29,9 @@ import { ProfileComponent } from './profile/profile.component';
     NgApexchartsModule,
     FormsModule, ReactiveFormsModule ,
     NgbTooltipModule
+  ],
+  providers: [
+    UserManagementService
   ]
 })
 export class ContactsModule { }

@@ -75,7 +75,7 @@ export class SignupComponent implements OnInit {
           }).toPromise();
           Swal.fire('Created!', 'Saved successfully.', 'success');
         } catch (e) {
-          Swal.fire('Error', e);
+          Swal.fire('Error', e?.body?.error);
         }
       } else {
         this.userService.register(this.signupForm.value)

@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 
 import { revenueBarChart, statData } from './data';
 
 import { ChartType } from './profile.model';
+import { Table } from "@pages/master/user/user.model";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: 'app-profile',
@@ -14,12 +16,16 @@ import { ChartType } from './profile.model';
  * Contacts-profile component
  */
 export class ProfileComponent implements OnInit {
+  @ViewChild('content') editmodal: TemplateRef<any>;
+
   // bread crumb items
   breadCrumbItems: Array<{}>;
 
   revenueBarChart: ChartType;
   statData;
-  constructor() { }
+  constructor(
+    private modalService: NgbModal
+  ) { }
 
   ngOnInit() {
     this.breadCrumbItems = [{ label: 'Contacts' }, { label: 'Profile', active: true }];
@@ -34,5 +40,9 @@ export class ProfileComponent implements OnInit {
   private _fetchData() {
     this.revenueBarChart = revenueBarChart;
     this.statData = statData;
+  }
+
+  openModal() {
+    this.modalService.open(this.editmodal);
   }
 }
