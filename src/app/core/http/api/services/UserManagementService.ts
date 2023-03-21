@@ -102,4 +102,42 @@ id?: any,
         });
     }
 
+    /**
+     * Change user password
+     * Changes the password of the authenticated user
+     * @param requestBody 
+     * @returns any Password changed successfully
+     * @throws ApiError
+     */
+    public changePassword(
+requestBody: {
+/**
+ * The user's ID
+ */
+id?: number;
+/**
+ * The user's current password
+ */
+current_password: string;
+/**
+ * The user's new password
+ */
+new_password: string;
+/**
+ * Confirmation of the user's new password
+ */
+new_password_confirmation: string;
+},
+): Observable<any> {
+        return __request(OpenAPI, this.http, {
+            method: 'POST',
+            url: '/api/user/password',
+            body: requestBody,
+            mediaType: 'application/json',
+            errors: {
+                401: `Unauthorized - invalid current password`,
+            },
+        });
+    }
+
 }

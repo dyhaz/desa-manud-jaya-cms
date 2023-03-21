@@ -94,7 +94,7 @@ export class LandingComponent implements OnInit {
 
   async loadProgramDesa() {
     try {
-      const result = await this.programDesa.getProgramDesa().toPromise();
+      const result = await this.programDesa.getProgramDesaLanding().toPromise();
       this.programDesaList = result.data;
       this.programDesaList.forEach(item => {
         item.foto = this.domSanitizer.bypassSecurityTrustResourceUrl('data:image/png;base64, ' + item.foto);

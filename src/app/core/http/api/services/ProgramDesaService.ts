@@ -45,6 +45,7 @@ tanggal_mulai: string;
 tanggal_selesai: string;
 anggaran?: string;
 foto?: string;
+status?: boolean;
 },
 accept: string = 'application/json',
 ): Observable<any> {
@@ -58,6 +59,36 @@ accept: string = 'application/json',
             mediaType: 'application/json',
             errors: {
                 422: `Validation error`,
+            },
+        });
+    }
+
+    /**
+     * Get all ProgramDesa with optional filters
+     * @param namaProgram Filter by nama_program
+     * @param tanggalMulai Filter by tanggal_mulai
+     * @param tanggalSelesai Filter by tanggal_selesai
+     * @param desaId Filter by desa_id
+     * @param status Filter by status
+     * @returns any List of ProgramDesa
+     * @throws ApiError
+     */
+    public getProgramDesaLanding(
+namaProgram?: string,
+tanggalMulai?: string,
+tanggalSelesai?: string,
+desaId?: number,
+status?: boolean,
+): Observable<any> {
+        return __request(OpenAPI, this.http, {
+            method: 'GET',
+            url: '/api/program-desa-landing',
+            query: {
+                'nama_program': namaProgram,
+                'tanggal_mulai': tanggalMulai,
+                'tanggal_selesai': tanggalSelesai,
+                'desa_id': desaId,
+                'status': status,
             },
         });
     }
@@ -102,6 +133,7 @@ tanggal_mulai: string;
 tanggal_selesai: string;
 anggaran?: string;
 foto?: string;
+status?: boolean;
 },
 accept: string = 'application/json',
 ): Observable<any> {
