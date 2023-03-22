@@ -41,13 +41,13 @@ export class ChangePasswordFormComponent implements OnInit {
         this.modal.dismiss();
       }
     } catch (e) {
-        let errorMessage = '';
+      let errorMessage = '';
 
-        if (this.newPassword !== this.confirmPassword) {
-          errorMessage = 'Password tidak sama';
-        }
+      if (this.newPassword !== this.confirmPassword) {
+        errorMessage = 'Password tidak sama';
+      }
 
-        await Swal.fire('Error', errorMessage ? errorMessage : e.body?.error);
+      await Swal.fire('Error', errorMessage ? errorMessage : e.toString());
     }
   }
 

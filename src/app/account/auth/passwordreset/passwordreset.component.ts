@@ -71,7 +71,7 @@ export class PasswordresetComponent implements OnInit, AfterViewInit {
         }).toPromise();
         Swal.fire('Email sent!', 'Please check your inbox for instructions of how to reset your password', 'success');
       } catch (e) {
-        Swal.fire('Error', e?.body?.error);
+        Swal.fire('Error', e.toString());
       }
     }
   }

@@ -70,7 +70,7 @@ export class UserFormComponent implements OnInit {
         this.modal.dismiss();
       }
     } catch (e) {
-      await Swal.fire('Error', e?.body?.error);
+      await Swal.fire('Error', e.toString());
     }
   }
 

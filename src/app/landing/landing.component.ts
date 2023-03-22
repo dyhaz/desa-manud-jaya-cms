@@ -100,7 +100,7 @@ export class LandingComponent implements OnInit {
         item.foto = this.domSanitizer.bypassSecurityTrustResourceUrl('data:image/png;base64, ' + item.foto);
       });
     } catch (e) {
-      Swal.fire('Error', e?.body?.error);
+      Swal.fire('Error', e.toString());
     }
   }
 

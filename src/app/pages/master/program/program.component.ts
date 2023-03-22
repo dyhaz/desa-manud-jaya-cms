@@ -96,7 +96,7 @@ export class ProgramComponent implements OnInit {
       await Swal.fire('Deleted!', 'Program has been deleted.', 'success');
       await this._fetchData();
     } catch (e) {
-      await Swal.fire('Error', e?.body?.error);
+      await Swal.fire('Error', e.toString());
     }
   }
 

@@ -213,7 +213,7 @@ export class ProgramService {
         this.endIndex = this.totalRecords;
       }
     } catch (e) {
-      await Swal.fire('Error', e?.body?.error);
+      await Swal.fire('Error', e.toString());
     }
 
     tables = tables?.slice(this._state.startIndex - 1, this._state.endIndex);
