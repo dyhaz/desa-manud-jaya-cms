@@ -27,6 +27,8 @@ export class ProfileComponent implements OnInit {
   public loginName = '';
   public loginPhoto = '';
 
+  public user;
+
   constructor(
     private modalService: NgbModal
   ) { }
@@ -39,6 +41,7 @@ export class ProfileComponent implements OnInit {
 
     const currentUser = localStorage.getItem('currentUser');
     if (currentUser) {
+      this.user = JSON.parse(currentUser);
       this.loginName = JSON.parse(currentUser).name;
       this.loginPhoto = JSON.parse(currentUser).photo;
     }
