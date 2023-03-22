@@ -39,6 +39,7 @@ export class ProgramFormComponent implements OnInit, AfterViewInit {
       this.onAccept(file);
     }
   };
+  public previewImage = '';
 
   constructor(
     private programDesa: ProgramDesaService,
@@ -71,11 +72,14 @@ export class ProgramFormComponent implements OnInit, AfterViewInit {
 
   addImageToDropzone(imageData: string) {
     // Get a reference ot the dropzone component
-    const dropzone = this.dropzone.directiveRef.dropzone();
+    // const dropzone = this.dropzone.directiveRef.dropzone();
 
-    const blob = new Blob([imageData], { type: 'image/png' });
-    const imageFile = new File([blob], 'foto.png', { type: 'image/png' });
-    dropzone.addFile( imageFile );
+    // Still buggy
+    // const blob = new Blob([imageData], { type: 'image/png' });
+    // const imageFile = new File([blob], 'foto.png', { type: 'image/png' });
+    // dropzone.addFile( imageFile );
+
+    this.previewImage = imageData;
   }
 
   removeImages() {
@@ -85,6 +89,8 @@ export class ProgramFormComponent implements OnInit, AfterViewInit {
   }
 
   onAccept(file: any) {
+    this.previewImage = '';
+
     const fileToBase64 = (file:File):Promise<string> => {
       return new Promise<string> ((resolve,reject)=> {
         const reader = new FileReader();
