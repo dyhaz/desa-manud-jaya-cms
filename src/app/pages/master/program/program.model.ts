@@ -7,7 +7,7 @@ export interface Table {
     foto: string;
     anggaran: string;
     program_id: number;
-    status?: boolean;
+    status?: any;
     updated_at?: string;
 }
 

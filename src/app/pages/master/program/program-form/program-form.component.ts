@@ -25,7 +25,7 @@ export class ProgramFormComponent implements OnInit, AfterViewInit {
     tanggal_mulai: '',
     foto: '',
     anggaran: '',
-    status: false
+    status: 0
   };
   public today = new Date();
   config: DropzoneConfigInterface = {
@@ -97,11 +97,17 @@ export class ProgramFormComponent implements OnInit, AfterViewInit {
   async save() {
     try {
       if (this.mode === 'edit') {
-        await this.programDesa.updateProgramDesa(this.program.program_id, this.program).toPromise();
+        await this.programDesa.updateProgramDesa(this.program.program_id, {
+          ...this.program,
+          status: this.program.status === '1'
+        }).toPromise();
         Swal.fire('Updated!', 'Saved successfully.', 'success');
         this.modal.dismiss();
       } else {
-        await this.programDesa.storeProgramDesa(this.program).toPromise();
+        await this.programDesa.storeProgramDesa({
+          ...this.program,
+          status: this.program.status === '1'
+        }).toPromise();
         Swal.fire('Created!', 'Saved successfully.', 'success');
         this.modal.dismiss();
       }
