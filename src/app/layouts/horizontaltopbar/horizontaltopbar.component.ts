@@ -4,7 +4,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { LanguageService } from '../../core/services/language.service';
 
 import { EventService } from '../../core/services/event.service';
-import { AuthenticationService } from '../../core/services/auth.service';
+import { AuthenticationService } from "@core/http/api";
 import { AuthfakeauthenticationService } from '../../core/services/authfake.service';
 
 import { DOCUMENT } from '@angular/common';
@@ -80,9 +80,11 @@ export class HorizontaltopbarComponent implements OnInit, AfterViewInit {
   /**
    * Logout the user
    */
-  logout() {
+  async logout() {
     if (environment.defaultauth === 'firebase') {
-      this.authService.logout();
+      // this.authService.logout();
+    } else if (environment.defaultauth === 'api') {
+      await this.authService.logout().toPromise();
     } else {
       this.authFackservice.logout();
     }

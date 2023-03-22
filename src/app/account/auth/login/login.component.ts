@@ -48,6 +48,7 @@ export class LoginComponent implements OnInit {
 
     // reset login status
     // this.authenticationService.logout();
+    localStorage.removeItem('currentUser');
     // get return url from route parameters or default to '/'
     // tslint:disable-next-line: no-string-literal
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';

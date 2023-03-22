@@ -62,8 +62,10 @@ export class ProgramFormComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    if (this.program) {
+    if (this.program && this.mode === 'edit') {
       this.addImageToDropzone('data:image/png;base64,' + this.program.foto);
+    } else {
+      this.removeImages();
     }
   }
 
@@ -74,6 +76,12 @@ export class ProgramFormComponent implements OnInit, AfterViewInit {
     const blob = new Blob([imageData], { type: 'image/png' });
     const imageFile = new File([blob], 'foto.png', { type: 'image/png' });
     dropzone.addFile( imageFile );
+  }
+
+  removeImages() {
+    // Get a reference ot the dropzone component
+    const dropzone = this.dropzone.directiveRef.dropzone();
+    dropzone.removeImages();
   }
 
   onAccept(file: any) {
