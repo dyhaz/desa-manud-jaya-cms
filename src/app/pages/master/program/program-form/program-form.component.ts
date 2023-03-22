@@ -107,14 +107,14 @@ export class ProgramFormComponent implements OnInit, AfterViewInit {
       if (this.mode === 'edit') {
         await this.programDesa.updateProgramDesa(this.program.program_id, {
           ...this.program,
-          status: this.program.status === '1'
+          status: this.program.status === '1' || this.program.status === true
         }).toPromise();
         Swal.fire('Updated!', 'Saved successfully.', 'success');
         this.modal.dismiss();
       } else {
         await this.programDesa.storeProgramDesa({
           ...this.program,
-          status: this.program.status === '1'
+          status: this.program.status === '1' || this.program.status === true
         }).toPromise();
         Swal.fire('Created!', 'Saved successfully.', 'success');
         this.modal.dismiss();
