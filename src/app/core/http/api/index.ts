@@ -7,6 +7,7 @@ export { OpenAPI } from './core/OpenAPI';
 export type { OpenAPIConfig } from './core/OpenAPI';
 
 export { AuthenticationService } from './services/AuthenticationService';
+export { DashboardService } from './services/DashboardService';
 export { DesaService } from './services/DesaService';
 export { PelaksanaProgramService } from './services/PelaksanaProgramService';
 export { ProgramDesaService } from './services/ProgramDesaService';

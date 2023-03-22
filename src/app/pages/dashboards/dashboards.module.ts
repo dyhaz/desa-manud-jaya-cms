@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { DashboardsRoutingModule } from './dashboards-routing.module';
-import { UIModule } from '../../shared/ui/ui.module';
-import { WidgetModule } from '../../shared/widget/widget.module';
+import { UIModule } from '@shared/ui/ui.module';
+import { WidgetModule } from '@shared/widget/widget.module';
 
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { SharedModule } from './saas/shared/shared.module'
@@ -15,6 +15,7 @@ import { DefaultComponent } from './default/default.component';
 import { SaasComponent } from './saas/saas.component';
 import { CryptoComponent } from './crypto/crypto.component';
 import { BlogComponent } from './blog/blog.component';
+import { DashboardService } from '@core/http/api/services/DashboardService';
 
 @NgModule({
   declarations: [DefaultComponent, SaasComponent, CryptoComponent, BlogComponent],
@@ -31,6 +32,9 @@ import { BlogComponent } from './blog/blog.component';
     NgApexchartsModule,
     SharedModule,
     SimplebarAngularModule
+  ],
+  providers: [
+    DashboardService
   ]
 })
 export class DashboardsModule { }

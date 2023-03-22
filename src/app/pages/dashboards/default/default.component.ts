@@ -1,11 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { emailSentBarChart, monthlyEarningChart } from './data';
+import { monthlyEarningChart } from './data';
 import { ChartType } from './dashboard.model';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { EventService } from '../../../core/services/event.service';
 
 import { ConfigService } from '../../../core/services/config.service';
 import { Router } from "@angular/router";
+import { DashboardService } from "@core/http/api";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-default',
@@ -31,11 +33,12 @@ export class DefaultComponent implements OnInit {
     private modalService: NgbModal,
     private configService: ConfigService,
     private eventService: EventService,
-    private router: Router
+    private router: Router,
+    private dashboardService: DashboardService
   ) {
   }
 
-  ngOnInit() {
+  async ngOnInit() {
 
     /**
      * horizontal-vertical layput set
@@ -58,7 +61,7 @@ export class DefaultComponent implements OnInit {
     /**
      * Fetches the data
      */
-    this.fetchData();
+    await this.fetchData();
 
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     if (currentUser) {
@@ -76,15 +79,85 @@ export class DefaultComponent implements OnInit {
   /**
    * Fetches the data
    */
-  private fetchData() {
-    this.emailSentBarChart = emailSentBarChart;
+  private async fetchData() {
+    // this.emailSentBarChart = emailSentBarChart;
     this.monthlyEarningChart = monthlyEarningChart;
 
+    const budget = await this.getAnggaranChart();
+    this.emailSentBarChart = {
+      chart: {
+        height: 340,
+        type: 'bar',
+        stacked: true,
+        toolbar: {
+          show: false
+        },
+        zoom: {
+          enabled: true
+        }
+      },
+      plotOptions: {
+        bar: {
+          horizontal: false,
+          columnWidth: '15%',
+          endingShape: 'rounded'
+        },
+      },
+      dataLabels: {
+        enabled: false
+      },
+      series: [{
+        name: 'Total Anggaran',
+        data: [1,2,3,4,5,6,7,8,9,10,11,12].map(item => {
+          const anggaran = budget.filter((item2) => item2.month === item + '')[0]?.total_anggaran;
+          return anggaran ? anggaran : 0;
+        })
+      }],
+      xaxis: {
+        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+      },
+      colors: ['#556ee6', '#f1b44c', '#34c38f'],
+      legend: {
+        position: 'bottom',
+      },
+      fill: {
+        opacity: 1
+      },
+    };
+
     this.isActive = 'year';
-    this.configService.getConfig().subscribe(data => {
+    this.configService.getConfig().subscribe(async (data) => {
       this.transactions = data.transactions;
       this.statData = data.statData;
+
+      const dashboard = await this.dashboardService.dashboard().toPromise();
+      this.statData.forEach((stat: any) => {
+        if (stat.title === 'Total Program') {
+          stat.value = dashboard.data.totalPrograms;
+        }
+
+        if (stat.title === 'Total Budget') {
+          const options = { style: 'currency', currency: 'IDR' }; // formatting options
+           // format the number as IDR currency
+          stat.value = Number(dashboard.data.totalBudget).toLocaleString('id-ID', options);
+        }
+
+        if (stat.title === 'Program Aktif') {
+          stat.value = dashboard.data.ongoingPrograms;
+        }
+      })
     });
+  }
+
+  async getAnggaranChart() {
+    try {
+      const budget = await this.dashboardService.anggaran().toPromise();
+      return budget.data;
+    } catch (e) {
+      Swal.fire('Error', e.toString());
+    }
+
+    return [];
   }
 
   openModal() {

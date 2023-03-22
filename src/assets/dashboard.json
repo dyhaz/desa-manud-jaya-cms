@@ -57,16 +57,16 @@
 
   "statData": [{
     "icon": "bx bx-copy-alt",
-    "title": "Orders",
+    "title": "Total Program",
     "value": "1,235"
-  }, {
-    "icon": "bx bx-archive-in",
-    "title": "Revenue",
-    "value": "$35, 723"
-  }, {
-    "icon": "bx bx-purchase-tag-alt",
-    "title": "Average Price",
-    "value": "$16.2"
+  },{
+    "icon": "bx bx-copy-alt",
+    "title": "Total Budget",
+    "value": "1,235"
+  },{
+    "icon": "bx bx-copy-alt",
+    "title": "Program Aktif",
+    "value": "1,235"
   }],
 
   "sassEarning": [{

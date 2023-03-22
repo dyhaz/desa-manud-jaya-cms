@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { interval } from 'rxjs';
 import { map } from 'rxjs/internal/operators';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { ProgramDesaService } from "@core/http/api";
 import Swal from 'sweetalert2';
 import { DomSanitizer } from '@angular/platform-browser';
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: 'app-landing',
@@ -16,6 +17,8 @@ import { DomSanitizer } from '@angular/platform-browser';
  * Crypto landing page
  */
 export class LandingComponent implements OnInit {
+  @ViewChild('portfolioModal1') portfolioModal: TemplateRef<any>;
+  public selectedProgram = 0;
 
   // set the currenr year
   year: number = new Date().getFullYear();
@@ -71,7 +74,8 @@ export class LandingComponent implements OnInit {
 
   constructor(
     private programDesa: ProgramDesaService,
-    public domSanitizer: DomSanitizer
+    public domSanitizer: DomSanitizer,
+    private modalService: NgbModal
   ) {
 
   }
@@ -150,11 +154,14 @@ export class LandingComponent implements OnInit {
     this.currentSection = sectionId;
   }
 
-  showModal(modal: HTMLDivElement) {
-    modal.setAttribute('style', 'display: block !important; opacity: 100');
+  showModal(index: number) {
+    this.selectedProgram = index;
+    // modal.setAttribute('style', 'display: block !important; opacity: 100');
+    this.modalService.open(this.portfolioModal, { size: 'lg' });
   }
 
-  closeModal(modal: HTMLDivElement) {
-    modal.setAttribute('style', 'display: none !important; opacity: 0');
+  closeModal() {
+    // modal.setAttribute('style', 'display: none !important; opacity: 0');
+    this.modalService.dismissAll();
   }
 }
