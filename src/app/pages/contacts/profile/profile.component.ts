@@ -23,6 +23,10 @@ export class ProfileComponent implements OnInit {
 
   revenueBarChart: ChartType;
   statData;
+
+  public loginName = '';
+  public loginPhoto = '';
+
   constructor(
     private modalService: NgbModal
   ) { }
@@ -32,6 +36,12 @@ export class ProfileComponent implements OnInit {
 
     // fetches the data
     this._fetchData();
+
+    const currentUser = localStorage.getItem('currentUser');
+    if (currentUser) {
+      this.loginName = JSON.parse(currentUser).name;
+      this.loginPhoto = JSON.parse(currentUser).photo;
+    }
   }
 
   /**
