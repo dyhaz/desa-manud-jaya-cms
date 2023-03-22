@@ -164,4 +164,8 @@ export class LandingComponent implements OnInit {
     // modal.setAttribute('style', 'display: none !important; opacity: 0');
     this.modalService.dismissAll();
   }
+
+  sendMessage() {
+    Swal.fire('Sukses!', 'Pesan Anda telah diterima', 'success');
+  }
 }
