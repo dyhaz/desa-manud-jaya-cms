@@ -19,6 +19,7 @@ import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 export class LandingComponent implements OnInit {
   @ViewChild('portfolioModal1') portfolioModal: TemplateRef<any>;
   public selectedProgram = 0;
+  public loading = false;
 
   // set the currenr year
   year: number = new Date().getFullYear();
@@ -98,12 +99,15 @@ export class LandingComponent implements OnInit {
 
   async loadProgramDesa() {
     try {
+      this.loading = true;
       const result = await this.programDesa.getProgramDesaLanding().toPromise();
       this.programDesaList = result.data;
       this.programDesaList.forEach(item => {
         item.foto = this.domSanitizer.bypassSecurityTrustResourceUrl('data:image/png;base64, ' + item.foto);
       });
+      this.loading = false;
     } catch (e) {
+      this.loading = false;
       Swal.fire('Error', e.toString());
     }
   }
