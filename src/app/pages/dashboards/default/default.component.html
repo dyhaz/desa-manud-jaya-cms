@@ -114,9 +114,9 @@
 <!--                                    <a class="nav-link" href="javascript: void(0);" (click)="monthlyreport()"-->
 <!--                                        [ngClass]="{'active': isActive === 'month'}">Month</a>-->
 <!--                                </li>-->
-                                <li class="nav-item">
-                                    <a class="nav-link" href="javascript: void(0);" (click)="yearlyreport()"
-                                        [ngClass]="{'active': isActive === 'year'}">Year</a>
+                                <li class="nav-item" *ngFor="let i of yearList">
+                                    <a class="nav-link" href="javascript: void(0);" (click)="fetchData(i)"
+                                        [ngClass]="{'active': isActive === i}">{{ i }}</a>
                                 </li>
                             </ul>
                         </div>

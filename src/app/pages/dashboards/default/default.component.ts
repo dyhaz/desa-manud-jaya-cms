@@ -23,7 +23,8 @@ export class DefaultComponent implements OnInit {
   transactions: Array<[]>;
   statData: Array<[]>;
 
-  isActive: string;
+  isActive: string = new Date().getFullYear() + '';
+  yearList: string[] = [];
 
   public loginName = '';
   public loginPhoto = '';
@@ -59,6 +60,13 @@ export class DefaultComponent implements OnInit {
      }
 
     /**
+     * Initialize last 3 years
+     */
+    for(let i = 0 ; i < 3 ; i++) {
+      this.yearList.push(String(new Date().getFullYear() - i));
+    }
+
+    /**
      * Fetches the data
      */
     await this.fetchData();
@@ -79,11 +87,12 @@ export class DefaultComponent implements OnInit {
   /**
    * Fetches the data
    */
-  private async fetchData() {
+  public async fetchData(year?: string) {
     // this.emailSentBarChart = emailSentBarChart;
     this.monthlyEarningChart = monthlyEarningChart;
 
-    const budget = await this.getAnggaranChart();
+    this.isActive = year ? year : new Date().getFullYear() + '';
+    const budget = await this.getAnggaranChart(year);
     this.emailSentBarChart = {
       chart: {
         height: 340,
@@ -109,8 +118,8 @@ export class DefaultComponent implements OnInit {
       series: [{
         name: 'Total Anggaran',
         data: [1,2,3,4,5,6,7,8,9,10,11,12].map(item => {
-          const anggaran = budget.filter((item2) => item2.month === item + '')[0]?.total_anggaran;
-          return anggaran ? anggaran : 0;
+          const anggaran = budget.filter((item2) => item2.month + '' === item + '')[0]?.total_anggaran;
+          return anggaran ? Number(anggaran) : 0;
         })
       }],
       xaxis: {
@@ -124,8 +133,6 @@ export class DefaultComponent implements OnInit {
         opacity: 1
       },
     };
-
-    this.isActive = 'year';
     this.configService.getConfig().subscribe(async (data) => {
       this.transactions = data.transactions;
       this.statData = data.statData;
@@ -149,10 +156,15 @@ export class DefaultComponent implements OnInit {
     });
   }
 
-  async getAnggaranChart() {
+  async getAnggaranChart(year?: string) {
     try {
-      const budget = await this.dashboardService.anggaran().toPromise();
-      return budget.data;
+      if (!year) {
+        const budget = await this.dashboardService.anggaran().toPromise();
+        return budget.data;
+      } else {
+        const budget = await this.dashboardService.anggaranByMonth(year).toPromise();
+        return budget.data;
+      }
     } catch (e) {
       Swal.fire('Error', e.toString());
     }

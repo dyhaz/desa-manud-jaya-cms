@@ -46,6 +46,7 @@ tanggal_selesai: string;
 anggaran?: string;
 foto?: string;
 status?: boolean;
+jenis_program?: number;
 },
 accept: string = 'application/json',
 ): Observable<any> {
@@ -134,6 +135,7 @@ tanggal_selesai: string;
 anggaran?: string;
 foto?: string;
 status?: boolean;
+jenis_program?: number;
 },
 accept: string = 'application/json',
 ): Observable<any> {

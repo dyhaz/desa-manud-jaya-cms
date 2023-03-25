@@ -11383,7 +11383,7 @@ p {
     transition: font-size 0.3s ease-in-out;
   }
   #navbar .navbar-brand img {
-    height: 2rem;
+    height: 7rem;
     transition: height 0.3s ease-in-out;
   }
   #navbar.navbar-shrink {

@@ -37,4 +37,22 @@ export class DashboardService {
         });
     }
 
+    /**
+     * Show the finance report for the current year.
+     * @param year Current year.
+     * @returns any Dashboard record retrieved successfully
+     * @throws ApiError
+     */
+    public anggaranByMonth(
+year: string,
+): Observable<any> {
+        return __request(OpenAPI, this.http, {
+            method: 'GET',
+            url: '/api/dashboard/anggaran/{year}',
+            path: {
+                'year': year,
+            },
+        });
+    }
+
 }
