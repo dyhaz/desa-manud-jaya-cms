@@ -56,6 +56,14 @@ export class LoginComponent implements OnInit {
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
 
     this.configureOAuth();
+
+    const token = sessionStorage.getItem('nonce');
+    if (token) {
+      Swal.fire('Sukses!', 'Login berhasil', 'success');
+      setTimeout(() => {
+        this.router.navigate(['/dashboard']);
+      }, 2000);
+    }
   }
 
   // convenience getter for easy access to form fields
