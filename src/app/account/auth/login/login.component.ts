@@ -57,13 +57,19 @@ export class LoginComponent implements OnInit {
 
     this.configureOAuth();
 
-    const token = sessionStorage.getItem('nonce');
-    if (token) {
-      Swal.fire('Sukses!', 'Login berhasil', 'success');
-      setTimeout(() => {
-        this.router.navigate(['/dashboard']);
-      }, 2000);
-    }
+    // Check if SSO login succeed
+    this.route.queryParams
+      .subscribe(params => {
+          console.log('access token', params.returnUrl.split('access_token=')[1]);
+          const token = params.returnUrl?.split('access_token=')[1] ?? false;
+          if (token) {
+            Swal.fire('Sukses!', 'Login berhasil', 'success');
+            setTimeout(() => {
+              this.router.navigate(['/dashboard']);
+            }, 2000);
+          }
+        }
+      );
   }
 
   // convenience getter for easy access to form fields
