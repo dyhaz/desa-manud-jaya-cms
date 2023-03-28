@@ -107,7 +107,7 @@ export class LoginComponent implements OnInit {
       issuer: 'https://accounts.google.com',
       clientId: '186253579723-pvgkk6cpbe8krpu8m07ngdfdc44v1rv8.apps.googleusercontent.com',
       redirectUri: window.location.origin,
-      scope: 'm.dyhaz@gmail.com',
+      scope: 'openid',
       responseType: 'id_token token',
       showDebugInformation: true,
       strictDiscoveryDocumentValidation: false
