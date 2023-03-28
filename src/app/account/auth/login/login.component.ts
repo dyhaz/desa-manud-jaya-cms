@@ -10,6 +10,7 @@ import { first } from 'rxjs/operators';
 import { environment } from '@environments/environment';
 import { AuthenticationService } from '@core/http/api';
 import Swal from 'sweetalert2';
+import { AuthConfig, OAuthService } from 'angular-oauth2-oidc';
 
 @Component({
   selector: 'app-login',
@@ -37,7 +38,8 @@ export class LoginComponent implements OnInit {
     private router: Router,
     // private authenticationService: AuthenticationService,
     private authFackservice: AuthfakeauthenticationService,
-    private auth: AuthenticationService
+    private auth: AuthenticationService,
+    private oauthService: OAuthService
   ) { }
 
   ngOnInit() {
@@ -52,6 +54,8 @@ export class LoginComponent implements OnInit {
     // get return url from route parameters or default to '/'
     // tslint:disable-next-line: no-string-literal
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+
+    this.configureOAuth();
   }
 
   // convenience getter for easy access to form fields
@@ -96,5 +100,24 @@ export class LoginComponent implements OnInit {
             });
       }
     }
+  }
+
+  private configureOAuth(): void {
+    const authConfig: AuthConfig = {
+      issuer: 'https://accounts.google.com',
+      clientId: '186253579723-pvgkk6cpbe8krpu8m07ngdfdc44v1rv8.apps.googleusercontent.com',
+      redirectUri: window.location.origin,
+      scope: 'm.dyhaz@gmail.com',
+      responseType: 'id_token token',
+      showDebugInformation: true,
+      strictDiscoveryDocumentValidation: false
+    };
+
+    this.oauthService.configure(authConfig);
+    this.oauthService.loadDiscoveryDocumentAndTryLogin();
+  }
+
+  signInWithGoogle() {
+    this.oauthService.initLoginFlow();
   }
 }
