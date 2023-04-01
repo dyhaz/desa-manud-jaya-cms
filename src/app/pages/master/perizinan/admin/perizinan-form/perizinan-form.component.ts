@@ -4,6 +4,7 @@ import { Table } from '@pages/master/perizinan/admin/perizinan.model';
 import Swal from 'sweetalert2';
 import { PerizinanTableService } from '@pages/master/perizinan/admin/perizinan.service';
 import { PerizinanService } from '@core/http/api';
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-perizinan-form',
@@ -96,4 +97,10 @@ export class PerizinanFormComponent implements OnInit {
     }
   }
 
+  downloadLampiran(lampiran: string) {
+    lampiran = lampiran.replace('data:', '')
+      .replace(/^.+,/, '');
+    const blob = new Blob([atob(lampiran)], {type: 'application/pdf'});
+    saveAs(blob, 'lampiran.pdf');
+  }
 }

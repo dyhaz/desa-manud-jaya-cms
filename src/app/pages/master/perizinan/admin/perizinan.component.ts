@@ -94,7 +94,7 @@ export class PerizinanManagementComponent implements OnInit {
   downloadLampiran(lampiran: string) {
     lampiran = lampiran.replace('data:', '')
       .replace(/^.+,/, '');
-    const blob = new Blob([atob(lampiran)], {type: 'pdf'});
+    const blob = new Blob([atob(lampiran)], {type: 'application/pdf'});
     saveAs(blob, 'lampiran.pdf');
   }
 }

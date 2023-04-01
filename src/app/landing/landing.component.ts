@@ -187,7 +187,7 @@ export class LandingComponent implements OnInit {
       await this.perizinanService.createPerizinan(this.requestPerizinan).toPromise();
       Swal.fire('Sukses!', 'Request Anda telah diterima', 'success');
     } catch (e) {
-      await Swal.fire('Error', e.toString());
+      await Swal.fire('Error', 'Input yang Anda berikan tidak valid. Silakan cek kembali dan pastikan semua kolom telah diisi dengan benar.');
     }
 
   }
