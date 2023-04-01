@@ -42,6 +42,8 @@
               <tr>
                 <th sortable="keterangan" (sort)="onSort($event)">Keterangan</th>
                 <th sortable="tanggal_request" (sort)="onSort($event)">Tanggal Request</th>
+                <th sortable="nama_warga" (sort)="onSort($event)">Nama Warga</th>
+                <th sortable="nik" (sort)="onSort($event)">NIK</th>
                 <th sortable="status_request" (sort)="onSort($event)">Status Request</th>
                 <th sortable="lampiran" (sort)="onSort($event)">Lampiran</th>
                 <th>Actions</th>
@@ -54,6 +56,12 @@
                 </td>
                 <td>
                   <ngb-highlight [result]="table.tanggal_request" [term]="service.searchTerm"></ngb-highlight>
+                </td>
+                <td>
+                  <ngb-highlight [result]="table.warga.nama_warga" [term]="service.searchTerm"></ngb-highlight>
+                </td>
+                <td>
+                  <ngb-highlight [result]="table.warga.nik" [term]="service.searchTerm"></ngb-highlight>
                 </td>
                 <td>
                   <ngb-highlight [result]="table.status_request" [term]="service.searchTerm"></ngb-highlight>

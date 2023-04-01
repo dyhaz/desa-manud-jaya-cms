@@ -64,7 +64,7 @@ export class PerizinanManagementComponent implements OnInit {
    */
   async _fetchData() {
     const result = await this.perizinanManagementService.getPerizinan().toPromise();
-    this.tableData = result.data;
+    this.tableData = { ...result.data, ...result.data.warga };
     for (let i = 0; i <= this.tableData.length; i++) {
       this.hideme.push(true);
     }

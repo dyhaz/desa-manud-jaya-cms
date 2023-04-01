@@ -23,7 +23,17 @@ export class PerizinanFormComponent implements OnInit {
     status_request: '',
     jenis_id: 0,
     request_id: 0,
-    warga_id: 0
+    warga_id: 0,
+    warga: {
+      nik: '',
+      warga_id: 0,
+      nama_warga: '',
+      alamat: '',
+      created_at: '',
+      email: '',
+      nomor_telepon: '',
+      updated_at: ''
+    }
   };
   @Output() public dismiss = new EventEmitter<any>();
 
@@ -45,7 +55,17 @@ export class PerizinanFormComponent implements OnInit {
         status_request: '',
         jenis_id: 0,
         request_id: 0,
-        warga_id: 0
+        warga_id: 0,
+        warga: {
+          nik: '',
+          warga_id: 0,
+          nama_warga: '',
+          alamat: '',
+          created_at: '',
+          email: '',
+          nomor_telepon: '',
+          updated_at: ''
+        }
       };
     }
   }

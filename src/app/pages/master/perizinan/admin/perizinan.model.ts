@@ -1,4 +1,6 @@
 // Table data
+import { Warga } from '@core/http/api';
+
 export interface Table {
     keterangan: string;
     lampiran: string;
@@ -7,6 +9,7 @@ export interface Table {
     request_id: number;
     jenis_id: number;
     warga_id: number;
+    warga: Warga
 }
 
 // Search Data

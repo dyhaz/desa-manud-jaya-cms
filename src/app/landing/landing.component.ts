@@ -2,7 +2,7 @@ import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { interval } from 'rxjs';
 import { map } from 'rxjs/internal/operators';
 import { OwlOptions } from 'ngx-owl-carousel-o';
-import { CreateRequestPerizinan, PerizinanService, ProgramDesaService } from "@core/http/api";
+import { CreateRequestPerizinan, PerizinanService, ProgramDesaService, Warga, WargaService } from "@core/http/api";
 import Swal from 'sweetalert2';
 import { DomSanitizer } from '@angular/platform-browser';
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
@@ -20,7 +20,16 @@ export class LandingComponent implements OnInit {
   @ViewChild('portfolioModal1') portfolioModal: TemplateRef<any>;
   public selectedProgram = 0;
   public loading = false;
-  public warga: any = {};
+  public warga: Warga = {
+    warga_id: 1,
+    updated_at: '',
+    nama_warga: '',
+    alamat: '',
+    nomor_telepon: '',
+    email: '',
+    nik: '',
+    created_at: ''
+  };
   public requestPerizinan: CreateRequestPerizinan = {
     alamat: '',
     jenis_perizinan: '',
@@ -89,6 +98,7 @@ export class LandingComponent implements OnInit {
     private programDesa: ProgramDesaService,
     public domSanitizer: DomSanitizer,
     private modalService: NgbModal,
+    private wargaService: WargaService,
     private perizinanService: PerizinanService
   ) {
 
@@ -184,6 +194,22 @@ export class LandingComponent implements OnInit {
 
   async sendMessage() {
     try {
+      let warga;
+      const result = await this.wargaService.filterWarga('', '', this.warga.email).toPromise();
+      if (result.data.length > 0) {
+        warga = result.data[0];
+      } else {
+        warga = await this.wargaService.storeWarga({
+          nik: '1234567890',
+          email: this.warga.email,
+          nama_warga: this.requestPerizinan.nama,
+          nomor_telepon: this.warga.nomor_telepon,
+          warga_id: 0,
+          alamat: ''
+        }).toPromise();
+      }
+
+      this.requestPerizinan.warga_id = warga.warga_id;
       await this.perizinanService.createPerizinan(this.requestPerizinan).toPromise();
       Swal.fire('Sukses!', 'Request Anda telah diterima', 'success');
     } catch (e) {

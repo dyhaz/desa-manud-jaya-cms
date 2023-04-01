@@ -47,7 +47,9 @@ function matches(tables: Table, term: string, pipe: PipeTransform) {
   return tables.keterangan?.toLowerCase()?.includes(term.toLowerCase())
     || tables.status_request?.toLowerCase()?.includes(term)
     || tables.tanggal_request?.toLowerCase()?.includes(term)
-    || tables.lampiran?.toLowerCase()?.includes(term);
+    || tables.lampiran?.toLowerCase()?.includes(term)
+    || tables.warga?.nik?.toLowerCase()?.includes(term)
+    || tables.warga?.nama_warga?.toLowerCase()?.includes(term);
 }
 
 @Injectable({
