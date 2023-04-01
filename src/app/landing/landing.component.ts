@@ -2,7 +2,7 @@ import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { interval } from 'rxjs';
 import { map } from 'rxjs/internal/operators';
 import { OwlOptions } from 'ngx-owl-carousel-o';
-import { ProgramDesaService } from "@core/http/api";
+import { CreateRequestPerizinan, PerizinanService, ProgramDesaService } from "@core/http/api";
 import Swal from 'sweetalert2';
 import { DomSanitizer } from '@angular/platform-browser';
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
@@ -20,6 +20,18 @@ export class LandingComponent implements OnInit {
   @ViewChild('portfolioModal1') portfolioModal: TemplateRef<any>;
   public selectedProgram = 0;
   public loading = false;
+  public warga: any = {};
+  public requestPerizinan: CreateRequestPerizinan = {
+    alamat: '',
+    jenis_perizinan: '',
+    jenis_id: 1,
+    nama: '',
+    status_request: 'Menunggu Persetujuan',
+    tanggal_request: (new Date()).toISOString().split('T')[0],
+    keterangan: '',
+    warga_id: 1,
+    lampiran: ''
+  };
 
   // set the currenr year
   year: number = new Date().getFullYear();
@@ -76,7 +88,8 @@ export class LandingComponent implements OnInit {
   constructor(
     private programDesa: ProgramDesaService,
     public domSanitizer: DomSanitizer,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private perizinanService: PerizinanService
   ) {
 
   }
@@ -169,7 +182,29 @@ export class LandingComponent implements OnInit {
     this.modalService.dismissAll();
   }
 
-  sendMessage() {
-    Swal.fire('Sukses!', 'Pesan Anda telah diterima', 'success');
+  async sendMessage() {
+    try {
+      await this.perizinanService.createPerizinan(this.requestPerizinan).toPromise();
+      Swal.fire('Sukses!', 'Request Anda telah diterima', 'success');
+    } catch (e) {
+      await Swal.fire('Error', e.toString());
+    }
+
+  }
+
+  uploadLampiran(ev) {
+    const fileToBase64 = (file:File):Promise<string> => {
+      return new Promise<string> ((resolve,reject)=> {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result.toString());
+        reader.onerror = error => reject(error);
+      })
+    }
+
+    fileToBase64(ev.target.files[0])
+      .then(result=>{
+        this.requestPerizinan.lampiran =  result;
+      });
   }
 }

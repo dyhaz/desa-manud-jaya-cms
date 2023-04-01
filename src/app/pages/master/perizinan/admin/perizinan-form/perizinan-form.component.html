@@ -1,0 +1,47 @@
+<div class="modal-header">
+  <h5 class="modal-title mt-0">{{ mode === 'edit' ? 'Update' : 'Tambah' }} Perizinan</h5>
+  <button type="button" class="close" aria-hidden="true" (click)="modal.dismiss('Cross click')">×</button>
+</div>
+<div class="modal-body">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+
+          <div class="mb-3 row">
+            <label for="name-text-input" class="col-md-2 col-form-label">Keterangan</label>
+            <div class="col-md-10">
+              <textarea class="form-control" [readonly]="mode === 'edit'" [(ngModel)]="perizinan.keterangan" type="text" placeholder="Keterangan" id="name-text-input">
+              </textarea>
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label for="date-text-input" class="col-md-2 col-form-label">Tanggal Request</label>
+            <div class="col-md-10">
+              <input id="date-text-input" [readonly]="mode === 'edit'" [(ngModel)]="perizinan.tanggal_request" class="form-control" placeholder="Tanggal Perizinan" type="date"/>
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label for="status-text-input" class="col-md-2 col-form-label">Status Request</label>
+            <div class="col-md-10">
+              <input id="status-text-input" [readonly]="mode === 'edit'" [(ngModel)]="perizinan.status_request" class="form-control" placeholder="Tanggal Perizinan" type="text"/>
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label for="att-text-input" class="col-md-2 col-form-label">Lampiran</label>
+            <div class="col-md-10">
+              <button type="button" class="btn btn-info" id="att-text-input"><i
+                class="mdi mdi-file-document"></i> File</button>
+<!--              <input maxlength="20" id="att-text-input" [(ngModel)]="perizinan.lampiran" class="form-control" placeholder="Lampiran" />-->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> <!-- end col -->
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+  <button *ngIf="perizinan.status_request === 'Menunggu Persetujuan'" type="button" class="btn btn-success" (click)="approve()">Approve</button>
+  <button *ngIf="perizinan.status_request === 'Menunggu Persetujuan'" type="button" class="btn btn-danger" (click)="reject()">Tolak</button>
+</div>

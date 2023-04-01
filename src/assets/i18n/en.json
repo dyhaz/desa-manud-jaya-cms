@@ -272,7 +272,8 @@
       "LIST": {
         "BASIC": "Basic Tables",
         "ADVANCED": "Program Desa",
-        "USERS": "Pengguna"
+        "USERS": "Pengguna",
+        "PERIZINAN": "Data Perizinan"
       }
     },
     "CHARTS": {

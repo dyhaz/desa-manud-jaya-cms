@@ -10,10 +10,10 @@ export const MENU: MenuItem[] = [
         id: 2,
         label: 'MENUITEMS.DASHBOARDS.TEXT',
         icon: 'bx-home-circle',
-        badge: {
-            variant: 'info',
-            text: 'MENUITEMS.DASHBOARDS.BADGE',
-        },
+        // badge: {
+        //     variant: 'info',
+        //     text: 'MENUITEMS.DASHBOARDS.BADGE',
+        // },
         subItems: [
             {
                 id: 3,
@@ -36,6 +36,12 @@ export const MENU: MenuItem[] = [
                       id: 113,
                       label: 'MENUITEMS.TABLES.LIST.USERS',
                       link: '/master/user',
+                      parentId: 110
+                    },
+                    {
+                      id: 114,
+                      label: 'MENUITEMS.TABLES.LIST.PERIZINAN',
+                      link: '/master/perizinan',
                       parentId: 110
                     }
                 ]
