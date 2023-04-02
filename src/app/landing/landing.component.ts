@@ -4,7 +4,7 @@ import { map } from 'rxjs/internal/operators';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import {
   CreateRequestPerizinan,
-  DataResponse,
+  DataResponse, JenisPerizinanInput, JenisPerizinanService,
   PerizinanService,
   ProgramDesaService,
   Warga,
@@ -48,6 +48,7 @@ export class LandingComponent implements OnInit {
     warga_id: 1,
     lampiran: ''
   };
+  public jenisPerizinan: any[] = [];
 
   // set the currenr year
   year: number = new Date().getFullYear();
@@ -106,7 +107,8 @@ export class LandingComponent implements OnInit {
     public domSanitizer: DomSanitizer,
     private modalService: NgbModal,
     private wargaService: WargaService,
-    private perizinanService: PerizinanService
+    private perizinanService: PerizinanService,
+    private jenisPerizinanService: JenisPerizinanService
   ) {
 
   }
@@ -124,6 +126,7 @@ export class LandingComponent implements OnInit {
       this._seconds = this.getSeconds(this._diff);
     });
 
+    this.getAllJenisPerizinan();
     this.loadProgramDesa();
   }
 
@@ -197,6 +200,15 @@ export class LandingComponent implements OnInit {
   closeModal() {
     // modal.setAttribute('style', 'display: none !important; opacity: 0');
     this.modalService.dismissAll();
+  }
+
+  async getAllJenisPerizinan() {
+    try {
+      const result = await this.jenisPerizinanService.getAllJenisPerizinan().toPromise();
+      this.jenisPerizinan = result.data;
+    } catch(e) {
+      await Swal.fire('Error', e);
+    }
   }
 
   async sendMessage() {

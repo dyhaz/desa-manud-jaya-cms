@@ -11741,9 +11741,46 @@ section#contact form#contactForm .form-group {
   margin-bottom: 1.5rem;
 }
 section#contact form#contactForm .form-group input,
-section#contact form#contactForm .form-group textarea {
+section#contact form#contactForm .form-group textarea,
+section#contact form#contactForm .form-group select{
   padding: 1.25rem;
 }
+section#contact form#contactForm .form-group select{
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  padding: 10px;
+  border: none;
+  border-bottom: 2px solid navajowhite;
+  color: navajowhite;
+  text-align: center;
+  background-color: transparent;
+}
+section#contact form#contactForm .form-group select:hover {
+  cursor: pointer;
+}
+
+.dropdownWrapper {
+  /*width: 185px;*/
+  height: 40px;
+  overflow: hidden;
+  background: url("https://i.imgur.com/NvpeSY6.png") no-repeat right;
+  margin: 0 auto;
+  display: block;
+  border-radius: 0.2rem;
+}
+
+.dropdownWrapper select {
+  background: white;
+  /*width: 180px;*/
+  /*padding: 10px;*/
+  font-size: 16px;
+  line-height: 1;
+  border-radius: 0;
+  height: 40px;
+  -webkit-appearance: none;
+}
+
 section#contact form#contactForm .form-group input.form-control {
   height: auto;
 }

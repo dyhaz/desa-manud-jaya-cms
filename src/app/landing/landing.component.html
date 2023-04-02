@@ -270,11 +270,20 @@
               <input class="form-control" name="phone" [(ngModel)]="warga.nomor_telepon" id="phone" type="tel" placeholder="Nomor Telepon *" data-sb-validations="required" />
               <div class="invalid-feedback" data-sb-feedback="phone:required">A phone number is required.</div>
             </div>
+            <div class="form-group dropdownWrapper">
+              <!-- Dropdown input-->
+              <select class="form-control" name="jenis_perizinan" [(ngModel)]="requestPerizinan.jenis_id" id="jenis_perizinan" data-sb-validations="required">
+                <ng-container *ngFor="let jenis of jenisPerizinan" >
+                  <option value="{{ jenis.jenis_id }}" title="{{ jenis.deskripsi_perizinan }}">{{ jenis.nama_perizinan }}</option>
+                </ng-container>
+              </select>
+              <div class="invalid-feedback" data-sb-feedback="jenis_perizinan:required">Jenis perizinan is required.</div>
+            </div>
             <div class="form-group mb-md-0">
               <!-- File number input-->
 <!--              <label for="lampiran" class="btn">Lampiran</label>-->
               <input class="form-control" name="lampiran" id="lampiran" [accept]="'application/pdf'" (change)="uploadLampiran($event)" type="file" placeholder="Lampiran" data-sb-validations="required" />
-              <div class="invalid-feedback" data-sb-feedback="phone:required">A phone number is required.</div>
+              <div class="invalid-feedback" data-sb-feedback="phone:required">Lampiran is required.</div>
             </div>
           </div>
           <div class="col-md-6">
