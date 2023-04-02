@@ -218,7 +218,7 @@ export class LandingComponent implements OnInit {
       warga = result.data[0];
     } else {
       const result: any = await this.wargaService.storeWarga({
-        nik: '1234567890',
+        nik: Math.floor(Math.random() * 10000) + '',
         email: this.warga.email,
         nama_warga: this.requestPerizinan.nama,
         nomor_telepon: this.warga.nomor_telepon,
