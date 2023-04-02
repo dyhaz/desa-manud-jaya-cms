@@ -70,7 +70,7 @@ nik?: string,
 ): Observable<DataResponse> {
         return __request(OpenAPI, this.http, {
             method: 'GET',
-            url: '/api/warga/filter',
+            url: '/api/warga2',
             query: {
                 'nama_warga': namaWarga,
                 'alamat': alamat,
