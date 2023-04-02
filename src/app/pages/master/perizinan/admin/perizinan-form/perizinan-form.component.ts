@@ -3,7 +3,7 @@ import { DatePipe, DecimalPipe } from '@angular/common';
 import { Table } from '@pages/master/perizinan/admin/perizinan.model';
 import Swal from 'sweetalert2';
 import { PerizinanTableService } from '@pages/master/perizinan/admin/perizinan.service';
-import { PerizinanService } from '@core/http/api';
+import { JenisPerizinanService, PerizinanService } from '@core/http/api';
 import { saveAs } from 'file-saver';
 
 @Component({
@@ -35,12 +35,14 @@ export class PerizinanFormComponent implements OnInit {
       updated_at: ''
     }
   };
+  public jenisPerizinan = '';
   @Output() public dismiss = new EventEmitter<any>();
 
   public today = new Date();
 
   constructor(
     private perizinanService: PerizinanService,
+    private jenisPerizinanService: JenisPerizinanService,
     public datePipe: DatePipe
   ) {
   }
@@ -68,6 +70,8 @@ export class PerizinanFormComponent implements OnInit {
         }
       };
     }
+
+    this.getAllJenisPerizinan();
   }
 
 
@@ -114,6 +118,17 @@ export class PerizinanFormComponent implements OnInit {
       }
     } catch (e) {
       await Swal.fire('Error', e.toString());
+    }
+  }
+
+  async getAllJenisPerizinan() {
+    try {
+      const result = await this.jenisPerizinanService.getAllJenisPerizinan().toPromise();
+      if (this.perizinan.jenis_id) {
+        this.jenisPerizinan = result.data.filter(item => item.jenis_id + '' === this.perizinan.jenis_id + '')[0]?.nama_perizinan;
+      }
+    } catch(e) {
+      await Swal.fire('Error', e);
     }
   }
 

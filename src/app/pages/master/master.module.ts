@@ -10,7 +10,7 @@ import { ProgramComponent } from './program/program.component';
 import { MasterRoutingModule } from '@pages/master/master-routing.module';
 import { TablesModule } from '@pages/tables/tables.module';
 import { AdvancedSortableDirective } from '@pages/tables/advancedtable/advanced-sortable.directive';
-import { PerizinanService, ProgramDesaService, UserManagementService } from '@core/http/api';
+import { JenisPerizinanService, PerizinanService, ProgramDesaService, UserManagementService } from '@core/http/api';
 import { ProgramFormComponent } from '@pages/master/program/program-form/program-form.component';
 import { UserManagementComponent } from '@pages/master/user/user.component';
 import { UserFormComponent } from '@pages/master/user/user-form/user-form.component';
@@ -39,6 +39,7 @@ import { PerizinanFormComponent } from '@pages/master/perizinan/admin/perizinan-
     ProgramDesaService,
     UserManagementService,
     PerizinanService,
+    JenisPerizinanService,
     DatePipe,
   ]
 })

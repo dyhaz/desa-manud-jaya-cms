@@ -218,12 +218,12 @@ export class LandingComponent implements OnInit {
       warga = result.data[0];
     } else {
       const result: any = await this.wargaService.storeWarga({
-        nik: Math.floor(Math.random() * 10000) + '',
+        nik: this.warga.nik ?? Math.floor(Math.random() * 10000) + '',
         email: this.warga.email,
         nama_warga: this.requestPerizinan.nama,
         nomor_telepon: this.warga.nomor_telepon,
         warga_id: 0,
-        alamat: 'Salemba'
+        alamat: this.requestPerizinan.alamat
       }).toPromise();
       if (result.data) {
         warga = result.data;
@@ -232,6 +232,7 @@ export class LandingComponent implements OnInit {
 
     try {
       this.requestPerizinan.warga_id = warga.warga_id;
+      this.requestPerizinan.keterangan = this.jenisPerizinan.filter(item => item.jenis_id + '' === this.requestPerizinan.jenis_id + '')[0].deskripsi_perizinan;
       await this.perizinanService.createPerizinan(this.requestPerizinan).toPromise();
       Swal.fire('Sukses!', 'Request Anda telah diterima', 'success');
     } catch (e) {

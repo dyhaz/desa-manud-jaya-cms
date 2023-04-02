@@ -40,10 +40,11 @@
                    class="table table-bordered dt-responsive nowrap datatables no-footer dtr-inline">
               <thead>
               <tr>
-                <th sortable="keterangan" (sort)="onSort($event)">Keterangan</th>
+                <th sortable="nama_jenis" (sort)="onSort($event)">Jenis</th>
                 <th sortable="tanggal_request" (sort)="onSort($event)">Tanggal Request</th>
                 <th sortable="nama_warga" (sort)="onSort($event)">Nama Warga</th>
                 <th sortable="nik" (sort)="onSort($event)">NIK</th>
+                <th sortable="email" (sort)="onSort($event)">Email</th>
                 <th sortable="status_request" (sort)="onSort($event)">Status Request</th>
                 <th sortable="lampiran" (sort)="onSort($event)">Lampiran</th>
                 <th>Actions</th>
@@ -52,7 +53,7 @@
               <tbody *ngFor="let table of tables$ | async;let i=index">
               <tr>
                 <td>
-                  <ngb-highlight [result]="table.keterangan" [term]="service.searchTerm"></ngb-highlight>
+                  <ngb-highlight [result]="getNamaJenisPerizinan(table.jenis_id)" [term]="service.searchTerm"></ngb-highlight>
                 </td>
                 <td>
                   <ngb-highlight [result]="table.tanggal_request" [term]="service.searchTerm"></ngb-highlight>
@@ -62,6 +63,9 @@
                 </td>
                 <td>
                   <ngb-highlight [result]="table.warga.nik" [term]="service.searchTerm"></ngb-highlight>
+                </td>
+                <td>
+                  <ngb-highlight [result]="table.warga.email" [term]="service.searchTerm"></ngb-highlight>
                 </td>
                 <td>
                   <ngb-highlight [result]="table.status_request" [term]="service.searchTerm"></ngb-highlight>

@@ -16,6 +16,12 @@
             </div>
           </div>
           <div class="mb-3 row">
+            <label for="jenis-text-input" class="col-md-2 col-form-label">Jenis Perizinan</label>
+            <div class="col-md-10">
+              <input class="form-control" [readonly]="mode === 'edit'" [(ngModel)]="jenisPerizinan" type="text" placeholder="Jenis" id="jenis-text-input" />
+            </div>
+          </div>
+          <div class="mb-3 row">
             <label for="date-text-input" class="col-md-2 col-form-label">Tanggal Request</label>
             <div class="col-md-10">
               <input id="date-text-input" [readonly]="mode === 'edit'" [(ngModel)]="perizinan.tanggal_request" class="form-control" placeholder="Tanggal Perizinan" type="date"/>

@@ -9,8 +9,9 @@ import { AdvancedSortableDirective, SortEvent } from '@pages/tables/advancedtabl
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DomSanitizer } from '@angular/platform-browser';
 import { PerizinanTableService } from '@pages/master/perizinan/admin/perizinan.service';
-import { PerizinanService } from '@core/http/api';
+import { JenisPerizinanService, PerizinanService } from '@core/http/api';
 import { saveAs } from 'file-saver';
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-perizinan-management',
@@ -33,13 +34,15 @@ export class PerizinanManagementComponent implements OnInit {
 
   @ViewChildren(AdvancedSortableDirective) headers: QueryList<AdvancedSortableDirective>;
   public isCollapsed = true;
+  private jenisPerizinanList: any[] = [];
 
   constructor(
     public service: PerizinanTableService,
     public perizinanManagementService: PerizinanService,
     public domSanitizer: DomSanitizer,
     private modalService: NgbModal,
-    private changeDetectorRef: ChangeDetectorRef
+    private changeDetectorRef: ChangeDetectorRef,
+    private jenisPerizinanService: JenisPerizinanService
   ) {
     this.tables$ = service.tables$;
     this.total$ = service.total$;
@@ -51,6 +54,7 @@ export class PerizinanManagementComponent implements OnInit {
      * fetch data
      */
     this._fetchData();
+    this.getAllJenisPerizinan();
     this.changeDetectorRef.detectChanges();
   }
 
@@ -89,6 +93,19 @@ export class PerizinanManagementComponent implements OnInit {
   openModal(table?: Table) {
     this.selected = table;
     this.modalService.open(this.editmodal);
+  }
+
+  async getAllJenisPerizinan() {
+    try {
+      const result = await this.jenisPerizinanService.getAllJenisPerizinan().toPromise();
+      this.jenisPerizinanList = result.data;
+    } catch(e) {
+      await Swal.fire('Error', e);
+    }
+  }
+
+  getNamaJenisPerizinan(idJenis: any) {
+    return this.jenisPerizinanList.filter(item => item.jenis_id + '' === idJenis + '')[0]?.nama_perizinan;
   }
 
   downloadLampiran(lampiran: string) {

@@ -253,18 +253,25 @@
       <!-- to get an API token!-->
       <form id="contactForm" data-sb-form-api-token="API_TOKEN">
         <div class="row align-items-stretch mb-5">
-          <div class="col-md-6">
+          <div class="col-md-4">
             <div class="form-group">
               <!-- Name input-->
               <input class="form-control" name="name" [(ngModel)]="requestPerizinan.nama" id="name" type="text" placeholder="Nama Anda *" data-sb-validations="required" />
               <div class="invalid-feedback" data-sb-feedback="name:required">A name is required.</div>
             </div>
             <div class="form-group">
+              <!-- NIK input-->
+              <input class="form-control" name="nik" [(ngModel)]="warga.nik" id="nik" type="text" placeholder="NIK *" data-sb-validations="required" />
+              <div class="invalid-feedback" data-sb-feedback="nik:required">NIK is required.</div>
+            </div>
+            <div class="form-group form-group-textarea mb-md-0">
               <!-- Email address input-->
               <input class="form-control" name="email" [(ngModel)]="warga.email" id="email" type="email" placeholder="Email Anda *" data-sb-validations="required,email" />
               <div class="invalid-feedback" data-sb-feedback="email:required">An email is required.</div>
               <div class="invalid-feedback" data-sb-feedback="email:email">Email is not valid.</div>
             </div>
+          </div>
+          <div class="col-md-4">
             <div class="form-group">
               <!-- Phone number input-->
               <input class="form-control" name="phone" [(ngModel)]="warga.nomor_telepon" id="phone" type="tel" placeholder="Nomor Telepon *" data-sb-validations="required" />
@@ -281,15 +288,15 @@
             </div>
             <div class="form-group mb-md-0">
               <!-- File number input-->
-<!--              <label for="lampiran" class="btn">Lampiran</label>-->
+              <!--<label for="lampiran" class="btn">Lampiran</label>-->
               <input class="form-control" name="lampiran" id="lampiran" [accept]="'application/pdf'" (change)="uploadLampiran($event)" type="file" placeholder="Lampiran" data-sb-validations="required" />
               <div class="invalid-feedback" data-sb-feedback="phone:required">Lampiran is required.</div>
             </div>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-4">
             <div class="form-group form-group-textarea mb-md-0">
               <!-- Message input-->
-              <textarea class="form-control" name="keterangan" id="message" [(ngModel)]="requestPerizinan.keterangan" placeholder="Keterangan *" data-sb-validations="required"></textarea>
+              <textarea class="form-control" name="keterangan" id="message" [(ngModel)]="requestPerizinan.alamat" placeholder="Alamat *" data-sb-validations="required"></textarea>
               <div class="invalid-feedback" data-sb-feedback="message:required">A message is required.</div>
             </div>
           </div>
