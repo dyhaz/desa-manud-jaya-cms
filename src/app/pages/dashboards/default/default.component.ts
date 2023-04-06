@@ -26,6 +26,8 @@ export class DefaultComponent implements OnInit {
   isActive: string = new Date().getFullYear() + '';
   yearList: string[] = [];
 
+  simplePieChart: any;
+
   public loginName = '';
   public loginPhoto = '';
 
@@ -152,7 +154,22 @@ export class DefaultComponent implements OnInit {
         if (stat.title === 'Program Aktif') {
           stat.value = dashboard.data.ongoingPrograms;
         }
-      })
+      });
+      this.simplePieChart = {
+        data: {
+          series: dashboard.data.perizinan.map(item => {
+            return item.jumlahRequest;
+          }),
+          labels: dashboard.data.perizinan.map(item => {
+            return `${item.jenisPerizinan} (${item.jumlahRequest})`;
+          })
+        },
+        options: {
+          height: 200,
+          showLabel: true
+        },
+        type: 'Pie'
+      };
     });
   }
 

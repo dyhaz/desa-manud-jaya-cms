@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
     private oauthService: OAuthService
   ) { }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
@@ -55,7 +55,8 @@ export class LoginComponent implements OnInit {
     // tslint:disable-next-line: no-string-literal
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
 
-    this.configureOAuth();
+    await this.configureOAuth();
+    console.log('has valid access token', this.oauthService.hasValidAccessToken());
 
     // Check if SSO login succeed
     this.route.queryParams
@@ -63,13 +64,47 @@ export class LoginComponent implements OnInit {
           console.log('access token', params.returnUrl.split('access_token=')[1]);
           const token = params.returnUrl?.split('access_token=')[1] ?? false;
           if (token) {
+            console.log(this.getUserEmail());
             Swal.fire('Sukses!', 'Login berhasil', 'success');
-            setTimeout(() => {
-              this.router.navigate(['/dashboard']);
-            }, 2000);
+            // setTimeout(() => {
+            //   this.router.navigate(['/dashboard']);
+            // }, 2000);
           }
         }
       );
+  }
+
+
+  private async configureOAuth() {
+    const authConfig: AuthConfig = {
+      issuer: 'https://accounts.google.com',
+      clientId: '186253579723-pvgkk6cpbe8krpu8m07ngdfdc44v1rv8.apps.googleusercontent.com',
+      redirectUri: window.location.origin,
+      scope: 'openid',
+      responseType: 'id_token token',
+      showDebugInformation: true,
+      strictDiscoveryDocumentValidation: false
+    };
+
+    this.oauthService.configure(authConfig);
+    this.oauthService.loadDiscoveryDocumentAndTryLogin({ customHashFragment: location.hash }).then(isLoggedIn => {
+      console.log("isLoggedIn: ", isLoggedIn);
+      if (isLoggedIn) {
+        this.oauthService.setupAutomaticSilentRefresh();
+      } else {
+        // this.oauthService.initImplicitFlow();
+      }
+    });
+  }
+
+  getUserEmail(): string {
+    const identityClaims: any = this.oauthService.getIdentityClaims();
+    return identityClaims?.email || 'Email not available';
+  }
+
+  signInWithGoogle() {
+    this.oauthService.initLoginFlow();
+    // this.oauthService.initCodeFlow();
   }
 
   // convenience getter for easy access to form fields
@@ -114,24 +149,5 @@ export class LoginComponent implements OnInit {
             });
       }
     }
-  }
-
-  private configureOAuth(): void {
-    const authConfig: AuthConfig = {
-      issuer: 'https://accounts.google.com',
-      clientId: '186253579723-pvgkk6cpbe8krpu8m07ngdfdc44v1rv8.apps.googleusercontent.com',
-      redirectUri: window.location.origin,
-      scope: 'openid',
-      responseType: 'id_token token',
-      showDebugInformation: true,
-      strictDiscoveryDocumentValidation: false
-    };
-
-    this.oauthService.configure(authConfig);
-    this.oauthService.loadDiscoveryDocumentAndTryLogin();
-  }
-
-  signInWithGoogle() {
-    this.oauthService.initLoginFlow();
   }
 }

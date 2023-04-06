@@ -68,7 +68,7 @@
                     <div class="row">
                       <div class="col-md-12">
                         <div class="mt-4 mt-md-0">
-                          <img class="img-thumbnail rounded-circle avatar-sm" alt="200x200" [src]="domSanitizer.bypassSecurityTrustResourceUrl('data:image/png;base64, ' + table.photo)"
+                          <img class="img-thumbnail rounded-circle avatar-sm" alt="200x200" [src]="domSanitizer.bypassSecurityTrustResourceUrl(!table.photo?.includes('https://') ? 'data:image/png;base64, ' + table.photo : table.photo)"
                                data-holder-rendered="true">
                         </div>
                       </div>

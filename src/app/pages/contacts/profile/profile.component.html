@@ -22,7 +22,7 @@
           <div class="row">
             <div class="col-sm-4">
               <div class="avatar-md profile-user-wid mb-4">
-                <img [src]="loginPhoto ? 'data:image/jpeg;base64,' + loginPhoto : 'assets/images/users/avatar-1.jpg'" alt="" class="img-thumbnail rounded-circle">
+                <img [src]="!loginPhoto.includes('https://') ? 'data:image/jpeg;base64,' + loginPhoto : loginPhoto" alt="" class="img-thumbnail rounded-circle">
               </div>
               <h5 class="font-size-15 text-truncate">{{ loginName }}</h5>
               <p class="text-muted mb-0 text-truncate">Admin</p>

@@ -354,7 +354,7 @@
 
       <div class="dropdown d-inline-block" ngbDropdown>
         <button type="button" class="btn header-item" ngbDropdownToggle id="page-header-user-dropdown">
-          <img class="rounded-circle header-profile-user" [src]="domSanitizer.bypassSecurityTrustResourceUrl('data:image/png;base64, ' + loginPhoto)" alt="Header Avatar">
+          <img class="rounded-circle header-profile-user" [src]="domSanitizer.bypassSecurityTrustResourceUrl(!loginPhoto.includes('https://') ? 'data:image/png;base64, ' + loginPhoto : loginPhoto)" alt="Header Avatar">
           <span class="d-none d-xl-inline-block ms-1">{{ loginName }}</span>
           <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
         </button>

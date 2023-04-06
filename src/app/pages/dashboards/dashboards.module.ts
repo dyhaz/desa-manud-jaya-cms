@@ -16,23 +16,25 @@ import { SaasComponent } from './saas/saas.component';
 import { CryptoComponent } from './crypto/crypto.component';
 import { BlogComponent } from './blog/blog.component';
 import { DashboardService } from '@core/http/api/services/DashboardService';
+import { NgxChartistModule } from "ngx-chartist";
 
 @NgModule({
   declarations: [DefaultComponent, SaasComponent, CryptoComponent, BlogComponent],
-  imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    DashboardsRoutingModule,
-    UIModule,
-    NgbDropdownModule,
-    NgbTooltipModule,
-    NgbNavModule,
-    WidgetModule,
-    NgApexchartsModule,
-    SharedModule,
-    SimplebarAngularModule
-  ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        DashboardsRoutingModule,
+        UIModule,
+        NgbDropdownModule,
+        NgbTooltipModule,
+        NgbNavModule,
+        WidgetModule,
+        NgApexchartsModule,
+        SharedModule,
+        SimplebarAngularModule,
+        NgxChartistModule
+    ],
   providers: [
     DashboardService
   ]
