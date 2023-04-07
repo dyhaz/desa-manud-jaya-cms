@@ -273,7 +273,8 @@
         "BASIC": "Basic Tables",
         "ADVANCED": "Program Desa",
         "USERS": "Pengguna",
-        "PERIZINAN": "Data Perizinan"
+        "PERIZINAN": "Data Perizinan",
+        "MY_PERIZINAN": "Perizinan Saya"
       }
     },
     "CHARTS": {

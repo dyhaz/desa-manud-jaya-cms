@@ -32,7 +32,8 @@ const routes: Routes = [
   /**
    * Add your path here
    */
-  { path: 'master', loadChildren: () => import('./master/master.module').then(m => m.MasterModule) }
+  { path: 'master', loadChildren: () => import('./master/master.module').then(m => m.MasterModule) },
+  { path: 'warga', loadChildren: () => import('./warga/warga.module').then(m => m.WargaModule) }
 ];
 
 @NgModule({

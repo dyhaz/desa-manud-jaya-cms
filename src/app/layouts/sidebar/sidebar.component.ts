@@ -5,7 +5,7 @@ import { Router, NavigationEnd } from '@angular/router';
 
 import { HttpClient } from '@angular/common/http';
 
-import { MENU } from './menu';
+import { MENU_ADMIN, MENU_WARGA } from './menu';
 import { MenuItem } from './menu.model';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -139,7 +139,12 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnChanges {
    * Initialize
    */
   initialize(): void {
-    this.menuItems = MENU;
+    const user = localStorage.getItem('currentUser');
+    if (user && JSON.parse(user).user_level.includes('warga')) {
+      this.menuItems = MENU_WARGA;
+    } else {
+      this.menuItems = MENU_ADMIN;
+    }
   }
 
   /**

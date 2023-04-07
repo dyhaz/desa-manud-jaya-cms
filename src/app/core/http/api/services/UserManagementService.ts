@@ -37,6 +37,7 @@ name: string;
 email: string;
 password: string;
 phone?: string;
+user_level?: string;
 },
 ): Observable<any> {
         return __request(OpenAPI, this.http, {
@@ -85,6 +86,7 @@ name: string;
 email: string;
 password: string;
 phone?: string;
+user_level?: string;
 },
 id?: any,
 ): Observable<any> {
