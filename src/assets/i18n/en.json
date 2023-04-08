@@ -267,14 +267,14 @@
         "LAYOUTS": "Form Layouts"
       }
     },
+    "MY_PERIZINAN": "Perizinan Saya",
     "TABLES": {
       "TEXT": "Data Induk",
       "LIST": {
         "BASIC": "Basic Tables",
         "ADVANCED": "Program Desa",
         "USERS": "Pengguna",
-        "PERIZINAN": "Data Perizinan",
-        "MY_PERIZINAN": "Perizinan Saya"
+        "PERIZINAN": "Data Perizinan"
       }
     },
     "CHARTS": {

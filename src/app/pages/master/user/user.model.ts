@@ -7,6 +7,7 @@ export interface Table {
     id: number;
     password?: string;
     phone?: string;
+    user_level?: string;
 }
 
 // Search Data

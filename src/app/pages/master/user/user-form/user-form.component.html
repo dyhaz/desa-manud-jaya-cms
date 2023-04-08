@@ -14,6 +14,18 @@
               <input class="form-control" [(ngModel)]="user.name" type="text" placeholder="Nama" value="" id="name-text-input">
             </div>
           </div>
+          <div class="mb-3 row" *ngIf="mode === 'add'">
+            <label for="nik-text-input" class="col-md-2 col-form-label">NIK</label>
+            <div class="col-md-10">
+              <input class="form-control" [(ngModel)]="warga.nik" type="text" placeholder="NIK" value="" id="nik-text-input">
+            </div>
+          </div>
+          <div class="mb-3 row" *ngIf="mode === 'add'">
+            <label for="alamat-text-input" class="col-md-2 col-form-label">Alamat</label>
+            <div class="col-md-10">
+              <input class="form-control" [(ngModel)]="warga.alamat" type="text" placeholder="Alamat" value="" id="alamat-text-input">
+            </div>
+          </div>
           <div class="mb-3 row">
             <label for="email-text-input" class="col-md-2 col-form-label">Email</label>
             <div class="col-md-10">
@@ -24,6 +36,17 @@
             <label for="phone-text-input" class="col-md-2 col-form-label">Nomor Telepon</label>
             <div class="col-md-10">
               <input maxlength="20" id="phone-text-input" [(ngModel)]="user.phone" class="form-control" placeholder="Nomor Telepon" />
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label for="level-text-input" class="col-md-2 col-form-label">Jenis User</label>
+            <div class="col-md-10">
+              <select class="form-select" name="user_level" [(ngModel)]="user.user_level" id="level-text-input" data-sb-validations="required">
+                <ng-container>
+                  <option value="warga_desa" title="Warga">Warga</option>
+                  <option value="aparat_desa" title="Admin">Admin</option>
+                </ng-container>
+              </select>
             </div>
           </div>
           <div class="mb-3 row">

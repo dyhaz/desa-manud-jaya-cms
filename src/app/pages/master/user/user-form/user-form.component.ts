@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { DatePipe, DecimalPipe } from '@angular/common';
 import { Table } from '@pages/master/user/user.model';
 import Swal from 'sweetalert2';
-import { UserManagementService } from '@core/http/api';
+import { UserManagementService, Warga, WargaService } from '@core/http/api';
 import { UserService } from '@pages/master/user/user.service';
 
 @Component({
@@ -24,10 +24,22 @@ export class UserFormComponent implements OnInit {
     password: '',
     phone: ''
   };
+  warga: Warga = {
+    warga_id: 0,
+    alamat: '',
+    email: '',
+    nik: '',
+    nama_warga: '',
+    nomor_telepon: '',
+    created_at: '',
+    updated_at: ''
+  };
+
   public today = new Date();
 
   constructor(
     private userManagementService: UserManagementService,
+    private wargaService: WargaService,
     public datePipe: DatePipe
   ) {
   }
@@ -60,6 +72,13 @@ export class UserFormComponent implements OnInit {
         Swal.fire('Updated!', 'Saved successfully.', 'success');
         this.modal.dismiss();
       } else {
+        await this.wargaService.storeWarga({
+          nik: this.warga.nik,
+          alamat: this.warga.alamat,
+          email: this.user.email,
+          nomor_telepon: this.user.phone,
+          nama_warga: this.user.name
+        }).toPromise();
         await this.userManagementService.createUser({
           name: this.user.name,
           email: this.user.email,

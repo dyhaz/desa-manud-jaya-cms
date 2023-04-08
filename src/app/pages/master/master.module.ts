@@ -9,7 +9,13 @@ import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 import { ProgramComponent } from './program/program.component';
 import { MasterRoutingModule } from '@pages/master/master-routing.module';
 import { TablesModule } from '@pages/tables/tables.module';
-import { JenisPerizinanService, PerizinanService, ProgramDesaService, UserManagementService } from '@core/http/api';
+import {
+  JenisPerizinanService,
+  PerizinanService,
+  ProgramDesaService,
+  UserManagementService,
+  WargaService
+} from '@core/http/api';
 import { ProgramFormComponent } from '@pages/master/program/program-form/program-form.component';
 import { UserManagementComponent } from '@pages/master/user/user.component';
 import { UserFormComponent } from '@pages/master/user/user-form/user-form.component';
@@ -41,6 +47,7 @@ import { PagesModule } from "@pages/pages.module";
     providers: [
         ProgramDesaService,
         UserManagementService,
+        WargaService,
         PerizinanService,
         JenisPerizinanService,
         DatePipe,

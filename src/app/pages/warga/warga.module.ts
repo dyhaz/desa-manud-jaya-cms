@@ -7,7 +7,13 @@ import { NgbPaginationModule, NgbTypeaheadModule, NgbDropdownModule, NgbNavModul
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 import { TablesModule } from '@pages/tables/tables.module';
-import { JenisPerizinanService, PerizinanService, ProgramDesaService, UserManagementService } from '@core/http/api';
+import {
+  JenisPerizinanService,
+  PerizinanService,
+  ProgramDesaService,
+  UserManagementService,
+  WargaService
+} from '@core/http/api';
 import { DropzoneModule } from 'ngx-dropzone-wrapper';
 import { CurrencyMaskModule } from 'ng2-currency-mask';
 import { MyPerizinanComponent } from '@pages/warga/perizinan/perizinan.component';
@@ -38,6 +44,7 @@ import { WargaRoutingModule } from "@pages/warga/warga-routing.module";
   providers: [
     ProgramDesaService,
     UserManagementService,
+    WargaService,
     PerizinanService,
     JenisPerizinanService,
     DatePipe,

@@ -38,7 +38,7 @@
                                 <img [src]="!loginPhoto.includes('https://') ? 'data:image/jpeg;base64,' + loginPhoto : loginPhoto" alt="" class="img-thumbnail rounded-circle">
                             </div>
                             <h5 class="font-size-15 text-truncate">{{ loginName }}</h5>
-                            <p class="text-muted mb-0 text-truncate">Admin</p>
+                            <p class="text-muted mb-0 text-truncate">{{ user.user_level.includes('aparat') ? 'Admin' : 'Warga' }}</p>
                         </div>
 
                         <div class="col-sm-8">
@@ -46,12 +46,12 @@
 
                                 <div class="row">
                                     <div class="col-6">
-                                        <h5 class="font-size-15">125</h5>
-                                        <p class="text-muted mb-0">Projects</p>
+                                        <h5 class="font-size-15">0</h5>
+                                        <p class="text-muted mb-0">Total Pengajuan</p>
                                     </div>
                                     <div class="col-6">
-                                        <h5 class="font-size-15">$1245</h5>
-                                        <p class="text-muted mb-0">Revenue</p>
+                                        <h5 class="font-size-15">0</h5>
+                                        <p class="text-muted mb-0">Pengajuan Disetujui</p>
                                     </div>
                                 </div>
                                 <div class="mt-4">
@@ -63,7 +63,7 @@
                     </div>
                 </div>
             </div>
-            <div class="card">
+            <div class="card" *ngIf="user.user_level.includes('aparat')">
                 <div class="card-body">
                     <h4 class="card-title mb-4">Perizinan Masuk</h4>
                     <div class="row">
@@ -98,7 +98,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-xl-8">
+        <div class="col-xl-8" *ngIf="user.user_level.includes('aparat')">
             <div class="row">
                 <div *ngFor="let stat of statData" class="col-md-4">
                     <app-stat [title]="stat.title" [value]="stat.value" [icon]="stat.icon"></app-stat>

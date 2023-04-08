@@ -30,6 +30,7 @@ export class DefaultComponent implements OnInit {
 
   public loginName = '';
   public loginPhoto = '';
+  public user: any;
 
   @ViewChild('content') content;
   constructor(
@@ -77,6 +78,7 @@ export class DefaultComponent implements OnInit {
     if (currentUser) {
       this.loginName = currentUser.name;
       this.loginPhoto = currentUser.photo;
+      this.user = currentUser;
     }
   }
 

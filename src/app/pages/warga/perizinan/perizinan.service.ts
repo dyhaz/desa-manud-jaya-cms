@@ -61,7 +61,7 @@ export class PerizinanTableService {
   // tslint:disable-next-line: variable-name
   private _loading$ = new BehaviorSubject<boolean>(true);
   // tslint:disable-next-line: variable-name
-  private _search$ = new Subject<void>();
+  private _search$ = new Subject<boolean>();
   // tslint:disable-next-line: variable-name
   private _tables$ = new BehaviorSubject<Table[]>([]);
   // tslint:disable-next-line: variable-name
@@ -88,7 +88,7 @@ export class PerizinanTableService {
     this._search$.pipe(
       tap(() => this._loading$.next(true)),
       debounceTime(200),
-      switchMap(async () => await this._search()),
+      switchMap(async (value) => await this._search(value)),
       delay(200),
       tap(() => this._loading$.next(false))
     ).subscribe(result => {
@@ -189,7 +189,7 @@ export class PerizinanTableService {
   /**
    * Search Method
    */
-  private async _search(): Promise<Observable<SearchResult>> {
+  private async _search(reload): Promise<Observable<SearchResult>> {
     this.user = JSON.parse(localStorage.getItem('currentUser'));
     const {sortColumn, sortDirection, pageSize, page, searchTerm} = this._state;
     let tables = null;
@@ -198,7 +198,7 @@ export class PerizinanTableService {
     // 1. sort
     try {
       let result;
-      if (!this.tableData) {
+      if (!this.tableData || reload) {
         result = await this.perizinanService.getPerizinanByEmail(this.user.email, this.status).toPromise();
         this.tableData = result.data;
       }
@@ -227,6 +227,6 @@ export class PerizinanTableService {
   }
 
   public reloadData() {
-    this._search$.next();
+    this._search$.next(true);
   }
 }

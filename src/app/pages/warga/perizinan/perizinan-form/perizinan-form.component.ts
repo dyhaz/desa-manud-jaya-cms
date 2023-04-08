@@ -3,7 +3,7 @@ import { DatePipe, DecimalPipe } from '@angular/common';
 import { Table } from '@pages/master/perizinan/admin/perizinan.model';
 import Swal from 'sweetalert2';
 import { PerizinanTableService } from '@pages/master/perizinan/admin/perizinan.service';
-import { JenisPerizinanService, PerizinanService } from '@core/http/api';
+import { JenisPerizinanService, PerizinanService, WargaService } from '@core/http/api';
 import { saveAs } from 'file-saver';
 
 @Component({
@@ -43,6 +43,7 @@ export class PerizinanFormComponent implements OnInit {
 
   constructor(
     private perizinanService: PerizinanService,
+    private wargaService: WargaService,
     private jenisPerizinanService: JenisPerizinanService,
     public datePipe: DatePipe
   ) {
@@ -89,6 +90,39 @@ export class PerizinanFormComponent implements OnInit {
           tanggal_request: this.perizinan.tanggal_request,
           tanggal_mulai: '',
           tanggal_selesai: ''
+        }).toPromise();
+        Swal.fire('Updated!', 'Saved successfully.', 'success');
+        this.dismiss.emit();
+        this.modal.dismiss();
+      } else {
+        let warga;
+        let user = JSON.parse(localStorage.getItem('currentUser'));
+        const result = await this.wargaService.filterWarga('', '', user.email).toPromise();
+        if (result.data.length > 0) {
+          warga = result.data[0];
+        } else {
+          const result: any = await this.wargaService.storeWarga({
+            nik: '' + Math.floor(Math.random() * 10000),
+            email: user.email,
+            nama_warga: user.name,
+            nomor_telepon: '12345',
+            warga_id: 0,
+            alamat: 'Salemba'
+          }).toPromise();
+          if (result.data) {
+            warga = result.data;
+          }
+        }
+
+        await this.perizinanService.createPerizinan({
+          alamat: '',
+          jenis_id: this.perizinan.jenis_id,
+          keterangan: this.perizinan.keterangan,
+          jenis_perizinan: this.perizinan.jenis_id + '',
+          status_request: 'Menunggu Persetujuan',
+          nama: '',
+          tanggal_request: this.perizinan.tanggal_request,
+          warga_id: warga.warga_id
         }).toPromise();
         Swal.fire('Updated!', 'Saved successfully.', 'success');
         this.dismiss.emit();

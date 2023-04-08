@@ -870,18 +870,11 @@ export const MENU_WARGA: MenuItem[] = [
         parentId: 2
       },
       {
-        id: 110,
-        icon: 'bx-list-ul',
-        label: 'MENUITEMS.TABLES.TEXT',
-        subItems: [
-          {
-            id: 114,
-            label: 'MENUITEMS.TABLES.LIST.MY_PERIZINAN',
-            link: '/warga/perizinan',
-            parentId: 110
-          }
-        ]
-      }
+        id: 114,
+        label: 'MENUITEMS.MY_PERIZINAN',
+        link: '/warga/perizinan',
+        parentId: 110
+      },
     ]
   },
   {
