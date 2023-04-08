@@ -18,7 +18,10 @@
           <div class="mb-3 row">
             <label for="jenis-text-input" class="col-md-2 col-form-label">Jenis Perizinan</label>
             <div class="col-md-10">
-              <input class="form-control" [readonly]="mode === 'edit'" [(ngModel)]="jenisPerizinan" type="text" placeholder="Jenis" id="jenis-text-input" />
+<!--              <input class="form-control" [readonly]="mode === 'edit'" [(ngModel)]="jenisPerizinan" type="text" placeholder="Jenis" id="jenis-text-input" />-->
+              <select id="jenis-text-input" class="form-select" [(ngModel)]="perizinan.jenis_id">
+                <option *ngFor="let jenis of jenisPerizinanList" value="{{ jenis.value }}">{{ jenis.name }}</option>
+              </select>
             </div>
           </div>
           <div class="mb-3 row">
@@ -27,13 +30,13 @@
               <input id="date-text-input" [readonly]="mode === 'edit'" [(ngModel)]="perizinan.tanggal_request" class="form-control" placeholder="Tanggal Perizinan" type="date"/>
             </div>
           </div>
-          <div class="mb-3 row">
+          <div class="mb-3 row" *ngIf="mode === 'edit'">
             <label for="status-text-input" class="col-md-2 col-form-label">Status Request</label>
             <div class="col-md-10">
-              <input id="status-text-input" [readonly]="mode === 'edit'" [(ngModel)]="perizinan.status_request" class="form-control" placeholder="Tanggal Perizinan" type="text"/>
+              <input id="status-text-input" [readonly]="mode === 'edit'" [(ngModel)]="perizinan.status_request" class="form-control" placeholder="Status Perizinan" type="text"/>
             </div>
           </div>
-          <div class="mb-3 row">
+          <div class="mb-3 row" *ngIf="mode === 'edit'">
             <label for="att-text-input" class="col-md-2 col-form-label">Lampiran</label>
             <div class="col-md-10">
               <button type="button" (click)="downloadLampiran(perizinan.lampiran)" class="btn btn-info" id="att-text-input"><i
@@ -47,7 +50,5 @@
   </div>
 </div>
 <div class="modal-footer">
-  <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
-  <button *ngIf="perizinan.status_request === 'Menunggu Persetujuan'" type="button" class="btn btn-success" (click)="approve()">Approve</button>
-  <button *ngIf="perizinan.status_request === 'Menunggu Persetujuan'" type="button" class="btn btn-danger" (click)="reject()">Tolak</button>
+  <button type="button" class="btn btn-success" (click)="approve()">Save</button>
 </div>

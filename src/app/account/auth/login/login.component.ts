@@ -61,7 +61,7 @@ export class LoginComponent implements OnInit {
     // Check if SSO login succeed
     this.route.queryParams
       .subscribe(params => {
-          console.log('access token', params.returnUrl.split('access_token=')[1]);
+          // console.log('access token', params.returnUrl.split('access_token=')[1]);
           const token = params.returnUrl?.split('access_token=')[1] ?? false;
           if (token) {
             console.log(this.getUserEmail());

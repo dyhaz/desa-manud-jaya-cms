@@ -876,7 +876,7 @@ export const MENU_WARGA: MenuItem[] = [
         subItems: [
           {
             id: 114,
-            label: 'MENUITEMS.TABLES.LIST.MY_PERIZINAN>',
+            label: 'MENUITEMS.TABLES.LIST.MY_PERIZINAN',
             link: '/warga/perizinan',
             parentId: 110
           }

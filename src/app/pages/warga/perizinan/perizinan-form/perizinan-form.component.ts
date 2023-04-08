@@ -35,6 +35,7 @@ export class PerizinanFormComponent implements OnInit {
       updated_at: ''
     }
   };
+  public jenisPerizinanList = [];
   public jenisPerizinan = '';
   @Output() public dismiss = new EventEmitter<any>();
 
@@ -83,30 +84,7 @@ export class PerizinanFormComponent implements OnInit {
           jenis_id: this.perizinan.jenis_id,
           keterangan: this.perizinan.keterangan,
           jenis_perizinan: this.perizinan.jenis_id + '',
-          status_request: 'Disetujui',
-          nama: '',
-          tanggal_request: this.perizinan.tanggal_request,
-          tanggal_mulai: '',
-          tanggal_selesai: ''
-        }).toPromise();
-        Swal.fire('Updated!', 'Saved successfully.', 'success');
-        this.dismiss.emit();
-        this.modal.dismiss();
-      }
-    } catch (e) {
-      await Swal.fire('Error', e.toString());
-    }
-  }
-
-  async reject() {
-    try {
-      if (this.mode === 'edit') {
-        await this.perizinanService.updatePerizinan(this.perizinan.request_id,{
-          alamat: '',
-          jenis_id: this.perizinan.jenis_id,
-          keterangan: this.perizinan.keterangan,
-          jenis_perizinan: this.perizinan.jenis_id + '',
-          status_request: 'Ditolak',
+          status_request: 'Menunggu Persetujuan',
           nama: '',
           tanggal_request: this.perizinan.tanggal_request,
           tanggal_mulai: '',
@@ -124,9 +102,13 @@ export class PerizinanFormComponent implements OnInit {
   async getAllJenisPerizinan() {
     try {
       const result = await this.jenisPerizinanService.getAllJenisPerizinan().toPromise();
-      if (this.perizinan.jenis_id) {
-        this.jenisPerizinan = result.data.filter(item => item.jenis_id + '' === this.perizinan.jenis_id + '')[0]?.nama_perizinan;
-      }
+      this.jenisPerizinan = result.data.filter(item => item.jenis_id + '' === this.perizinan?.jenis_id + '')[0]?.nama_perizinan;
+      this.jenisPerizinanList = result.data.map(item => {
+        return {
+          value: item.jenis_id,
+          name: item.nama_perizinan
+        }
+      });
     } catch(e) {
       await Swal.fire('Error', e);
     }

@@ -50,6 +50,32 @@ requestBody: CreateRequestPerizinan,
     }
 
     /**
+     * Get perizinan data filtered by email and status request
+     * Returns perizinan data based on email and status request
+     * @param email 
+     * @param status 
+     * @returns DataResponse successful operation
+     * @throws ApiError
+     */
+    public getPerizinanByEmail(
+email: string,
+status: string,
+): Observable<DataResponse> {
+        return __request(OpenAPI, this.http, {
+            method: 'GET',
+            url: '/api/perizinan-by-email',
+            query: {
+                'email': email,
+                'status': status,
+            },
+            errors: {
+                400: `Invalid input`,
+                404: `Warga not found`,
+            },
+        });
+    }
+
+    /**
      * Get a perizinan request by ID
      * @param id ID of the perizinan request to retrieve
      * @returns DataResponse Returns the specified perizinan request

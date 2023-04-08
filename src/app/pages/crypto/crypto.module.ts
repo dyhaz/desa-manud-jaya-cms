@@ -27,23 +27,28 @@ import { OrdersComponent } from './orders/orders.component';
 
 
 @NgModule({
-  declarations: [WalletComponent, BuysellComponent, ExchangeComponent, LendingComponent, KycapplicationComponent, WalletSortableService, OrdersComponent, OrderSortableService],
-  imports: [
-    CommonModule,
-    UIModule,
-    CryptoRoutingModule,
-    NgbDropdownModule,
-    NgApexchartsModule,
-    FormsModule,
-    ReactiveFormsModule,
-    NgbPaginationModule,
-    NgbTypeaheadModule,
-    NgbNavModule,
-    NgbModalModule,
-    NgbDatepickerModule,
-    ArchwizardModule,
-    DropzoneModule,
-    SimplebarAngularModule
-  ]
+    declarations: [WalletComponent, BuysellComponent, ExchangeComponent, LendingComponent, KycapplicationComponent, WalletSortableService, OrdersComponent, OrderSortableService],
+    exports: [
+        OrderSortableService,
+        OrderSortableService,
+        WalletSortableService
+    ],
+    imports: [
+        CommonModule,
+        UIModule,
+        CryptoRoutingModule,
+        NgbDropdownModule,
+        NgApexchartsModule,
+        FormsModule,
+        ReactiveFormsModule,
+        NgbPaginationModule,
+        NgbTypeaheadModule,
+        NgbNavModule,
+        NgbModalModule,
+        NgbDatepickerModule,
+        ArchwizardModule,
+        DropzoneModule,
+        SimplebarAngularModule
+    ]
 })
 export class CryptoModule { }

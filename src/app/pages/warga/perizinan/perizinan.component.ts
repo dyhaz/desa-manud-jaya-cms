@@ -8,25 +8,26 @@ import { Table } from './perizinan.model';
 import { AdvancedSortableDirective, SortEvent } from '@pages/tables/advancedtable/advanced-sortable.directive';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DomSanitizer } from '@angular/platform-browser';
-import { PerizinanTableService } from '@pages/master/perizinan/admin/perizinan.service';
+import { PerizinanTableService } from '@pages/warga/perizinan/perizinan.service';
 import { JenisPerizinanService, PerizinanService } from '@core/http/api';
 import { saveAs } from 'file-saver';
-import Swal from "sweetalert2";
+import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-perizinan-management',
+  selector: 'app-my-perizinan-management',
   templateUrl: './perizinan.component.html',
   styleUrls: ['./perizinan.component.scss'],
   providers: [PerizinanTableService, DecimalPipe]
 })
 
-export class PerizinanManagementComponent implements OnInit {
+export class MyPerizinanComponent implements OnInit {
   // bread crum data
   breadCrumbItems: Array<{}>;
   // Table data
   tableData: Table[];
 
   public selected: any;
+  public user: any;
   hideme: boolean[] = [];
   tables$: Observable<Table[]>;
   total$: Observable<number>;
@@ -49,6 +50,7 @@ export class PerizinanManagementComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.user = JSON.parse(localStorage.getItem('currentUser'));
     this.breadCrumbItems = [{ label: 'Tables' }, { label: 'Perizinan Management', active: true }];
     /**
      * fetch data
@@ -66,8 +68,10 @@ export class PerizinanManagementComponent implements OnInit {
   /**
    * fetches the table value
    */
-  async _fetchData() {
-    const result = await this.perizinanManagementService.getPerizinan().toPromise();
+  async _fetchData(status = 'Menunggu Persetujuan') {
+    this.service.status = status;
+    this.service.reloadData();
+    const result = await this.perizinanManagementService.getPerizinanByEmail(this.user.email, status).toPromise();
     this.tableData = { ...result.data, ...result.data.warga };
     for (let i = 0; i <= this.tableData.length; i++) {
       this.hideme.push(true);

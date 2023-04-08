@@ -78,6 +78,9 @@ export class PerizinanTableService {
     totalRecords: 0
   };
 
+  public status = 'Menunggu Persetujuan';
+  private user: any;
+
   constructor(
     private pipe: DecimalPipe,
     private perizinanService: PerizinanService
@@ -187,6 +190,7 @@ export class PerizinanTableService {
    * Search Method
    */
   private async _search(): Promise<Observable<SearchResult>> {
+    this.user = JSON.parse(localStorage.getItem('currentUser'));
     const {sortColumn, sortDirection, pageSize, page, searchTerm} = this._state;
     let tables = null;
     let total = 0;
@@ -195,7 +199,7 @@ export class PerizinanTableService {
     try {
       let result;
       if (!this.tableData) {
-        result = await this.perizinanService.getPerizinan().toPromise();
+        result = await this.perizinanService.getPerizinanByEmail(this.user.email, this.status).toPromise();
         this.tableData = result.data;
       }
 
@@ -220,5 +224,9 @@ export class PerizinanTableService {
     return of(
       {tables, total}
     );
+  }
+
+  public reloadData() {
+    this._search$.next();
   }
 }

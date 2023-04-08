@@ -9,7 +9,6 @@ import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 import { ProgramComponent } from './program/program.component';
 import { MasterRoutingModule } from '@pages/master/master-routing.module';
 import { TablesModule } from '@pages/tables/tables.module';
-import { AdvancedSortableDirective } from '@pages/tables/advancedtable/advanced-sortable.directive';
 import { JenisPerizinanService, PerizinanService, ProgramDesaService, UserManagementService } from '@core/http/api';
 import { ProgramFormComponent } from '@pages/master/program/program-form/program-form.component';
 import { UserManagementComponent } from '@pages/master/user/user.component';
@@ -18,29 +17,33 @@ import { DropzoneModule } from 'ngx-dropzone-wrapper';
 import { CurrencyMaskModule } from 'ng2-currency-mask';
 import { PerizinanManagementComponent } from '@pages/master/perizinan/admin/perizinan.component';
 import { PerizinanFormComponent } from '@pages/master/perizinan/admin/perizinan-form/perizinan-form.component';
+import { PagesModule } from "@pages/pages.module";
 
 @NgModule({
-  declarations: [ProgramComponent, ProgramFormComponent, UserManagementComponent, UserFormComponent, PerizinanManagementComponent, PerizinanFormComponent, AdvancedSortableDirective],
-    imports: [
-        CommonModule,
-        UIModule,
-        NgbPaginationModule,
-        NgbTypeaheadModule,
-        NgbCollapseModule,
-        NgbDropdownModule,
-        FormsModule,
-        Ng2SmartTableModule,
-        MasterRoutingModule,
-        TablesModule,
-        DropzoneModule,
-        CurrencyMaskModule
+    declarations: [ProgramComponent, ProgramFormComponent, UserManagementComponent, UserFormComponent, PerizinanManagementComponent, PerizinanFormComponent],
+  imports: [
+    CommonModule,
+    UIModule,
+    NgbPaginationModule,
+    NgbTypeaheadModule,
+    NgbCollapseModule,
+    NgbDropdownModule,
+    FormsModule,
+    Ng2SmartTableModule,
+    MasterRoutingModule,
+    TablesModule,
+    DropzoneModule,
+    CurrencyMaskModule,
+    PagesModule
+  ],
+    exports: [
     ],
-  providers: [
-    ProgramDesaService,
-    UserManagementService,
-    PerizinanService,
-    JenisPerizinanService,
-    DatePipe,
-  ]
+    providers: [
+        ProgramDesaService,
+        UserManagementService,
+        PerizinanService,
+        JenisPerizinanService,
+        DatePipe,
+    ]
 })
 export class MasterModule { }
