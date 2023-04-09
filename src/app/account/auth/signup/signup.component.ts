@@ -90,6 +90,9 @@ export class SignupComponent implements OnInit {
             phone: ''
           }).toPromise();
           Swal.fire('Created!', 'Saved successfully.', 'success');
+          setTimeout(() => {
+            this.router.navigate(['/account/login']);
+          }, 1000);
         } catch (e) {
           Swal.fire('Error', 'Alamat email Anda sudah terdaftar. Silakan masuk menggunakan alamat email tersebut.');
         }
