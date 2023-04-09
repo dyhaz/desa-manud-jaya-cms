@@ -140,7 +140,7 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('currentUser', JSON.stringify(response.user));
           this.router.navigate(['/dashboard']);
         }, async (result) => {
-          await Swal.fire('Error', result.toString());
+          await Swal.fire('Mohon maaf Anda gagal masuk', result.toString());
         });
       } else {
         this.authFackservice.login(this.f.email.value, this.f.password.value)
