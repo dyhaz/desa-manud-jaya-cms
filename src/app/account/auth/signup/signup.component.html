@@ -37,14 +37,26 @@
                 <ngb-alert type="danger" *ngIf="error" [dismissible]="false">{{ error }}</ngb-alert>
 
                 <div class="mb-3">
-                  <label for="username" class="form-label">Username</label>
+                  <label for="username" class="form-label">Nama</label>
 
                   <input type="text" formControlName="username" class="form-control"
                     [ngClass]="{ 'is-invalid': submitted && f.username.errors }" id="username"
-                    placeholder="Enter username" />
+                    placeholder="Masukkan nama" />
 
                   <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
-                    <div *ngIf="f.username.errors.required">Userame is required</div>
+                    <div *ngIf="f.username.errors.required">Nama is required</div>
+                  </div>
+                </div>
+
+                <div class="mb-3">
+                  <label for="nik" class="form-label">NIK</label>
+
+                  <input type="text" formControlName="nik" class="form-control"
+                         [ngClass]="{ 'is-invalid': submitted && f.nik.errors }" id="nik"
+                         placeholder="Masukkan NIK" />
+
+                  <div *ngIf="submitted && f.nik.errors" class="invalid-feedback">
+                    <div *ngIf="f.nik.errors.required">NIK is required</div>
                   </div>
                 </div>
 

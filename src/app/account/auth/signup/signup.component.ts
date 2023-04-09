@@ -6,7 +6,7 @@ import { AuthenticationService } from '../../../core/services/auth.service';
 import { environment } from '../../../../environments/environment';
 import { first } from 'rxjs/operators';
 import { UserProfileService } from '../../../core/services/user.service';
-import { UserManagementService } from '@core/http/api';
+import { UserManagementService, WargaService } from '@core/http/api';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -31,12 +31,14 @@ export class SignupComponent implements OnInit {
     private router: Router,
     private authenticationService: AuthenticationService,
     private userService: UserProfileService,
+    private wargaService: WargaService,
     private userManagementService: UserManagementService
   ) { }
 
   ngOnInit() {
     this.signupForm = this.formBuilder.group({
       username: ['', Validators.required],
+      nik: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
     });
@@ -71,6 +73,14 @@ export class SignupComponent implements OnInit {
           });
       } if (environment.defaultauth === 'api') {
         try {
+          await this.wargaService.storeWarga({
+            nik: this.f.nik.value ?? Math.floor(Math.random() * 10000) + '',
+            email: this.f.email.value,
+            nama_warga: this.f.username.value,
+            nomor_telepon: '1234567890',
+            warga_id: 0,
+            alamat: 'Salemba'
+          }).toPromise();
           await this.userManagementService.createUser({
             email: this.f.email.value,
             password: this.f.password.value,
@@ -79,7 +89,7 @@ export class SignupComponent implements OnInit {
           }).toPromise();
           Swal.fire('Created!', 'Saved successfully.', 'success');
         } catch (e) {
-          Swal.fire('Error', e.toString());
+          Swal.fire('Error', 'Alamat email Anda sudah terdaftar. Silakan masuk menggunakan alamat email tersebut.');
         }
       } else {
         this.userService.register(this.signupForm.value)
