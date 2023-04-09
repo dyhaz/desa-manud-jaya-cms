@@ -25,7 +25,13 @@ import { ErrorInterceptor } from './core/helpers/error.interceptor';
 import { JwtInterceptor } from './core/helpers/jwt.interceptor';
 import { FakeBackendInterceptor } from './core/helpers/fake-backend';
 import { LandingComponent } from './landing/landing.component';
-import { JenisPerizinanService, PerizinanService, ProgramDesaService, WargaService } from '@core/http/api';
+import {
+  JenisPerizinanService,
+  PerizinanService,
+  ProgramDesaService,
+  UserManagementService,
+  WargaService
+} from '@core/http/api';
 import { CurrencyMaskModule } from 'ng2-currency-mask';
 import { OAuthModule } from 'angular-oauth2-oidc';
 import { FormsModule } from "@angular/forms";
@@ -90,7 +96,8 @@ export function createTranslateLoader(http: HttpClient): any {
     ProgramDesaService,
     PerizinanService,
     WargaService,
-    JenisPerizinanService
+    JenisPerizinanService,
+    UserManagementService
     // LoaderService,
     // { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptorService, multi: true },
   ],

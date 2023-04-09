@@ -105,6 +105,27 @@ id?: any,
     }
 
     /**
+     * Retrieve a single user by email
+     * @param email 
+     * @returns any User record retrieved successfully
+     * @throws ApiError
+     */
+    public showUserByEmail(
+email: any,
+): Observable<any> {
+        return __request(OpenAPI, this.http, {
+            method: 'GET',
+            url: '/api/user-by-email/{email}',
+            path: {
+                'email': email,
+            },
+            errors: {
+                404: `User record not found`,
+            },
+        });
+    }
+
+    /**
      * Change user password
      * Changes the password of the authenticated user
      * @param requestBody 

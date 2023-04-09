@@ -8,7 +8,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 
 import { environment } from '@environments/environment';
-import { AuthenticationService } from '@core/http/api';
+import { AuthenticationService, UserManagementService } from '@core/http/api';
 import Swal from 'sweetalert2';
 import { AuthConfig, OAuthService } from 'angular-oauth2-oidc';
 
@@ -39,7 +39,8 @@ export class LoginComponent implements OnInit {
     // private authenticationService: AuthenticationService,
     private authFackservice: AuthfakeauthenticationService,
     private auth: AuthenticationService,
-    private oauthService: OAuthService
+    private oauthService: OAuthService,
+    private userService: UserManagementService
   ) { }
 
   async ngOnInit() {
@@ -56,19 +57,13 @@ export class LoginComponent implements OnInit {
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
 
     await this.configureOAuth();
-    console.log('has valid access token', this.oauthService.hasValidAccessToken());
 
     // Check if SSO login succeed
     this.route.queryParams
       .subscribe(params => {
-          // console.log('access token', params.returnUrl.split('access_token=')[1]);
           const token = params.returnUrl?.split('access_token=')[1] ?? false;
           if (token) {
-            console.log(this.getUserEmail());
             Swal.fire('Sukses!', 'Login berhasil', 'success');
-            // setTimeout(() => {
-            //   this.router.navigate(['/dashboard']);
-            // }, 2000);
           }
         }
       );
@@ -80,15 +75,29 @@ export class LoginComponent implements OnInit {
       issuer: 'https://accounts.google.com',
       clientId: '186253579723-pvgkk6cpbe8krpu8m07ngdfdc44v1rv8.apps.googleusercontent.com',
       redirectUri: window.location.origin,
-      scope: 'openid',
-      responseType: 'id_token token',
+      scope: 'openid profile email',
+      responseType: 'id_token token code',
       showDebugInformation: true,
       strictDiscoveryDocumentValidation: false
     };
 
     this.oauthService.configure(authConfig);
-    this.oauthService.loadDiscoveryDocumentAndTryLogin({ customHashFragment: location.hash }).then(isLoggedIn => {
+    this.oauthService.loadDiscoveryDocumentAndTryLogin({ customHashFragment: location.hash }).then(async (isLoggedIn) => {
       console.log("isLoggedIn: ", isLoggedIn);
+      if (this.oauthService.hasValidAccessToken()) {
+        const emailAddress = this.getUserEmail();
+        if (!localStorage.getItem('currentUser')) {
+          const result = await this.userService.showUserByEmail(emailAddress).toPromise();
+          const currentUser = result.data;
+          if (currentUser) {
+            localStorage.setItem('currentUser', JSON.stringify(currentUser));
+            await this.router.navigate(['/dashboard']);
+          } else {
+            await this.router.navigate(['/account/signup'], {queryParams: {email: emailAddress}});
+          }
+        }
+      }
+
       if (isLoggedIn) {
         this.oauthService.setupAutomaticSilentRefresh();
       } else {
@@ -97,14 +106,9 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  getUserEmail(): string {
-    const identityClaims: any = this.oauthService.getIdentityClaims();
-    return identityClaims?.email || 'Email not available';
-  }
-
   signInWithGoogle() {
-    this.oauthService.initLoginFlow();
-    // this.oauthService.initCodeFlow();
+    // this.oauthService.initLoginFlow();
+    this.oauthService.initCodeFlow();
   }
 
   // convenience getter for easy access to form fields
@@ -149,5 +153,11 @@ export class LoginComponent implements OnInit {
             });
       }
     }
+  }
+
+
+  private getUserEmail(): string {
+    const identityClaims: any = this.oauthService.getIdentityClaims();
+    return identityClaims?.email || 'Email not available';
   }
 }

@@ -40,6 +40,10 @@ export class SignupComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
     });
+
+    this.route.queryParams.subscribe((queryParams) => {
+      console.log('queryParams', queryParams);
+    })
   }
 
   // convenience getter for easy access to form fields
