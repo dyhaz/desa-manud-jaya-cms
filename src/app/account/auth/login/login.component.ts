@@ -84,6 +84,7 @@ export class LoginComponent implements OnInit {
     this.oauthService.configure(authConfig);
     this.oauthService.loadDiscoveryDocumentAndTryLogin({ customHashFragment: location.hash }).then(async (isLoggedIn) => {
       console.log("isLoggedIn: ", isLoggedIn);
+      console.log('valid access token: ', this.oauthService.hasValidAccessToken());
       if (this.oauthService.hasValidAccessToken()) {
         const emailAddress = this.getUserEmail();
         if (!localStorage.getItem('currentUser')) {
