@@ -63,7 +63,7 @@
                 <div class="mb-3">
                   <label for="email" class="form-label">Email</label>
 
-                  <input type="email" formControlName="email" class="form-control" [readonly]="disableEmail"
+                  <input type="email" formControlName="email" class="form-control" [readonly]="registerWithGoogle"
                     [ngClass]="{ 'is-invalid': submitted && f.email.errors }" id="email" placeholder="Email" />
 
                   <div *ngIf="submitted && f.email.errors" class="invalid-feedback">

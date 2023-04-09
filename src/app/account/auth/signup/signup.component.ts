@@ -20,7 +20,7 @@ export class SignupComponent implements OnInit {
   submitted = false;
   error = '';
   successmsg = false;
-  disableEmail = false;
+  registerWithGoogle = false;
 
   // set the currenr year
   year: number = new Date().getFullYear();
@@ -45,8 +45,10 @@ export class SignupComponent implements OnInit {
     });
 
     this.route.queryParams.subscribe((queryParams) => {
-      this.signupForm.patchValue({'email': queryParams.email});
-      this.disableEmail = true;
+      if (queryParams.email) {
+        this.signupForm.patchValue({'email': queryParams.email});
+        this.registerWithGoogle = true;
+      }
     })
   }
 
