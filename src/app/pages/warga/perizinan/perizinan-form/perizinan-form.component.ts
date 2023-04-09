@@ -5,6 +5,7 @@ import Swal from 'sweetalert2';
 import { PerizinanTableService } from '@pages/master/perizinan/admin/perizinan.service';
 import { JenisPerizinanService, PerizinanService, WargaService } from '@core/http/api';
 import { saveAs } from 'file-saver';
+import { DropzoneConfigInterface } from "ngx-dropzone-wrapper";
 
 @Component({
   selector: 'app-perizinan-form',
@@ -38,6 +39,17 @@ export class PerizinanFormComponent implements OnInit {
   public jenisPerizinanList = [];
   public jenisPerizinan = '';
   @Output() public dismiss = new EventEmitter<any>();
+  config: DropzoneConfigInterface = {
+    // Change this to your upload POST address:
+    maxFilesize: 50,
+    acceptedFiles: 'image/*',
+    method: 'POST',
+    uploadMultiple: false,
+    autoProcessQueue: true,
+    accept: (file) => {
+      this.onAccept(file);
+    }
+  };
 
   public today = new Date();
 
@@ -146,6 +158,24 @@ export class PerizinanFormComponent implements OnInit {
     } catch(e) {
       await Swal.fire('Error', e);
     }
+  }
+
+  onAccept(file: any) {
+    const fileToBase64 = (file:File):Promise<string> => {
+      return new Promise<string> ((resolve,reject)=> {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result.toString());
+        reader.onerror = error => reject(error);
+      })
+    }
+
+    fileToBase64(file)
+      .then(result=>{
+        // To remove data url part
+        this.perizinan.lampiran =  result.replace('data:', '')
+          .replace(/^.+,/, '');
+      });
   }
 
   downloadLampiran(lampiran: string) {
