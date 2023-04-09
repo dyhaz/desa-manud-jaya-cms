@@ -8,6 +8,7 @@ import { first } from 'rxjs/operators';
 import { UserProfileService } from '../../../core/services/user.service';
 import { UserManagementService, WargaService } from '@core/http/api';
 import Swal from 'sweetalert2';
+import { nikValidator } from '@core/helpers/nik.validator';
 
 @Component({
   selector: 'app-signup',
@@ -39,7 +40,7 @@ export class SignupComponent implements OnInit {
   ngOnInit() {
     this.signupForm = this.formBuilder.group({
       username: ['', Validators.required],
-      nik: ['', Validators.required],
+      nik: ['', [Validators.required, nikValidator()]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
     });

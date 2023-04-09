@@ -57,6 +57,7 @@
 
                   <div *ngIf="submitted && f.nik.errors" class="invalid-feedback">
                     <div *ngIf="f.nik.errors.required">NIK is required</div>
+                    <div *ngIf="f.nik.errors.invalidNIK">Invalid NIK (Must be a 16-digit number)</div>
                   </div>
                 </div>
 
