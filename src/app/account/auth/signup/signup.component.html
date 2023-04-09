@@ -109,7 +109,7 @@
 <!--                  </ul>-->
 <!--                </div>-->
                 <div class="mt-4 text-center">
-                  <p class="mb-0">By registering you agree to the <a href="javascript: void(0);"
+                  <p class="mb-0">By registering you agree to the <a href="javascript: void(0);" (click)="openTermsOfUse()"
                       class="text-primary">Terms of
                       Use</a></p>
                 </div>
@@ -130,3 +130,7 @@
   </div>
   <!-- end container -->
 </div>
+<ng-template #content role="document" let-modal>
+  <app-terms-of-use [modal]="modal"></app-terms-of-use>
+</ng-template>
+

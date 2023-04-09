@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -9,6 +9,7 @@ import { UserProfileService } from '../../../core/services/user.service';
 import { UserManagementService, WargaService } from '@core/http/api';
 import Swal from 'sweetalert2';
 import { nikValidator } from '@core/helpers/nik.validator';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-signup',
@@ -16,6 +17,7 @@ import { nikValidator } from '@core/helpers/nik.validator';
   styleUrls: ['./signup.component.scss']
 })
 export class SignupComponent implements OnInit {
+  @ViewChild('content') modal: TemplateRef<any>;
 
   signupForm: FormGroup;
   submitted = false;
@@ -34,7 +36,8 @@ export class SignupComponent implements OnInit {
     private authenticationService: AuthenticationService,
     private userService: UserProfileService,
     private wargaService: WargaService,
-    private userManagementService: UserManagementService
+    private userManagementService: UserManagementService,
+    private modalService: NgbModal
   ) { }
 
   ngOnInit() {
@@ -114,5 +117,11 @@ export class SignupComponent implements OnInit {
             });
       }
     }
+  }
+
+  openTermsOfUse() {
+    this.modalService.open(this.modal, {
+      size: 'lg'
+    });
   }
 }
