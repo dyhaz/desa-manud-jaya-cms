@@ -17,6 +17,11 @@ export const environment = {
   },
   apiConfig: {
     baseUrl: 'https://api.simanud.asia'
+  },
+  ssoConfig: {
+    clientId: '186253579723-pvgkk6cpbe8krpu8m07ngdfdc44v1rv8.apps.googleusercontent.com',
+    scope: 'openid profile email',
+    responseType: 'id_token token code'
   }
 };
 

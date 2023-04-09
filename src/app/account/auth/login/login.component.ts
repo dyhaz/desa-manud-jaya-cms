@@ -8,7 +8,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 
 import { environment } from '@environments/environment';
-import { AuthenticationService, UserManagementService } from '@core/http/api';
+import { AuthenticationService } from '@core/http/api';
 import Swal from 'sweetalert2';
 import { AuthConfig, OAuthService } from 'angular-oauth2-oidc';
 
@@ -39,8 +39,7 @@ export class LoginComponent implements OnInit {
     // private authenticationService: AuthenticationService,
     private authFackservice: AuthfakeauthenticationService,
     private auth: AuthenticationService,
-    private oauthService: OAuthService,
-    private userService: UserManagementService
+    private oauthService: OAuthService
   ) { }
 
   async ngOnInit() {
@@ -73,38 +72,15 @@ export class LoginComponent implements OnInit {
   private async configureOAuth() {
     const authConfig: AuthConfig = {
       issuer: 'https://accounts.google.com',
-      clientId: '186253579723-pvgkk6cpbe8krpu8m07ngdfdc44v1rv8.apps.googleusercontent.com',
+      clientId: environment.ssoConfig.clientId,
       redirectUri: window.location.origin,
-      scope: 'openid profile email',
-      responseType: 'id_token token code',
+      scope: environment.ssoConfig.scope,
+      responseType: environment.ssoConfig.responseType,
       showDebugInformation: true,
       strictDiscoveryDocumentValidation: false
     };
 
     this.oauthService.configure(authConfig);
-    this.oauthService.loadDiscoveryDocumentAndTryLogin({ customHashFragment: location.hash }).then(async (isLoggedIn) => {
-      console.log("isLoggedIn: ", isLoggedIn);
-      console.log('valid access token: ', this.oauthService.hasValidAccessToken());
-      if (this.oauthService.hasValidAccessToken()) {
-        const emailAddress = this.getUserEmail();
-        if (!localStorage.getItem('currentUser')) {
-          const result = await this.userService.showUserByEmail(emailAddress).toPromise();
-          const currentUser = result.data;
-          if (currentUser) {
-            localStorage.setItem('currentUser', JSON.stringify(currentUser));
-            await this.router.navigate(['/dashboard']);
-          } else {
-            await this.router.navigate(['/account/signup'], {queryParams: {email: emailAddress}});
-          }
-        }
-      }
-
-      if (isLoggedIn) {
-        this.oauthService.setupAutomaticSilentRefresh();
-      } else {
-        // this.oauthService.initImplicitFlow();
-      }
-    });
   }
 
   signInWithGoogle() {
