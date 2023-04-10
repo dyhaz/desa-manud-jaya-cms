@@ -96,7 +96,9 @@ export class MyPerizinanComponent implements OnInit {
 
   openModal(table?: Table) {
     this.selected = table;
-    this.modalService.open(this.editmodal);
+    this.modalService.open(this.editmodal, {
+      size: 'lg'
+    });
   }
 
   async getAllJenisPerizinan() {
