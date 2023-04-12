@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { ProgramComponent } from './program/program.component';
 import { UserManagementComponent } from '@pages/master/user/user.component';
 import { PerizinanManagementComponent } from '@pages/master/perizinan/admin/perizinan.component';
+import { JenisPerizinanComponent } from "@pages/master/jenis-perizinan/jenis-perizinan.component";
 
 const routes: Routes = [
   {
@@ -17,6 +18,10 @@ const routes: Routes = [
   {
     path: 'perizinan',
     component: PerizinanManagementComponent
+  },
+  {
+    path: 'jenis-perizinan',
+    component: JenisPerizinanComponent
   },
 ];
 

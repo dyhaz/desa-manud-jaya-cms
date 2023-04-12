@@ -43,7 +43,13 @@ export const MENU_ADMIN: MenuItem[] = [
                       label: 'MENUITEMS.TABLES.LIST.PERIZINAN',
                       link: '/master/perizinan',
                       parentId: 110
-                    }
+                    },
+                  {
+                    id: 115,
+                    label: 'MENUITEMS.TABLES.LIST.JENIS_PERIZINAN',
+                    link: '/master/jenis-perizinan',
+                    parentId: 110
+                  }
                 ]
             }
             // {

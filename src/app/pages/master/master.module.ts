@@ -23,10 +23,14 @@ import { DropzoneModule } from 'ngx-dropzone-wrapper';
 import { CurrencyMaskModule } from 'ng2-currency-mask';
 import { PerizinanManagementComponent } from '@pages/master/perizinan/admin/perizinan.component';
 import { PerizinanFormComponent } from '@pages/master/perizinan/admin/perizinan-form/perizinan-form.component';
-import { PagesModule } from "@pages/pages.module";
+import { JenisPerizinanComponent } from '@pages/master/jenis-perizinan/jenis-perizinan.component';
+import {
+  JenisPerizinanFormComponent
+} from '@pages/master/jenis-perizinan/jenis-perizinan-form/jenis-perizinan-form.component';
+import { PagesModule } from '@pages/pages.module';
 
 @NgModule({
-    declarations: [ProgramComponent, ProgramFormComponent, UserManagementComponent, UserFormComponent, PerizinanManagementComponent, PerizinanFormComponent],
+    declarations: [ProgramComponent, ProgramFormComponent, UserManagementComponent, UserFormComponent, PerizinanManagementComponent, PerizinanFormComponent, JenisPerizinanComponent, JenisPerizinanFormComponent],
   imports: [
     CommonModule,
     UIModule,

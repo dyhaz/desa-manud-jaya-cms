@@ -274,6 +274,7 @@
         "BASIC": "Basic Tables",
         "ADVANCED": "Program Desa",
         "USERS": "Pengguna",
+        "JENIS_PERIZINAN": "Jenis Perizinan",
         "PERIZINAN": "Data Perizinan"
       }
     },
