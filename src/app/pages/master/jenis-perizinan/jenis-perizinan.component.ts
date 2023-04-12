@@ -46,7 +46,7 @@ export class JenisPerizinanComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.breadCrumbItems = [{ label: 'Tables' }, { label: 'User Management', active: true }];
+    this.breadCrumbItems = [{ label: 'Tables' }, { label: 'Jenis Perizinan', active: true }];
     /**
      * fetch data
      */
