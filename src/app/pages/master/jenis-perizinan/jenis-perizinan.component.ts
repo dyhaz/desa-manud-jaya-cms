@@ -10,6 +10,7 @@ import { AdvancedSortableDirective, SortEvent } from '../../tables/advancedtable
 import { JenisPerizinanService } from '@core/http/api';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DomSanitizer } from '@angular/platform-browser';
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-jenis-izin-management',
@@ -88,5 +89,15 @@ export class JenisPerizinanComponent implements OnInit {
   openModal(table?: Table) {
     this.selected = table;
     this.modalService.open(this.editmodal);
+  }
+
+  async delete(table?: Table) {
+    try {
+      await this.jenisPerizinanService.deleteJenisPerizinan(table.jenis_id).toPromise();
+      await Swal.fire('Deleted!', 'Jenis Perizinan has been deleted.', 'success');
+      await this._fetchData();
+    } catch (e) {
+      await Swal.fire('Error', e.toString());
+    }
   }
 }
