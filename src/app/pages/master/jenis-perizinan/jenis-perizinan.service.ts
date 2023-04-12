@@ -44,7 +44,7 @@ function sort(tables: Table[], column: string, direction: string): Table[] {
  * @param pipe
  */
 function matches(tables: Table, term: string, pipe: PipeTransform) {
-  return tables.nama_jenis?.toLowerCase()?.includes(term.toLowerCase())
+  return tables.nama_perizinan?.toLowerCase()?.includes(term.toLowerCase())
     || tables.created_at?.toLowerCase()?.includes(term)
     || tables.deskripsi_perizinan?.toLowerCase()?.includes(term)
 }

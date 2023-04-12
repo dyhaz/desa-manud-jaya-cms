@@ -18,7 +18,7 @@ export class JenisPerizinanFormComponent implements OnInit {
   @Input('jenisIzin') jenisIzin: Table = {
     jenis_id: 0,
     deskripsi_perizinan: '',
-    nama_jenis: '',
+    nama_perizinan: '',
     created_at: ''
   };
 
@@ -37,7 +37,7 @@ export class JenisPerizinanFormComponent implements OnInit {
         jenis_id: 0,
         deskripsi_perizinan: '',
         created_at: '',
-        nama_jenis: ''
+        nama_perizinan: ''
       };
     }
   }
@@ -47,14 +47,14 @@ export class JenisPerizinanFormComponent implements OnInit {
     try {
       if (this.mode === 'edit') {
         await this.jenisPerizinanService.updateJenisPerizinan(this.jenisIzin.jenis_id, {
-          nama_jenis: this.jenisIzin.nama_jenis,
+          nama_jenis: this.jenisIzin.nama_perizinan,
           deskripsi_perizinan: this.jenisIzin.deskripsi_perizinan
         }).toPromise();
         Swal.fire('Updated!', 'Saved successfully.', 'success');
         this.modal.dismiss();
       } else {
         await this.jenisPerizinanService.createJenisPerizinan({
-          nama_jenis: this.jenisIzin.nama_jenis,
+          nama_jenis: this.jenisIzin.nama_perizinan,
           deskripsi_perizinan: this.jenisIzin.deskripsi_perizinan
         }).toPromise();
         Swal.fire('Created!', 'Saved successfully.', 'success');

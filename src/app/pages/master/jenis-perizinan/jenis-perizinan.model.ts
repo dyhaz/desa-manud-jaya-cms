@@ -1,7 +1,7 @@
 // Table data
 export interface Table {
   jenis_id: number;
-  nama_jenis: string;
+  nama_perizinan: string;
   deskripsi_perizinan: string;
   created_at: string;
 }

@@ -49,7 +49,7 @@
               <tbody *ngFor="let table of tables$ | async;let i=index">
               <tr>
                 <td>
-                  <ngb-highlight [result]="table.nama_jenis" [term]="service.searchTerm"></ngb-highlight>
+                  <ngb-highlight [result]="table.nama_perizinan" [term]="service.searchTerm"></ngb-highlight>
                 </td>
                 <td>
                   <ngb-highlight [result]="table.deskripsi_perizinan" [term]="service.searchTerm"></ngb-highlight>
