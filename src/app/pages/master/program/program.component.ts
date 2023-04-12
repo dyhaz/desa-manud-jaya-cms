@@ -102,6 +102,8 @@ export class ProgramComponent implements OnInit {
 
   openModal(table?: Table) {
     this.selected = table;
-    this.modalService.open(this.editmodal);
+    this.modalService.open(this.editmodal, {
+      size: 'xl'
+    });
   }
 }
