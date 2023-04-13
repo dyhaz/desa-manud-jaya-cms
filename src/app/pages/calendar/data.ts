@@ -1,4 +1,4 @@
-import { EventInput } from '@fullcalendar/angular';
+// import { EventInput } from '@fullcalendar/angular';
 
 let eventGuid = 0;
 export function createEventId() {
@@ -32,7 +32,8 @@ const category = [
     },
 ];
 
-const calendarEvents: EventInput[] = [
+// const calendarEvents: EventInput[] = [
+const calendarEvents: any[] = [
     {
         id: createEventId(),
         title: 'Meeting',

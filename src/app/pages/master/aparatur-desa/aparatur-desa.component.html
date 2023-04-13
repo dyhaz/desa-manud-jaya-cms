@@ -5,8 +5,10 @@
       <div class="card">
 <!--        <h4 class="card-title mb-4"></h4>-->
         <div class="card-body">
-          <div class="row mb-md-2">
+          <div class="row mb-md-2" [dragula]="'officials'">
             <div class="col-md-3" *ngFor="let official of officials">
+              <div class="handle">☰</div>
+
               <div class="form-group">
                 <label for="{{ official.id }}">{{ official.name }}</label>
                 <input type="text" class="form-control" id="{{ official.id }}" name="{{ official.id }}" [(ngModel)]="official.position" placeholder="Enter {{ official.name }}'s position">

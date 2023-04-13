@@ -29,6 +29,7 @@ import {
 } from '@pages/master/jenis-perizinan/jenis-perizinan-form/jenis-perizinan-form.component';
 import { PagesModule } from '@pages/pages.module';
 import { AparaturDesaComponent } from "@pages/master/aparatur-desa/aparatur-desa.component";
+import { DragulaModule } from 'ng2-dragula';
 
 @NgModule({
     declarations: [ProgramComponent, ProgramFormComponent, UserManagementComponent, UserFormComponent, PerizinanManagementComponent, PerizinanFormComponent, JenisPerizinanComponent, JenisPerizinanFormComponent, AparaturDesaComponent],
@@ -45,7 +46,8 @@ import { AparaturDesaComponent } from "@pages/master/aparatur-desa/aparatur-desa
     TablesModule,
     DropzoneModule,
     CurrencyMaskModule,
-    PagesModule
+    PagesModule,
+    DragulaModule
   ],
     exports: [
     ],

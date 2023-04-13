@@ -1,0 +1,14 @@
+.col-md-3 {
+  position: relative;
+}
+.handle {
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor: grab;
+}
+
+.handle:active {
+  cursor: grabbing;
+}
+

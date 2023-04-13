@@ -35,6 +35,7 @@ import {
 } from '@core/http/api';
 import { OAuthModule } from 'angular-oauth2-oidc';
 import { FormsModule } from "@angular/forms";
+import { DragulaModule } from 'ng2-dragula';
 
 if (environment.defaultauth === 'firebase') {
   initFirebaseBackend(environment.firebaseConfig);
@@ -80,6 +81,7 @@ export function createTranslateLoader(http: HttpClient): any {
                 sendAccessToken: true
             }
         }),
+        DragulaModule.forRoot(),
         FormsModule
     ],
   bootstrap: [AppComponent],

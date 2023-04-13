@@ -6,9 +6,9 @@ import { NgbNavModule, NgbDropdownModule, NgbModalModule, NgbTooltipModule , Ngb
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { SimplebarAngularModule } from 'simplebar-angular';
-import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin
-import interactionPlugin from '@fullcalendar/interaction'; // a plugin
-import bootstrapPlugin from "@fullcalendar/bootstrap";
+// import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin
+// import interactionPlugin from '@fullcalendar/interaction'; // a plugin
+// import bootstrapPlugin from "@fullcalendar/bootstrap";
 import { LightboxModule } from 'ngx-lightbox';
 
 import { WidgetModule } from '../shared/widget/widget.module';
@@ -39,11 +39,11 @@ import { ChatComponent } from './chat/chat.component';
 import { FilemanagerComponent } from './filemanager/filemanager.component';
 import { AdvancedSortableDirective } from "@pages/tables/advancedtable/advanced-sortable.directive";
 
-FullCalendarModule.registerPlugins([ // register FullCalendar plugins
-  dayGridPlugin,
-  interactionPlugin,
-  bootstrapPlugin
-]);
+// FullCalendarModule.registerPlugins([ // register FullCalendar plugins
+//   dayGridPlugin,
+//   interactionPlugin,
+//   bootstrapPlugin
+// ]);
 
 @NgModule({
   declarations: [AdvancedSortableDirective, CalendarComponent, ChatComponent, FilemanagerComponent],

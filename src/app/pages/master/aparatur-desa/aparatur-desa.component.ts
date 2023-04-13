@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { AssetsService } from "@core/http/api";
 import Swal from "sweetalert2";
 import { environment } from "@environments/environment";
+import { DragulaService } from 'ng2-dragula';
 
 interface Official {
   name: string;
@@ -48,8 +49,16 @@ export class AparaturDesaComponent implements OnInit {
   ];
 
   constructor(
-    private assetsService: AssetsService
+    private assetsService: AssetsService,
+    private dragulaService: DragulaService
   ) {
+    this.dragulaService.createGroup('officials', {
+      moves: (el, container, handle) => handle.classList.contains('handle')
+    });
+    this.dragulaService.drag().subscribe(() => {
+      const elements = document.querySelectorAll('.row .col-md-3');
+      // this.columns = Array.from(elements).map((el: HTMLElement) => el.innerText);
+    });
   }
 
   async initImages() {

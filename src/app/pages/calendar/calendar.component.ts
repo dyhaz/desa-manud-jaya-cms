@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { CalendarOptions, EventClickArg, EventApi } from '@fullcalendar/angular';
+// import { CalendarOptions, EventClickArg, EventApi } from '@fullcalendar/angular';
 import { category, calendarEvents, createEventId } from './data';
 
 import Swal from 'sweetalert2';
@@ -29,7 +29,8 @@ export class CalendarComponent implements OnInit {
   // event form
   formData: FormGroup;
 
-  calendarOptions: CalendarOptions = {
+  // calendarOptions: CalendarOptions = {
+  calendarOptions: any = {
     headerToolbar: {
       left: 'dayGridMonth,dayGridWeek,dayGridDay',
       center: 'title',
@@ -53,7 +54,8 @@ export class CalendarComponent implements OnInit {
       hour12: true
     }
   };
-  currentEvents: EventApi[] = [];
+  // currentEvents: EventApi[] = [];
+  currentEvents: any[] = [];
 
   ngOnInit(): void {
     this.breadCrumbItems = [{ label: 'Skote' }, { label: 'Calendar', active: true }];
@@ -73,7 +75,8 @@ export class CalendarComponent implements OnInit {
   /**
    * Event click modal show
    */
-  handleEventClick(clickInfo: EventClickArg) {
+  // handleEventClick(clickInfo: EventClickArg) {
+  handleEventClick(clickInfo: any) {
     this.editEvent = clickInfo.event;
     this.formEditData = this.formBuilder.group({
       editTitle: clickInfo.event.title,
@@ -86,7 +89,8 @@ export class CalendarComponent implements OnInit {
    * Events bind in calander
    * @param events events
    */
-  handleEvents(events: EventApi[]) {
+  // handleEvents(events: EventApi[]) {
+  handleEvents(events: any[]) {
     this.currentEvents = events;
   }
 
@@ -143,7 +147,7 @@ export class CalendarComponent implements OnInit {
   editEventSave() {
     const editTitle = this.formEditData.get('editTitle').value;
     const editCategory = this.formEditData.get('editCategory').value;
-    
+
     const editId = this.calendarEvents.findIndex(
       (x) => x.id + '' === this.editEvent.id + ''
     );
