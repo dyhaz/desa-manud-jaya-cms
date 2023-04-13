@@ -159,19 +159,45 @@ export class DefaultComponent implements OnInit {
       });
       this.simplePieChart = {
         data: {
-          series: dashboard.data.perizinan.map(item => {
+          series: dashboard.data.perizinan.filter(item => item.jumlahRequest > 0).map(item => {
             return item.jumlahRequest;
           }),
-          labels: dashboard.data.perizinan.map(item => {
-            return `${item.jenisPerizinan} (${item.jumlahRequest})`;
+          labels: dashboard.data.perizinan.filter(item => item.jumlahRequest > 0).map(item => {
+            return `${item.jenisPerizinan}`;
           })
         },
         options: {
-          height: 200,
+          height: 500,
+          type: 'pie',
           showLabel: true
         },
+        legend: {
+          show: true,
+          position: 'bottom',
+          horizontalAlign: 'center',
+          verticalAlign: 'middle',
+          floating: false,
+          fontSize: '14px',
+          offsetX: 0,
+          offsetY: -10
+        },
+        responsive: [{
+          breakpoint: 600,
+          options: {
+            chart: {
+              height: 240
+            },
+            legend: {
+              show: false
+            },
+          }
+        }],
+        colors: ['#34c38f', '#556ee6', '#f46a6a', '#50a5f1', '#f1b44c'],
         type: 'Pie'
       };
+      for (let i = 0 ; i < 99; i ++) {
+        this.simplePieChart.colors.push('#' + Math.floor(Math.random()*16777215).toString(16));
+      }
     });
   }
 
