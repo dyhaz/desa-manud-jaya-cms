@@ -15,6 +15,7 @@ export type { UpdateRequestPerizinan } from './models/UpdateRequestPerizinan';
 export type { ValidationError } from './models/ValidationError';
 export type { Warga } from './models/Warga';
 
+export { AssetsService } from './services/AssetsService';
 export { AuthenticationService } from './services/AuthenticationService';
 export { DashboardService } from './services/DashboardService';
 export { DesaService } from './services/DesaService';

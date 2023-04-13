@@ -49,6 +49,12 @@ export const MENU_ADMIN: MenuItem[] = [
                     label: 'MENUITEMS.TABLES.LIST.JENIS_PERIZINAN',
                     link: '/master/jenis-perizinan',
                     parentId: 110
+                  },
+                  {
+                    id: 116,
+                    label: 'MENUITEMS.TABLES.LIST.APARATUR_DESA',
+                    link: '/master/aparatur-desa',
+                    parentId: 110
                   }
                 ]
             }

@@ -28,9 +28,10 @@ import {
   JenisPerizinanFormComponent
 } from '@pages/master/jenis-perizinan/jenis-perizinan-form/jenis-perizinan-form.component';
 import { PagesModule } from '@pages/pages.module';
+import { AparaturDesaComponent } from "@pages/master/aparatur-desa/aparatur-desa.component";
 
 @NgModule({
-    declarations: [ProgramComponent, ProgramFormComponent, UserManagementComponent, UserFormComponent, PerizinanManagementComponent, PerizinanFormComponent, JenisPerizinanComponent, JenisPerizinanFormComponent],
+    declarations: [ProgramComponent, ProgramFormComponent, UserManagementComponent, UserFormComponent, PerizinanManagementComponent, PerizinanFormComponent, JenisPerizinanComponent, JenisPerizinanFormComponent, AparaturDesaComponent],
   imports: [
     CommonModule,
     UIModule,
