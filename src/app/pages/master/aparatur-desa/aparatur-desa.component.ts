@@ -67,19 +67,22 @@ export class AparaturDesaComponent implements OnInit {
     private assetsService: AssetsService,
     private dragulaService: DragulaService
   ) {
-    this.dragulaService.createGroup('officials', {
-      moves: (el, container, handle) => handle.classList.contains('handle')
-    });
+    try {
+      this.dragulaService.createGroup('officials', {
+        moves: (el, container, handle) => handle.classList.contains('handle')
+      });
 
-    this.dragulaService.drag().subscribe(() => {
-      const elements = document.querySelectorAll('.row .col-md-3');
-    });
+      this.dragulaService.drag().subscribe(() => {
+        const elements = document.querySelectorAll('.row .col-md-3');
+      });
 
-    this.dragulaService.drop().subscribe(() => {
-      const elements = document.querySelectorAll('.row .col-md-3 .official-id');
-      const ids = Array.from(elements).map((el: HTMLElement) => el.id);
-      console.log(ids);
-    })
+      this.dragulaService.drop().subscribe(() => {
+        const elements = document.querySelectorAll('.row .col-md-3 .official-id');
+        const ids = Array.from(elements).map((el: HTMLElement) => el.id);
+        console.log(ids);
+      })
+    } catch (e) {
+    }
   }
 
   onLogoImageChange(event: Event): void {
