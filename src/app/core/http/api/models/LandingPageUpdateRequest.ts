@@ -10,7 +10,7 @@ export type LandingPageUpdateRequest = {
     about_manud_jaya: string;
     logo_image?: string;
     aparat_desa?: Array<{
-photo: Blob;
+photo: string;
 name: string;
 position: string;
 }>;

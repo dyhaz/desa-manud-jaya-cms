@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { AssetsService, LandingService } from '@core/http/api';
+import { AssetsService, LandingPageUpdateRequest, LandingService } from '@core/http/api';
 import Swal from "sweetalert2";
 import { environment } from "@environments/environment";
 import { DragulaService } from 'ng2-dragula';
@@ -111,14 +111,26 @@ export class AparaturDesaComponent implements OnInit {
         this.logoImageUrl = uploadRes.data;
       }
 
-      await this.landingService.updateLandingPage({
+      const payload: LandingPageUpdateRequest = {
         visi: this.visi,
         misi: this.misi,
         subtitle: this.subtitle,
         title: this.title,
         about_manud_jaya: this.aboutManudJaya,
         logo_image: this.logoImageUrl
-      }).toPromise();
+      };
+
+      if (this.officials.length > 0) {
+        payload.aparat_desa = this.officials.map((item) => {
+          return {
+            photo: item.photo,
+            name: item.name,
+            position: item.position
+          }
+        });
+      }
+
+      await this.landingService.updateLandingPage(payload).toPromise();
       await Swal.hideLoading();
     } catch (e) {
       await Swal.hideLoading();
