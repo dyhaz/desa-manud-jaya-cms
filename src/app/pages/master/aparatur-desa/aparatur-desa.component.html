@@ -14,9 +14,11 @@
                     <input type="file" class="custom-file-input" id="logoImage" name="logoImage" (change)="onLogoImageChange($event)">
                     <label class="custom-file-label" for="logoImage">{{ logoImageName }}</label>
                   </div>
-                  <image-cropper *ngIf="showCropper" [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true"
+                  <image-cropper *ngIf="showCropper" [imageURL]="logoImageUrl" [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true"
                                      [aspectRatio]="1" [resizeToWidth]="300" format="jpeg"></image-cropper>
-                  <img src="{{ logoImageUrl }}" class="img-fluid mt-3" width="300" *ngIf="logoImageUrl" alt="Logo Image">
+                  <div class="text-center">
+                    <img src="{{ logoImageUrl }}" class="img-fluid mt-3" width="300" *ngIf="logoImageUrl && !showCropper" alt="Logo Image">
+                  </div>
                 </div>
               </div>
             </div>
