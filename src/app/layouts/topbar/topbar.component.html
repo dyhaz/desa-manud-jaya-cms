@@ -267,7 +267,7 @@
         <button type="button" class="btn header-item noti-icon" id="page-header-notifications-dropdown"
           ngbDropdownToggle>
           <i class="bx bx-bell bx-tada"></i>
-          <span class="badge bg-danger rounded-pill">3</span>
+          <span *ngIf="notifications.length > 0" class="badge bg-danger rounded-pill">{{ notifications.length }}</span>
         </button>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0"
           aria-labelledby="page-header-notifications-dropdown" ngbDropdownMenu>
@@ -277,7 +277,7 @@
                 <h6 class="m-0">{{ 'HEADER.NOTIFICATIONS.TITLE' | translate}} </h6>
               </div>
               <div class="col-auto">
-                <a href="javascript: void(0);" class="small">{{ 'HEADER.NOTIFICATIONS.VIEW_ALL' | translate}}</a>
+                <a href="javascript: void(0);" (click)="openPerizinanPage()" class="small">{{ 'HEADER.NOTIFICATIONS.VIEW_ALL' | translate}}</a>
               </div>
             </div>
           </div>
