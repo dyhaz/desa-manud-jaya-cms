@@ -18,19 +18,21 @@ import { HorizontaltopbarComponent } from './horizontaltopbar/horizontaltopbar.c
 import { LanguageService } from '../core/services/language.service';
 import { TranslateModule } from '@ngx-translate/core';
 import { AuthenticationService } from '@core/http/api';
+import { SharedModule } from "@shared/shared.module";
 
 @NgModule({
   // tslint:disable-next-line: max-line-length
   declarations: [LayoutComponent, SidebarComponent, TopbarComponent, FooterComponent, RightsidebarComponent, HorizontalComponent, VerticalComponent, HorizontaltopbarComponent],
-  imports: [
-    CommonModule,
-    TranslateModule,
-    RouterModule,
-    NgbDropdownModule,
-    ClickOutsideModule,
-    UIModule,
-    SimplebarAngularModule
-  ],
+    imports: [
+        CommonModule,
+        TranslateModule,
+        RouterModule,
+        NgbDropdownModule,
+        ClickOutsideModule,
+        UIModule,
+        SimplebarAngularModule,
+        SharedModule
+    ],
   providers: [LanguageService, AuthenticationService]
 })
 export class LayoutsModule { }

@@ -143,4 +143,26 @@ id: number,
         });
     }
 
+    /**
+     * Get user's last 5 perizinan history
+     * Retrieve the last 5 perizinan history for a user based on email address
+     * @param email Email address of the user to retrieve perizinan history for
+     * @returns DataResponse OK
+     * @throws ApiError
+     */
+    public getHistory(
+email?: string,
+): Observable<DataResponse> {
+        return __request(OpenAPI, this.http, {
+            method: 'GET',
+            url: '/api/perizinan/history/{email}',
+            path: {
+                'email': email,
+            },
+            errors: {
+                404: `User not found`,
+            },
+        });
+    }
+
 }

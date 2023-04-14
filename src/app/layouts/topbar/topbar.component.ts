@@ -8,7 +8,8 @@ import { CookieService } from 'ngx-cookie-service';
 import { LanguageService } from '../../core/services/language.service';
 import { TranslateService } from '@ngx-translate/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { AuthenticationService } from "@core/http/api";
+import { AuthenticationService, PerizinanService } from "@core/http/api";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-topbar',
@@ -30,6 +31,8 @@ export class TopbarComponent implements OnInit {
   public loginName = '';
   public loginPhoto = '';
 
+  public notifications: any[] = [];
+
   constructor(@Inject(DOCUMENT) private document: any, private router: Router,
               // private authService: AuthenticationService,
               private authFackservice: AuthfakeauthenticationService,
@@ -37,7 +40,8 @@ export class TopbarComponent implements OnInit {
               public translate: TranslateService,
               public _cookiesService: CookieService,
               public domSanitizer: DomSanitizer,
-              private authenticationService: AuthenticationService) {
+              private authenticationService: AuthenticationService,
+              private perizinanService: PerizinanService) {
   }
 
   listLang = [
@@ -71,6 +75,8 @@ export class TopbarComponent implements OnInit {
     } else {
       this.flagvalue = val.map(element => element.flag);
     }
+
+    this.getNotifications();
   }
 
   setLanguage(text: string, lang: string, flag: string) {
@@ -143,5 +149,21 @@ export class TopbarComponent implements OnInit {
         this.document.msExitFullscreen();
       }
     }
+  }
+
+  /**
+   * Get perizinan notifications
+   */
+  async getNotifications() {
+    try {
+      const result = await this.perizinanService.getHistory().toPromise();
+      this.notifications = result.data;
+    } catch (e) {
+      Swal.fire('Error', e.toString());
+    }
+  }
+
+  async openPerizinanPage() {
+    await this.router.navigate(['/master/perizinan']);
   }
 }
