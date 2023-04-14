@@ -55,10 +55,16 @@ export class AparaturDesaComponent implements OnInit {
     this.dragulaService.createGroup('officials', {
       moves: (el, container, handle) => handle.classList.contains('handle')
     });
+
     this.dragulaService.drag().subscribe(() => {
       const elements = document.querySelectorAll('.row .col-md-3');
-      // this.columns = Array.from(elements).map((el: HTMLElement) => el.innerText);
     });
+
+    this.dragulaService.drop().subscribe(() => {
+      const elements = document.querySelectorAll('.row .col-md-3 .official-id');
+      const ids = Array.from(elements).map((el: HTMLElement) => el.id);
+      console.log(ids);
+    })
   }
 
   async initImages() {
