@@ -1,25 +1,96 @@
 <div class="container-fluid">
-  <app-page-title title="Edit Aparatur Desa" [breadcrumbItems]="breadCrumbItems"></app-page-title>
+  <app-page-title title="Edit Landing Page" [breadcrumbItems]="breadCrumbItems"></app-page-title>
   <div class="row">
     <div class="col-12">
       <div class="card">
-<!--        <h4 class="card-title mb-4"></h4>-->
         <div class="card-body">
-          <div class="row mb-md-2" [dragula]="'officials'">
-            <div class="col-md-3" *ngFor="let official of officials">
-              <div class="handle">☰</div>
-
-              <div class="form-group">
-                <label for="{{ official.id }}">{{ official.name }}</label>
-                <input type="text" class="form-control official-id" id="{{ official.id }}" name="{{ official.id }}" [(ngModel)]="official.position" placeholder="Enter {{ official.name }}'s position">
-              </div>
-              <div class="form-group">
-                <label for="{{ official.id }}-photo">Foto</label>
-                <input type="file" class="form-control-file" id="{{ official.id }}-photo" name="{{ official.id }}-photo" (change)="handlePhotoInputChange($event, official)">
-                <img *ngIf="official.photoUrl" [src]="official.photoUrl" class="img-fluid mt-3">
+<!--          <h4 class="mb-3 header-title"></h4>-->
+          <form #editLandingPageForm="ngForm">
+            <div class="card mb-3">
+              <div class="card-body">
+                <h5 class="card-title">Logo</h5>
+                <div class="form-group">
+                  <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="logoImage" name="logoImage" (change)="onLogoImageChange($event)">
+                    <label class="custom-file-label" for="logoImage">{{ logoImageName }}</label>
+                  </div>
+                  <image-cropper *ngIf="showCropper" [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true"
+                                     [aspectRatio]="1" [resizeToWidth]="300" format="jpeg"></image-cropper>
+                  <img src="{{ logoImageUrl }}" class="img-fluid mt-3" width="300" *ngIf="logoImageUrl" alt="Logo Image">
+                </div>
               </div>
             </div>
-          </div>
+            <div class="card mb-3">
+              <div class="card-body">
+                <h5 class="card-title">Title and Subtitle</h5>
+                <div class="form-group">
+                  <label for="title">Title</label>
+                  <input required type="text" class="form-control" id="title" name="title" [(ngModel)]="title">
+                </div>
+                <div class="form-group">
+                  <label for="subtitle">Subtitle</label>
+                  <input required type="text" class="form-control" id="subtitle" name="subtitle" [(ngModel)]="subtitle">
+                </div>
+              </div>
+            </div>
+            <div class="card mb-3">
+              <div class="card-body">
+                <h5 class="card-title">Visi & Misi</h5>
+                <div class="form-group">
+                  <label for="visiMisi">Deskripsi Visi & Misi</label>
+                  <div class="row mb-3">
+                    <div class="col-md-6">
+                      <textarea required placeholder="Visi" class="form-control" id="visiMisi" name="visi" rows="5" [(ngModel)]="visi"></textarea>
+                    </div>
+                    <div class="col-md-6">
+                      <textarea required placeholder="Misi" class="form-control" id="misi" name="misi" rows="5" [(ngModel)]="misi"></textarea>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card mb-3">
+              <div class="card-body">
+                <h5 class="card-title">Sekilas Tentang Desa</h5>
+                <div class="form-group">
+                  <label for="aboutManudJaya">Sekilas Tentang Desa</label>
+                  <textarea required class="form-control" id="aboutManudJaya" name="aboutManudJaya" rows="5" [(ngModel)]="aboutManudJaya"></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="card mb-3">
+              <div class="card-body">
+                <h5 class="card-title">Aparatur Desa</h5>
+                <div class="form-group">
+                  <div class="row mb-md-2" [dragula]="'officials'">
+                    <div class="col-md-3" *ngFor="let official of officials">
+                      <div class="handle">☰</div>
+
+                      <div class="form-group">
+                        <label for="{{ official.id }}">{{ official.name }}</label>
+                        <input type="text" class="form-control official-id" id="{{ official.id }}" name="{{ official.id }}" [(ngModel)]="official.position" placeholder="Enter {{ official.name }}'s position">
+                      </div>
+                      <div class="form-group">
+                        <label for="{{ official.id }}-photo">Foto</label>
+                        <input type="file" class="form-control-file" id="{{ official.id }}-photo" name="{{ official.id }}-photo" (change)="handlePhotoInputChange($event, official)">
+                        <img *ngIf="official.photoUrl" [src]="official.photoUrl" class="img-fluid mt-3">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" (click)="onSubmit()" class="btn btn-primary mr-2" [disabled]="editLandingPageForm.invalid">Save</button>
+              <button type="reset" class="btn btn-secondary">Reset</button>
+            </div>
+<!--            <div class="row mb-md-2">-->
+<!--              <div class="col-md-3">-->
+<!--                <button type="submit" class="btn btn-primary mr-2" [disabled]="editLandingPageForm.invalid">Save</button>-->
+<!--                <button type="reset" class="btn btn-secondary">Reset</button>-->
+<!--              </div>-->
+<!--            </div>-->
+          </form>
         </div>
       </div>
     </div>

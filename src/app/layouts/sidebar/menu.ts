@@ -52,7 +52,7 @@ export const MENU_ADMIN: MenuItem[] = [
                   },
                   {
                     id: 116,
-                    label: 'MENUITEMS.TABLES.LIST.APARATUR_DESA',
+                    label: 'MENUITEMS.TABLES.LIST.LANDING_PAGE',
                     link: '/master/aparatur-desa',
                     parentId: 110
                   }

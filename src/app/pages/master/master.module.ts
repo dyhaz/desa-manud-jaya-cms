@@ -30,6 +30,7 @@ import {
 import { PagesModule } from '@pages/pages.module';
 import { AparaturDesaComponent } from "@pages/master/aparatur-desa/aparatur-desa.component";
 import { DragulaModule } from 'ng2-dragula';
+import { ImageCropperModule } from "ngx-image-cropper";
 
 @NgModule({
     declarations: [ProgramComponent, ProgramFormComponent, UserManagementComponent, UserFormComponent, PerizinanManagementComponent, PerizinanFormComponent, JenisPerizinanComponent, JenisPerizinanFormComponent, AparaturDesaComponent],
@@ -47,7 +48,8 @@ import { DragulaModule } from 'ng2-dragula';
     DropzoneModule,
     CurrencyMaskModule,
     PagesModule,
-    DragulaModule
+    DragulaModule,
+    ImageCropperModule
   ],
     exports: [
     ],
