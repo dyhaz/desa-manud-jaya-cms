@@ -104,10 +104,12 @@ export class AparaturDesaComponent implements OnInit {
     try {
       Swal.showLoading();
 
-      const uploadRes = await this.assetsService.uploadAssetFile({
-        file: this.logoImageFile
-      }).toPromise();
-      this.logoImageUrl = uploadRes.data;
+      if (this.logoImageFile) {
+        const uploadRes = await this.assetsService.uploadAssetFile({
+          file: this.logoImageFile
+        }).toPromise();
+        this.logoImageUrl = uploadRes.data;
+      }
 
       await this.landingService.updateLandingPage({
         visi: this.visi,

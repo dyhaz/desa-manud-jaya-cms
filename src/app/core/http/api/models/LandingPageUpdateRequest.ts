@@ -9,4 +9,9 @@ export type LandingPageUpdateRequest = {
     misi: string;
     about_manud_jaya: string;
     logo_image?: string;
+    aparat_desa?: Array<{
+photo: Blob;
+name: string;
+position: string;
+}>;
 };

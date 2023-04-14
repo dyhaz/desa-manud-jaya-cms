@@ -9,7 +9,7 @@
   <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="navbar" (window:scroll)="windowScroll()">
     <div class="container">
       <a class="navbar-brand" href="javascript: void(0);" [ngxScrollTo]="'services'"
-         [ngClass]="{'active':currentSection === 'home'}"><img src="assets/img/navbar-logo.png" alt="..." /></a>
+         [ngClass]="{'active':currentSection === 'home'}"><img [src]="landingPage.logo_image ? landingPage.logo_image : 'assets/img/navbar-logo.png'" alt="..." /></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         Menu
         <i class="fas fa-bars ms-1"></i>
@@ -28,8 +28,8 @@
   <!-- Masthead-->
   <header class="masthead">
     <div class="container">
-      <div class="masthead-subheading">Selamat Datang di Sistem Informasi Manud Jaya!</div>
-      <div class="masthead-heading text-uppercase">Kami Senang Melayani Anda</div>
+      <div class="masthead-subheading">{{ landingPage.title }}</div>
+      <div class="masthead-heading text-uppercase">{{ landingPage.subtitle }}</div>
       <!--                <a class="btn btn-primary btn-xl text-uppercase" href="#services">Tell Me More</a>-->
     </div>
   </header>
@@ -47,7 +47,7 @@
                             <i class="fas fa-eye fa-stack-1x fa-inverse"></i>
                         </span>
           <h4 class="my-3">Visi</h4>
-          <p class="text-muted">Terwujudnya warga Desa Manud Jaya yang harmonis, sejahtera, dan berkeadilan Pancasila dan UUD 1945 dalam bingkai NKRI yang ber-Bhineka Tunggal Ika.</p>
+          <p class="text-muted" [innerHTML]="landingPage.visi">Terwujudnya warga Desa Manud Jaya yang harmonis, sejahtera, dan berkeadilan Pancasila dan UUD 1945 dalam bingkai NKRI yang ber-Bhineka Tunggal Ika.</p>
         </div>
         <div class="col-md-6">
                         <span class="fa-stack fa-4x">
@@ -55,7 +55,7 @@
                             <i class="fas fa-rocket fa-stack-1x fa-inverse"></i>
                         </span>
           <h4 class="my-3">Misi</h4>
-          <p class="text-muted">1. Penguatan reformasi birokrasi menuju pemerintahan yang efektif, efisien, bersih, akuntable, dan menghadirkan pelayanan publik prima.<br />
+          <p class="text-muted" [innerHTML]="landingPage.misi">1. Penguatan reformasi birokrasi menuju pemerintahan yang efektif, efisien, bersih, akuntable, dan menghadirkan pelayanan publik prima.<br />
             2. Pengembangan Sumber Daya Manusia unggul, berkarakter, dan berbudaya.<br />
             3. Pendayagunaan potensi lokal dengan penerapan teknologi dan penyerapan investasi berorientasi pada pertumbuhan ekonomi inklusif.<br />
             4. Peningkatan kualitas lingkungan hidup, infrastruktur, dan pengelolaan risiko bencana.</p>
@@ -107,7 +107,7 @@
     <div class="container">
       <div class="text-center">
         <h2 class="section-heading text-uppercase">Sekilas tentang Desa Manud Jaya</h2>
-        <h3 class="section-subheading text-muted">Manud Jaya merupakan desan yang berbatasan dengan ibukota. Sebanyak 50% dari warganya merupakan pendatang, sebagian wwarganya bekerja di kota sebagian lagi membuka usaha tingkat UMKM. Dengan wilayahnya yang dekat dengan ibukota dan juga dekat dengan bandara Internasional. Desa Manud Jaya memiliki potensi sebagai penunjang ibukota. Letaknya yang strategis, juga 90 % (persen) wilayahnya bebas banjir, hal ini karena daerah ini memiliki area persawahan dan daerah resapan air yang cukup luas. Dalam hal ini Aparat Desa Manud Jaya seharusnya mempersiapkan pembangunan desa ini dengan sangat matang dan terencana. Jika tidak maka akan berdampak pada kualitas lingkungan, yang bisa berakibat justru Desa Manud Jaya yang selama ini 90 % (persen) daerahnya bebas banjir, malah mungkin akan bernasib sama dengan Ibu Kota. Karena pembangunan yang tidak teratur itu justru menimbulkan semakin berkurangnya daerah resapan air. Maka oleh karena itu haruslah ada upaya yang maksimal dari aparat desa terkait agar tidak sembarangan dalam melakukan pembangunan, dan harus tetap menjaga keseimbangan alam agar bisa tetap dinikmati oleh generasi selanjutnya.</h3>
+        <h3 class="section-subheading text-muted" [innerHTML]="landingPage.about_manud_jaya">Manud Jaya merupakan desan yang berbatasan dengan ibukota. Sebanyak 50% dari warganya merupakan pendatang, sebagian wwarganya bekerja di kota sebagian lagi membuka usaha tingkat UMKM. Dengan wilayahnya yang dekat dengan ibukota dan juga dekat dengan bandara Internasional. Desa Manud Jaya memiliki potensi sebagai penunjang ibukota. Letaknya yang strategis, juga 90 % (persen) wilayahnya bebas banjir, hal ini karena daerah ini memiliki area persawahan dan daerah resapan air yang cukup luas. Dalam hal ini Aparat Desa Manud Jaya seharusnya mempersiapkan pembangunan desa ini dengan sangat matang dan terencana. Jika tidak maka akan berdampak pada kualitas lingkungan, yang bisa berakibat justru Desa Manud Jaya yang selama ini 90 % (persen) daerahnya bebas banjir, malah mungkin akan bernasib sama dengan Ibu Kota. Karena pembangunan yang tidak teratur itu justru menimbulkan semakin berkurangnya daerah resapan air. Maka oleh karena itu haruslah ada upaya yang maksimal dari aparat desa terkait agar tidak sembarangan dalam melakukan pembangunan, dan harus tetap menjaga keseimbangan alam agar bisa tetap dinikmati oleh generasi selanjutnya.</h3>
       </div>
 <!--      <ul class="timeline">-->
 <!--        <li>-->

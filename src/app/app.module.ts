@@ -27,7 +27,7 @@ import { FakeBackendInterceptor } from './core/helpers/fake-backend';
 import { LandingComponent } from './landing/landing.component';
 import {
   AssetsService,
-  JenisPerizinanService,
+  JenisPerizinanService, LandingService,
   PerizinanService,
   ProgramDesaService,
   UserManagementService,
@@ -94,7 +94,8 @@ export function createTranslateLoader(http: HttpClient): any {
     WargaService,
     JenisPerizinanService,
     UserManagementService,
-    AssetsService
+    AssetsService,
+    LandingService
     // LoaderService,
     // { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptorService, multi: true },
   ],

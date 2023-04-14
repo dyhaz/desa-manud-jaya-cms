@@ -4,15 +4,15 @@ import { map } from 'rxjs/internal/operators';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import {
   CreateRequestPerizinan,
-  DataResponse, JenisPerizinanInput, JenisPerizinanService,
+  DataResponse, JenisPerizinanInput, JenisPerizinanService, LandingPage, LandingService,
   PerizinanService,
   ProgramDesaService,
   Warga,
   WargaService
-} from "@core/http/api";
+} from '@core/http/api';
 import Swal from 'sweetalert2';
 import { DomSanitizer } from '@angular/platform-browser';
-import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-landing',
@@ -102,13 +102,16 @@ export class LandingComponent implements OnInit {
   _minutes: number;
   _seconds: number;
 
+  public landingPage: LandingPage;
+
   constructor(
     private programDesa: ProgramDesaService,
     public domSanitizer: DomSanitizer,
     private modalService: NgbModal,
     private wargaService: WargaService,
     private perizinanService: PerizinanService,
-    private jenisPerizinanService: JenisPerizinanService
+    private jenisPerizinanService: JenisPerizinanService,
+    private landingService: LandingService
   ) {
 
   }
@@ -128,6 +131,7 @@ export class LandingComponent implements OnInit {
 
     this.getAllJenisPerizinan();
     this.loadProgramDesa();
+    this.loadLandingPageInformations();
   }
 
   async loadProgramDesa() {
@@ -141,6 +145,15 @@ export class LandingComponent implements OnInit {
       this.loading = false;
     } catch (e) {
       this.loading = false;
+      Swal.fire('Error', e.toString());
+    }
+  }
+
+  async loadLandingPageInformations() {
+    try {
+      const result = await this.landingService.landingPage().toPromise();
+      this.landingPage = result.data;
+    } catch (e) {
       Swal.fire('Error', e.toString());
     }
   }
