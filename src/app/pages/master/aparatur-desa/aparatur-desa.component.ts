@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
-import { AssetsService } from "@core/http/api";
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { AssetsService, LandingService } from '@core/http/api';
 import Swal from "sweetalert2";
 import { environment } from "@environments/environment";
 import { DragulaService } from 'ng2-dragula';
@@ -65,7 +65,8 @@ export class AparaturDesaComponent implements OnInit {
 
   constructor(
     private assetsService: AssetsService,
-    private dragulaService: DragulaService
+    private dragulaService: DragulaService,
+    private landingService: LandingService
   ) {
     try {
       this.dragulaService.createGroup('officials', {
@@ -100,21 +101,23 @@ export class AparaturDesaComponent implements OnInit {
   }
 
   async onSubmit() {
-    const formData = new FormData();
-    if (this.logoImageFile) {
-      formData.append('logoImage', this.logoImageFile);
-    }
-    formData.append('title', this.title);
-    formData.append('subtitle', this.subtitle);
-    formData.append('visi', this.visi);
-    formData.append('misi', this.misi);
-    formData.append('aboutManudJaya', this.aboutManudJaya);
-
     try {
       Swal.showLoading();
-      // this.apiService.updateLandingPageData(formData).subscribe(response => {
-      //   console.log(response);
-      // });
+
+      const uploadRes = await this.assetsService.uploadAssetFile({
+        file: this.logoImageFile
+      }).toPromise();
+      this.logoImageUrl = uploadRes.data;
+
+      await this.landingService.updateLandingPage({
+        visi: this.visi,
+        misi: this.misi,
+        subtitle: this.subtitle,
+        title: this.title,
+        about_manud_jaya: this.aboutManudJaya,
+        logo_image: this.logoImageUrl
+      }).toPromise();
+      await Swal.hideLoading();
     } catch (e) {
       await Swal.hideLoading();
       await Swal.fire('Error', e.toString());
@@ -140,7 +143,7 @@ export class AparaturDesaComponent implements OnInit {
 
   imageCropped(event: ImageCroppedEvent): void {
     const canvas = this.logoImageCropper.canvas;
-    canvas.toBlob((blob: Blob) => {
+    canvas.toBlob(async (blob: Blob) => {
       this.logoImageFile = new File([blob], this.logoImageName, { type: 'image/jpeg' });
     }, 'image/jpeg');
   }

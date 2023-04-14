@@ -10,7 +10,7 @@ import { ProgramComponent } from './program/program.component';
 import { MasterRoutingModule } from '@pages/master/master-routing.module';
 import { TablesModule } from '@pages/tables/tables.module';
 import {
-  JenisPerizinanService,
+  JenisPerizinanService, LandingService,
   PerizinanService,
   ProgramDesaService,
   UserManagementService,
@@ -28,9 +28,9 @@ import {
   JenisPerizinanFormComponent
 } from '@pages/master/jenis-perizinan/jenis-perizinan-form/jenis-perizinan-form.component';
 import { PagesModule } from '@pages/pages.module';
-import { AparaturDesaComponent } from "@pages/master/aparatur-desa/aparatur-desa.component";
+import { AparaturDesaComponent } from '@pages/master/aparatur-desa/aparatur-desa.component';
 import { DragulaModule } from 'ng2-dragula';
-import { ImageCropperModule } from "ngx-image-cropper";
+import { ImageCropperModule } from 'ngx-image-cropper';
 
 @NgModule({
     declarations: [ProgramComponent, ProgramFormComponent, UserManagementComponent, UserFormComponent, PerizinanManagementComponent, PerizinanFormComponent, JenisPerizinanComponent, JenisPerizinanFormComponent, AparaturDesaComponent],
@@ -60,6 +60,7 @@ import { ImageCropperModule } from "ngx-image-cropper";
         PerizinanService,
         JenisPerizinanService,
         DatePipe,
+        LandingService
     ]
 })
 export class MasterModule { }
