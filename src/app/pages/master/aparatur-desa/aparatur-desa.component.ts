@@ -242,7 +242,8 @@ export class AparaturDesaComponent implements OnInit {
           this.officials = JSON.parse(data.aparat_desa);
           this.officials.forEach((item, index) => {
             item.id = index + 1;
-          })
+          });
+          this.initImages();
         });
       }
     });
