@@ -39,8 +39,8 @@
           <div class="mb-3 row" *ngIf="mode !== 'edit'">
             <label for="att-text-input" class="col-md-2 col-form-label">Lampiran</label>
             <div class="col-md-10">
-              <button type="button" (click)="downloadLampiran(perizinan.lampiran)" class="btn btn-info" id="att-text-input"><i
-                class="mdi mdi-file-document"></i> File</button>
+              <button type="button" *ngIf="perizinan.lampiran && perizinan.lampiran !== ''" (click)="downloadLampiran(perizinan.lampiran)" class="btn btn-info" id="att-text-input"><i
+                class="mdi mdi-file-document mb-4"></i> File</button>
               <div>
                 <form>
                   <dropzone #dropzone class="dropzone" [config]="config"></dropzone>
