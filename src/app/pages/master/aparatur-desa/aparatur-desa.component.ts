@@ -79,8 +79,11 @@ export class AparaturDesaComponent implements OnInit {
 
       this.dragulaService.drop().subscribe(() => {
         const elements = document.querySelectorAll('.row .col-md-3 .official-id');
-        const ids = Array.from(elements).map((el: HTMLElement) => el.id);
-        console.log(ids);
+        const ids = Array.from(elements).map((el: HTMLElement) => Number(el.id));
+        // Sort the officials array based on the order of the IDs in the ids array
+        this.officials.sort((a, b) => {
+          return ids.indexOf(a.id) - ids.indexOf(b.id);
+        });
       })
     } catch (e) {
     }
