@@ -44,7 +44,7 @@
                 <div class="mb-3">
                   <label for="password">Password</label>
                   <div class="input-group auth-pass-inputgroup">
-                    <input type="password" class="form-control" formControlName="password" placeholder="Enter password"
+                    <input type="password" id="password" class="form-control" formControlName="password" placeholder="Enter password"
                       [ngClass]="{ 'is-invalid': submitted && f.password.errors }" aria-label="Password"
                       aria-describedby="password-addon">
 
@@ -81,9 +81,9 @@
 <!--                      </a>-->
 <!--                    </li>-->
                     <li class="list-inline-item">
-                      <button href="javascript:void(0);" (click)="signInWithGoogle()" class="btn btn-danger bg-danger text-white border-danger">
+                      <a href="#" (click)="signInWithGoogle()" class="btn btn-danger bg-danger text-white border-danger">
                         <i class="mdi mdi-google"></i> Login dengan Google
-                      </button>
+                      </a>
                     </li>
                   </ul>
                 </div>
