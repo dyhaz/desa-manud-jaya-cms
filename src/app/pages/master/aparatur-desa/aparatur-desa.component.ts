@@ -240,6 +240,9 @@ export class AparaturDesaComponent implements OnInit {
           this.misi = data.misi;
           this.aboutManudJaya = data.about_manud_jaya;
           this.officials = JSON.parse(data.aparat_desa);
+          this.officials.forEach((item, index) => {
+            item.id = index + 1;
+          })
         });
       }
     });
