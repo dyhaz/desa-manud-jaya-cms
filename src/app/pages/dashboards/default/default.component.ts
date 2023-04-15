@@ -288,7 +288,7 @@ export class DefaultComponent implements OnInit {
          await this.wargaService.updateWarga(warga.id, {
            ...warga,
            news_subscribe: true
-         })
+         }).toPromise();
          Swal.fire('Sukses!', 'Terima kasih. Silakan cek inbox konfirmasi lebih lanjut.', 'success');
        }
      } catch (e) {
