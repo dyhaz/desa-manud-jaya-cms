@@ -3,7 +3,7 @@ import { AssetsService, LandingPageUpdateRequest, LandingService } from '@core/h
 import Swal from "sweetalert2";
 import { environment } from "@environments/environment";
 import { DragulaService } from 'ng2-dragula';
-import { ImageCroppedEvent } from 'ngx-image-cropper';
+import { ImageCroppedEvent, ImageCropperComponent } from 'ngx-image-cropper';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 interface Official {
@@ -63,7 +63,7 @@ export class AparaturDesaComponent implements OnInit {
   showCropper = false;
   imageChangedEvent: any = '';
   public Editor = ClassicEditor;
-  @ViewChild('logoImageCropper') logoImageCropper: any;
+  @ViewChild('logoImageCropper', { static: false }) logoImageCropper: ImageCropperComponent;
 
   constructor(
     private assetsService: AssetsService,
@@ -161,10 +161,26 @@ export class AparaturDesaComponent implements OnInit {
   }
 
   imageCropped(event: ImageCroppedEvent): void {
-    const canvas = this.logoImageCropper.canvas;
-    canvas.toBlob(async (blob: Blob) => {
-      this.logoImageFile = new File([blob], this.logoImageName, { type: 'image/jpeg' });
-    }, 'image/jpeg');
+    const croppedImage = event.base64;
+
+    const base64ToFile = (image: string) => {
+      // base64 string
+      const base64String = image ?? "data:image/png;base64,iVBORw0KG...";
+
+      // convert base64 to Blob
+      const byteCharacters = atob(base64String.split(",")[1]);
+      const byteNumbers = new Array(byteCharacters.length);
+      for (let i = 0; i < byteCharacters.length; i++) {
+        byteNumbers[i] = byteCharacters.charCodeAt(i);
+      }
+      const byteArray = new Uint8Array(byteNumbers);
+      const blob = new Blob([byteArray], { type: "image/jpeg" });
+
+      // create File object
+      this.logoImageFile = new File([blob], this.logoImageName, { type: "image/jpeg" });
+    }
+
+    base64ToFile(croppedImage);
   }
 
   imageLoaded(): void {
