@@ -40,15 +40,17 @@ export class PerizinanFormComponent implements OnInit {
   public jenisPerizinan = '';
   @Output() public dismiss = new EventEmitter<any>();
   config: DropzoneConfigInterface = {
-    // Change this to your upload POST address:
     maxFilesize: 50,
-    acceptedFiles: 'image/*',
+    acceptedFiles: 'application/pdf',
     method: 'POST',
     uploadMultiple: false,
     autoProcessQueue: true,
     accept: (file) => {
       this.onAccept(file);
-    }
+    },
+    addRemoveLinks: true,
+    dictRemoveFile: 'Hapus',
+    dictFileSizeUnits: { gb: 'GB', mb: 'MB', kb: 'KB', b: 'bytes' }
   };
 
   public today = new Date();
