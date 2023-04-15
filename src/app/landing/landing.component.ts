@@ -13,6 +13,8 @@ import {
 import Swal from 'sweetalert2';
 import { DomSanitizer } from '@angular/platform-browser';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { environment } from "@environments/environment";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-landing',
@@ -111,7 +113,8 @@ export class LandingComponent implements OnInit {
     private wargaService: WargaService,
     private perizinanService: PerizinanService,
     private jenisPerizinanService: JenisPerizinanService,
-    private landingService: LandingService
+    private landingService: LandingService,
+    private router: Router
   ) {
 
   }
@@ -151,8 +154,12 @@ export class LandingComponent implements OnInit {
 
   async loadLandingPageInformations() {
     try {
-      const result = await this.landingService.landingPage().toPromise();
+      const result: any = await this.landingService.landingPage().toPromise();
       this.landingPage = result.data;
+      this.landingPage.aparat_desa = JSON.parse(result.data.aparat_desa);
+      this.landingPage.aparat_desa.forEach(item => {
+        item.photo = environment.apiConfig.baseUrl + '/api/assets/' + item.photo;
+      })
     } catch (e) {
       Swal.fire('Error', e.toString());
     }
@@ -222,6 +229,10 @@ export class LandingComponent implements OnInit {
     } catch(e) {
       await Swal.fire('Error', e);
     }
+  }
+
+  async openLoginPage() {
+    this.router.navigate(['/account/login']);
   }
 
   async sendMessage() {
