@@ -137,6 +137,7 @@ export class AparaturDesaComponent implements OnInit {
 
       await this.landingService.updateLandingPage(payload).toPromise();
       await Swal.hideLoading();
+      Swal.fire('Created!', 'Saved successfully.', 'success');
     } catch (e) {
       await Swal.hideLoading();
       await Swal.fire('Error', e.toString());
@@ -210,7 +211,6 @@ export class AparaturDesaComponent implements OnInit {
           }).toPromise();
           official.photo = result.data;
           await this.initImages();
-          // Add save village official here
         } catch (e) {
           await Swal.fire('Error', e.toString());
         }
@@ -219,15 +219,33 @@ export class AparaturDesaComponent implements OnInit {
     }
   }
 
+  reset() {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You won\'t be able to revert this!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#34c38f',
+      cancelButtonColor: '#f46a6a',
+      confirmButtonText: 'Yes'
+    }).then(result => {
+      if (result.value) {
+        this.landingService.landingPage().subscribe((result: any) => {
+          const { data } = result;
+          this.logoImageName = data.logo_image;
+          this.logoImageUrl = data.logo_image;
+          this.title = data.title;
+          this.subtitle = data.subtitle;
+          this.visi = data.visi;
+          this.misi = data.misi;
+          this.aboutManudJaya = data.about_manud_jaya;
+          this.officials = JSON.parse(data.aparat_desa);
+        });
+      }
+    });
+  }
+
   ngOnInit(): void {
-    // this.apiService.getLandingPageData().subscribe(data => {
-    //   this.logoImageName = data.logoImageName;
-    //   this.logoImageUrl = data.logoImageUrl;
-    //   this.title = data.title;
-    //   this.subtitle = data.subtitle;
-    //   this.visiMisi = data.visiMisi;
-    //   this.aboutManudJaya = data.aboutManudJaya;
-    // });
     this.breadCrumbItems = [{ label: 'Tables' }, { label: 'Landing Page', active: true }];
     this.initImages();
   }
