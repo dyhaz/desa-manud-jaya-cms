@@ -31,6 +31,7 @@ import { PagesModule } from '@pages/pages.module';
 import { AparaturDesaComponent } from '@pages/master/aparatur-desa/aparatur-desa.component';
 import { DragulaModule } from 'ng2-dragula';
 import { ImageCropperModule } from 'ngx-image-cropper';
+import { CKEditorModule } from "@ckeditor/ckeditor5-angular";
 
 @NgModule({
     declarations: [ProgramComponent, ProgramFormComponent, UserManagementComponent, UserFormComponent, PerizinanManagementComponent, PerizinanFormComponent, JenisPerizinanComponent, JenisPerizinanFormComponent, AparaturDesaComponent],
@@ -49,7 +50,8 @@ import { ImageCropperModule } from 'ngx-image-cropper';
     CurrencyMaskModule,
     PagesModule,
     DragulaModule,
-    ImageCropperModule
+    ImageCropperModule,
+    CKEditorModule
   ],
     exports: [
     ],

@@ -4,6 +4,7 @@ import Swal from "sweetalert2";
 import { environment } from "@environments/environment";
 import { DragulaService } from 'ng2-dragula';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 interface Official {
   name: string;
@@ -61,6 +62,7 @@ export class AparaturDesaComponent implements OnInit {
   aboutManudJaya: string = 'Manud Jaya merupakan desan yang berbatasan dengan ibukota. Sebanyak 50% dari warganya merupakan pendatang, sebagian wwarganya bekerja di kota sebagian lagi membuka usaha tingkat UMKM. Dengan wilayahnya yang dekat dengan ibukota dan juga dekat dengan bandara Internasional. Desa Manud Jaya memiliki potensi sebagai penunjang ibukota. Letaknya yang strategis, juga 90 % (persen) wilayahnya bebas banjir, hal ini karena daerah ini memiliki area persawahan dan daerah resapan air yang cukup luas. Dalam hal ini Aparat Desa Manud Jaya seharusnya mempersiapkan pembangunan desa ini dengan sangat matang dan terencana. Jika tidak maka akan berdampak pada kualitas lingkungan, yang bisa berakibat justru Desa Manud Jaya yang selama ini 90 % (persen) daerahnya bebas banjir, malah mungkin akan bernasib sama dengan Ibu Kota. Karena pembangunan yang tidak teratur itu justru menimbulkan semakin berkurangnya daerah resapan air. Maka oleh karena itu haruslah ada upaya yang maksimal dari aparat desa terkait agar tidak sembarangan dalam melakukan pembangunan, dan harus tetap menjaga keseimbangan alam agar bisa tetap dinikmati oleh generasi selanjutnya.';
   showCropper = false;
   imageChangedEvent: any = '';
+  public Editor = ClassicEditor;
   @ViewChild('logoImageCropper') logoImageCropper: any;
 
   constructor(
