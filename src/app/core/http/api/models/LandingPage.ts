@@ -9,4 +9,9 @@ export type LandingPage = {
     visi?: string;
     misi?: string;
     about_manud_jaya?: string;
+    aparat_desa?: Array<{
+photo: string;
+name: string;
+position: string;
+}>;
 };

@@ -268,4 +268,9 @@ export class LandingComponent implements OnInit {
         this.requestPerizinan.lampiran =  result;
       });
   }
+
+
+  onImageError(event: Event, imageRef) {
+    imageRef.nativeElement.src = 'assets/img/team/Kepala Desa_Trisambodo.jpeg';
+  }
 }
