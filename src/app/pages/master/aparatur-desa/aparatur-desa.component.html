@@ -15,8 +15,8 @@
                     <label class="custom-file-label" for="logoImage">{{ logoImageName }}</label>
                   </div>
                   <div [ngClass]="['text-center', !showCropper ? 'logo-wrapper' : '']">
-                    <image-cropper *ngIf="showCropper" [imageURL]="logoImageUrl" [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true"
-                                   [aspectRatio]="1" [resizeToWidth]="300" format="jpeg"></image-cropper>
+                    <image-cropper *ngIf="showCropper" [imageURL]="logoImageUrl" [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="false"
+                                   [aspectRatio]="1" [resizeToWidth]="300" format="jpeg" (imageCropped)="imageCropped($event)"></image-cropper>
                     <img *ngIf="logoImageUrl && !showCropper" src="{{ logoImageUrl }}" class="img-fluid mt-3" width="300" alt="Logo Image">
                   </div>
                 </div>
@@ -42,11 +42,11 @@
                   <label for="visiMisi">Deskripsi Visi & Misi</label>
                   <div class="row mb-3">
                     <div class="col-md-6">
-                      <ckeditor id="visiMisi" required [(ngModel)]="visi" [editor]="Editor" data="{{ visi }}"></ckeditor>
+                      <ckeditor id="visiMisi" required [(ngModel)]="visi" [editor]="Editor"></ckeditor>
                       <!-- <textarea required placeholder="Visi" class="form-control" id="visiMisi" name="visi" rows="5" [(ngModel)]="visi"></textarea>-->
                     </div>
                     <div class="col-md-6">
-                      <ckeditor required [(ngModel)]="misi" [editor]="Editor" data="{{ misi }}"></ckeditor>
+                      <ckeditor required [(ngModel)]="misi" [editor]="Editor"></ckeditor>
                       <!-- <textarea required placeholder="Misi" class="form-control" id="misi" name="misi" rows="5" [(ngModel)]="misi"></textarea>-->
                     </div>
                   </div>

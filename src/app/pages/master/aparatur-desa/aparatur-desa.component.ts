@@ -113,7 +113,7 @@ export class AparaturDesaComponent implements OnInit {
         const uploadRes = await this.assetsService.uploadAssetFile({
           file: this.logoImageFile
         }).toPromise();
-        this.logoImageUrl = uploadRes.data;
+        this.logoImageUrl = environment.apiConfig.baseUrl + '/api/assets/' + uploadRes.data;
       }
 
       const payload: LandingPageUpdateRequest = {
