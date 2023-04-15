@@ -10,6 +10,7 @@ import { AdvancedSortableDirective, SortEvent } from '../../tables/advancedtable
 import { UserManagementService } from '@core/http/api';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DomSanitizer } from "@angular/platform-browser";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-user-management',
@@ -88,5 +89,15 @@ export class UserManagementComponent implements OnInit {
   openModal(table?: Table) {
     this.selected = table;
     this.modalService.open(this.editmodal);
+  }
+
+  async delete(table?: Table) {
+    try {
+      await this.userManagementService.disableUser(table.id).toPromise();
+      await Swal.fire('Deleted!', 'User telah dihapus.', 'success');
+      await this._fetchData();
+    } catch (e) {
+      await Swal.fire('Error', e.toString());
+    }
   }
 }

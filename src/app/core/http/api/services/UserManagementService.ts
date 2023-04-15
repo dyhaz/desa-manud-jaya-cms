@@ -163,4 +163,28 @@ new_password_confirmation: string;
         });
     }
 
+    /**
+     * Disable a user
+     * Disable a user by setting the active flag to false.
+     * @param id ID of the user to disable.
+     * @returns any User disabled successfully.
+     * @throws ApiError
+     */
+    public disableUser(
+id: number,
+): Observable<{
+message?: string;
+}> {
+        return __request(OpenAPI, this.http, {
+            method: 'PUT',
+            url: '/api/users/{id}/disable',
+            path: {
+                'id': id,
+            },
+            errors: {
+                404: `User not found.`,
+            },
+        });
+    }
+
 }
