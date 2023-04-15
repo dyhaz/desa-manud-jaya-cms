@@ -6,7 +6,7 @@ import { EventService } from '../../../core/services/event.service';
 
 import { ConfigService } from '../../../core/services/config.service';
 import { Router } from "@angular/router";
-import { DashboardService } from "@core/http/api";
+import { DashboardService, WargaService } from "@core/http/api";
 import Swal from 'sweetalert2';
 
 @Component({
@@ -38,7 +38,8 @@ export class DefaultComponent implements OnInit {
     private configService: ConfigService,
     private eventService: EventService,
     private router: Router,
-    private dashboardService: DashboardService
+    private dashboardService: DashboardService,
+    private wargaService: WargaService
   ) {
   }
 
@@ -277,5 +278,20 @@ export class DefaultComponent implements OnInit {
 
   viewProfile() {
     this.router.navigate(['/contacts/profile']);
+  }
+
+  async addSubscription(value) {
+     try {
+       const result = await this.wargaService.filterWarga('', '', value).toPromise();
+       const warga = result.data[0];
+       if (warga) {
+         await this.wargaService.updateWarga(warga.id, {
+           ...warga,
+           news_subscribe: true
+         })
+         Swal.fire('Sukses!', 'Terima kasih. Silakan cek inbox konfirmasi lebih lanjut.', 'success');
+       }
+     } catch (e) {
+     }
   }
 }
