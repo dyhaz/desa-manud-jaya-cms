@@ -7,8 +7,8 @@
             <div class="row">
               <div class="col-7">
                 <div class="text-primary p-4">
-                  <h5 class="text-primary">Welcome Back !</h5>
-                  <p>Sign in to continue to SI Manud Jaya.</p>
+                  <h5 class="text-primary">Selamat Datang !</h5>
+                  <p>Silakan login untuk masuk ke SI Manud Jaya.</p>
                 </div>
               </div>
               <div class="col-5 align-self-end">
@@ -42,9 +42,9 @@
                 </div>
 
                 <div class="mb-3">
-                  <label for="password">Password</label>
+                  <label for="password">Kata sandi</label>
                   <div class="input-group auth-pass-inputgroup">
-                    <input type="password" id="password" class="form-control" formControlName="password" placeholder="Enter password"
+                    <input type="password" id="password" class="form-control" formControlName="password" placeholder="Masukkan kata sandi"
                       [ngClass]="{ 'is-invalid': submitted && f.password.errors }" aria-label="Password"
                       aria-describedby="password-addon">
 
@@ -81,16 +81,14 @@
 <!--                      </a>-->
 <!--                    </li>-->
                     <li class="list-inline-item">
-                      <a href="#" (click)="signInWithGoogle()" class="btn btn-danger bg-danger text-white border-danger">
+                      <a href="javascript: void(0);" (click)="signInWithGoogle()" class="btn btn-danger bg-danger text-white border-danger">
                         <i class="mdi mdi-google"></i> Login dengan Google
                       </a>
                     </li>
                   </ul>
                 </div>
                 <div class="mt-4 text-center">
-                  <a routerLink="/account/reset-password" class="text-muted"><i class="mdi mdi-lock mr-1"></i> Forgot
-                    your
-                    password?</a>
+                  <a routerLink="/account/reset-password" class="text-muted"><i class="mdi mdi-lock mr-1"></i> Lupa kata sandi?</a>
                 </div>
               </form>
             </div>
@@ -98,8 +96,7 @@
           </div>
         </div>
         <div class="mt-5 text-center">
-          <p>Don't have an account ? <a routerLink="/account/signup" class="fw-medium text-primary"> Signup
-              now
+          <p>Belum punya account ? <a routerLink="/account/signup" class="fw-medium text-primary"> Daftar sekarang
             </a> </p>
           <p>© {{year}} Desa Manud Jaya</p>
         </div>
