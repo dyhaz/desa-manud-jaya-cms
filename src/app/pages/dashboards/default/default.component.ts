@@ -285,7 +285,7 @@ export class DefaultComponent implements OnInit {
        const result = await this.wargaService.filterWarga('', '', value).toPromise();
        const warga = result.data[0];
        if (warga) {
-         await this.wargaService.updateWarga(warga.id, {
+         await this.wargaService.updateWarga(warga.warga_id, {
            ...warga,
            news_subscribe: true
          }).toPromise();
