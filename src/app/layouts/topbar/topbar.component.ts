@@ -30,6 +30,8 @@ export class TopbarComponent implements OnInit {
 
   public loginName = '';
   public loginPhoto = '';
+  public userEmail = null;
+  public userLevel = '';
 
   public notifications: any[] = [];
 
@@ -65,6 +67,8 @@ export class TopbarComponent implements OnInit {
     if (currentUser) {
       this.loginName = currentUser.name;
       this.loginPhoto = currentUser.photo ?? this.loginPhoto;
+      this.userLevel = currentUser.user_level ?? 'aparat_desa';
+      this.userEmail = currentUser.email;
     }
 
     this.cookieValue = this._cookiesService.get('lang');
@@ -156,7 +160,7 @@ export class TopbarComponent implements OnInit {
    */
   async getNotifications() {
     try {
-      const result = await this.perizinanService.getHistory().toPromise();
+      const result = await this.perizinanService.getHistory(this.userLevel.includes('aparat') ? null : this.userEmail).toPromise();
       this.notifications = result.data;
     } catch (e) {
       Swal.fire('Error', e.toString());

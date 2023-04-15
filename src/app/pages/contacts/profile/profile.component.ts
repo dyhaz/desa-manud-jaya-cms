@@ -3,7 +3,7 @@ import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { revenueBarChart, statData } from './data';
 
 import { ChartType } from './profile.model';
-import { Table } from "@pages/master/user/user.model";
+// import { Table } from "@pages/master/user/user.model";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
@@ -26,6 +26,7 @@ export class ProfileComponent implements OnInit {
 
   public loginName = '';
   public loginPhoto = '';
+  public phone = '';
 
   public user;
 
@@ -44,6 +45,7 @@ export class ProfileComponent implements OnInit {
       this.user = JSON.parse(currentUser);
       this.loginName = JSON.parse(currentUser).name;
       this.loginPhoto = JSON.parse(currentUser).photo;
+      this.phone = JSON.parse(currentUser).phone;
     }
   }
 
