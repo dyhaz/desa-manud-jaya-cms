@@ -19,6 +19,7 @@ export const MENU_ADMIN: MenuItem[] = [
                 id: 3,
                 label: 'MENUITEMS.DASHBOARDS.LIST.DEFAULT',
                 link: '/dashboard',
+                icon: 'bx-bar-chart',
                 parentId: 2
             },
             {
@@ -38,12 +39,12 @@ export const MENU_ADMIN: MenuItem[] = [
                       link: '/master/user',
                       parentId: 110
                     },
-                    {
-                      id: 114,
-                      label: 'MENUITEMS.TABLES.LIST.PERIZINAN',
-                      link: '/master/perizinan',
-                      parentId: 110
-                    },
+                    // {
+                    //   id: 114,
+                    //   label: 'MENUITEMS.TABLES.LIST.PERIZINAN',
+                    //   link: '/master/perizinan',
+                    //   parentId: 110
+                    // },
                   {
                     id: 115,
                     label: 'MENUITEMS.TABLES.LIST.JENIS_PERIZINAN',
@@ -57,7 +58,12 @@ export const MENU_ADMIN: MenuItem[] = [
                     parentId: 110
                   }
                 ]
-            }
+            },
+            {
+              id: 114,
+              label: 'MENUITEMS.TABLES.LIST.PERIZINAN',
+              link: '/master/perizinan'
+            },
             // {
             //     id: 4,
             //     label: 'MENUITEMS.DASHBOARDS.LIST.SAAS',
@@ -879,6 +885,7 @@ export const MENU_WARGA: MenuItem[] = [
         id: 3,
         label: 'MENUITEMS.DASHBOARDS.LIST.DEFAULT',
         link: '/dashboard',
+        icon: 'bx-bar-chart',
         parentId: 2
       },
       {

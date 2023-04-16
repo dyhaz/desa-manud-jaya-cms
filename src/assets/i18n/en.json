@@ -73,7 +73,7 @@
       "TEXT": "Dashboards",
       "BADGE": "04",
       "LIST": {
-        "DEFAULT": "Default",
+        "DEFAULT": "Halaman Utama",
         "SAAS": "Saas",
         "CRYPTO": "Crypto",
         "BLOG": "Blog"
@@ -279,6 +279,7 @@
         "LANDING_PAGE": "Landing Page"
       }
     },
+    "PERIZINAN": "Data Perizinan",
     "CHARTS": {
       "TEXT": "Charts",
       "LIST": {

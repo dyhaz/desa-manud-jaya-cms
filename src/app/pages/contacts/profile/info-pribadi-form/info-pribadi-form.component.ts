@@ -1,7 +1,7 @@
-import { Component, Input, OnInit } from "@angular/core";
-import { AssetsService } from "@core/http/api";
-import Swal from "sweetalert2";
-import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
+import { Component, Input, OnInit } from '@angular/core';
+import { AssetsService } from '@core/http/api';
+import Swal from 'sweetalert2';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-profile-form',
@@ -31,7 +31,8 @@ export class InfoPribadiFormComponent implements OnInit {
       tanggalLahir: ['', [Validators.required]],
       jenisKelamin: ['', [Validators.required]],
       alamat: ['', [Validators.required]],
-      noKTP: ['', [Validators.required]]
+      noKTP: ['', [Validators.required]],
+      phone: ['']
     });
   }
 
