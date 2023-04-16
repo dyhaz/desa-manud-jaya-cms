@@ -3,7 +3,7 @@ import { OwlOptions } from 'ngx-owl-carousel-o';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { AuthenticationService } from '../../../core/services/auth.service';
+import { FirebaseAuthenticationService } from '../../../core/services/auth.service';
 import { environment } from '../../../../environments/environment';
 
 @Component({
@@ -22,7 +22,7 @@ export class Recoverpwd2Component implements OnInit {
    success = '';
    loading = false;
 
-   constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private authenticationService: AuthenticationService) { }
+   constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private authenticationService: FirebaseAuthenticationService) { }
 
   ngOnInit(): void {
     this.resetForm = this.formBuilder.group({

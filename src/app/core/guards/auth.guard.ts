@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 
-import { AuthenticationService } from '../services/auth.service';
+import { FirebaseAuthenticationService } from '../services/auth.service';
 import { AuthfakeauthenticationService } from '../services/authfake.service';
 
 import { environment } from '../../../environments/environment';
@@ -12,7 +12,7 @@ import { UserManagementService } from '@core/http/api';
 export class AuthGuard implements CanActivate {
     constructor(
         private router: Router,
-        private authenticationService: AuthenticationService,
+        private authenticationService: FirebaseAuthenticationService,
         private authFackservice: AuthfakeauthenticationService,
         private oauthService: OAuthService,
         private userService: UserManagementService

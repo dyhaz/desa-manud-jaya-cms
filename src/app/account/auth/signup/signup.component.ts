@@ -2,7 +2,7 @@ import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { AuthenticationService } from '../../../core/services/auth.service';
+import { FirebaseAuthenticationService } from '../../../core/services/auth.service';
 import { environment } from '../../../../environments/environment';
 import { first } from 'rxjs/operators';
 import { UserProfileService } from '../../../core/services/user.service';
@@ -33,7 +33,7 @@ export class SignupComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private authenticationService: AuthenticationService,
+    private authenticationService: FirebaseAuthenticationService,
     private userService: UserProfileService,
     private wargaService: WargaService,
     private userManagementService: UserManagementService,

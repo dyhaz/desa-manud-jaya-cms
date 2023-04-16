@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { OwlOptions } from 'ngx-owl-carousel-o';
-import { AuthenticationService } from '../../../core/services/auth.service';
+import { FirebaseAuthenticationService } from '../../../core/services/auth.service';
 import { environment } from '../../../../environments/environment';
 import { first } from 'rxjs/operators';
 import { UserProfileService } from '../../../core/services/user.service';
@@ -20,7 +20,7 @@ export class Register2Component implements OnInit {
   error = '';
   successmsg = false;
 
-  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private authenticationService: AuthenticationService,
+  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private authenticationService: FirebaseAuthenticationService,
     private userService: UserProfileService) { }
   // set the currenr year
   year: number = new Date().getFullYear();

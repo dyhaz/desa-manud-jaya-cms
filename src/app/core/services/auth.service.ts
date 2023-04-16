@@ -6,7 +6,7 @@ import { User } from '../models/auth.models';
 
 @Injectable({ providedIn: 'root' })
 
-export class AuthenticationService {
+export class FirebaseAuthenticationService {
 
     user: User;
 

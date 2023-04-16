@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { AuthenticationService } from '../../../core/services/auth.service';
+import { FirebaseAuthenticationService } from '../../../core/services/auth.service';
 import { AuthfakeauthenticationService } from '../../../core/services/authfake.service';
 
 import { OwlOptions } from 'ngx-owl-carousel-o';
@@ -20,7 +20,7 @@ import { environment } from '../../../../environments/environment';
  */
 export class Login2Component implements OnInit {
 
-  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private authenticationService: AuthenticationService,
+  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private authenticationService: FirebaseAuthenticationService,
     private authFackservice: AuthfakeauthenticationService) { }
   loginForm: FormGroup;
   submitted = false;

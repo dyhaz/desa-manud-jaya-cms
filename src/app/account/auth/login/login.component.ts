@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-// import { AuthenticationService } from '../../../core/services/auth.service';
+// import { FirebaseAuthenticationService } from '../../../core/services/auth.service';
 import { AuthfakeauthenticationService } from '@core/services/authfake.service';
 
 import { ActivatedRoute, Router } from '@angular/router';
@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    // private authenticationService: AuthenticationService,
+    // private authenticationService: FirebaseAuthenticationService,
     private authFackservice: AuthfakeauthenticationService,
     private auth: AuthenticationService,
     private oauthService: OAuthService
