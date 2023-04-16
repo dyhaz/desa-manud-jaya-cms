@@ -207,7 +207,7 @@ export class PerizinanTableService {
           console.log(e);
         } finally {
           Swal.hideLoading();
-
+          Swal.clickConfirm();
         }
       }
 
