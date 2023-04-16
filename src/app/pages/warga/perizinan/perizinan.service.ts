@@ -199,8 +199,16 @@ export class PerizinanTableService {
     try {
       let result;
       if (!this.tableData || reload) {
-        result = await this.perizinanService.getPerizinanByEmail(this.user.email, this.status).toPromise();
-        this.tableData = result.data;
+        try {
+          Swal.showLoading();
+          result = await this.perizinanService.getPerizinanByEmail(this.user.email, this.status).toPromise();
+          this.tableData = result.data;
+        } catch (e) {
+          console.log(e);
+        } finally {
+          Swal.hideLoading();
+
+        }
       }
 
       tables = sort(this.tableData, sortColumn, sortDirection);
