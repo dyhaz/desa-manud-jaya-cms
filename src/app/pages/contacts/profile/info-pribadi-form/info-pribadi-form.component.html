@@ -8,7 +8,7 @@
       <div class="card">
         <div class="card-body">
 
-          <form [formGroup]="formData">
+          <form [formGroup]="formData" class="d-flex flex-column">
             <div class="form-group">
               <label for="namaLengkap">Nama Lengkap</label>
               <input type="text" class="form-control" id="namaLengkap" formControlName="namaLengkap" name="namaLengkap" placeholder="Masukkan nama lengkap">
@@ -23,7 +23,7 @@
             </div>
             <div class="form-group">
               <label for="jenisKelamin">Jenis Kelamin</label>
-              <select class="form-control" id="jenisKelamin"  formControlName="jenisKelamin" name="jenisKelamin">
+              <select class="form-select" id="jenisKelamin"  formControlName="jenisKelamin" name="jenisKelamin">
                 <option value="Laki-laki">Laki-laki</option>
                 <option value="Perempuan">Perempuan</option>
               </select>
@@ -36,7 +36,7 @@
               <label for="noKTP">Nomor KTP</label>
               <input type="text" class="form-control" id="noKTP" name="noKTP" formControlName="noKTP" placeholder="Masukkan nomor KTP">
             </div>
-            <div class="form-group row mb-md-2">
+            <div class="form-group row mb-md-2 upload-form">
               <label for="ktpFile" class="col-sm-3 col-form-label">Scan KTP*</label>
               <div class="col-sm-9">
                 <input type="file" class="form-control-file" id="ktpFile" (change)="changeKtp($event)" accept="image/*" required>
@@ -51,7 +51,7 @@
                 </small>
               </div>
             </div>
-            <div class="form-group row mb-md-2">
+            <div class="form-group row mb-md-2 upload-form">
               <label for="fotoFile" class="col-sm-3 col-form-label">Pas Foto*</label>
               <div class="col-sm-9">
                 <input type="file" class="form-control-file" id="fotoFile"(change)="changeFoto($event)" accept="image/*" required>

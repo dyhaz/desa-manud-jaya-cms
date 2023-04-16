@@ -6,7 +6,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms"
 @Component({
   selector: 'app-profile-form',
   templateUrl: './info-pribadi-form.component.html',
-  styleUrls: []
+  styleUrls: ['./info-pribadi-form.component.scss']
 })
 
 export class InfoPribadiFormComponent implements OnInit {
@@ -38,15 +38,28 @@ export class InfoPribadiFormComponent implements OnInit {
   async save() {
     try {
       Swal.showLoading();
-      const result = await this.assetService.uploadAssetFile({
-        file: this.fileKTP
-      }).toPromise();
+      this.uploadFile().then((fileName) => {
+        // Add save biodata here
+      })
       console.log(this.formData);
       Swal.hideLoading();
     } catch (e) {
       Swal.hideLoading();
       Swal.fire('Error', e.toString());
     }
+  }
+
+  uploadFile() {
+    return new Promise<any>(async (resolve, reject) => {
+      try {
+        const result = await this.assetService.uploadAssetFile({
+          file: this.fileKTP
+        }).toPromise();
+        resolve(result.data);
+      } catch (e) {
+        reject(e.toString());
+      }
+    })
   }
 
   changeKtp(ev) {

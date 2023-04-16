@@ -1,0 +1,33 @@
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+form label {
+  flex: 0 0 150px; /* set the label width to 150px */
+  margin-right: 20px; /* add some margin between the label and the input */
+  text-align: right; /* align the text to the right */
+}
+
+.form-group {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  margin-right: 1rem;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea,
+.form-group .form-control-file {
+  flex: 1;
+}
+
+.upload-form {
+  align-items: flex-start!important;
+  margin-top: 0.25rem;
+}
