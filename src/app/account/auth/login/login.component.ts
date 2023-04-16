@@ -83,8 +83,18 @@ export class LoginComponent implements OnInit {
     this.oauthService.configure(authConfig);
   }
 
-  signInWithGoogle() {
+  async signInWithGoogle() {
+    console.log('initiating sso login');
     // this.oauthService.initLoginFlow();
+    setTimeout(async() => {
+      Swal.showLoading();
+    }, 500);
+    // Simulate a delay to show the loading message
+    setTimeout(async () => {
+      Swal.close();
+      // Do something with the loaded data
+      await Swal.fire('Error', "Sorry, we were unable to log you in. Please try again later or contact our support team if the problem persists.");
+    }, 10000);
     this.oauthService.initCodeFlow();
   }
 

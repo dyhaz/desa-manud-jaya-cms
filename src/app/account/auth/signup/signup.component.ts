@@ -80,15 +80,16 @@ export class SignupComponent implements OnInit {
             this.error = error ? error : '';
           });
       } if (environment.defaultauth === 'api') {
+        await this.wargaService.storeWarga({
+          nik: this.f.nik.value ?? Math.floor(Math.random() * 10000) + '',
+          email: this.f.email.value,
+          nama_warga: this.f.username.value,
+          nomor_telepon: '1234567890',
+          warga_id: 0,
+          alamat: 'Salemba'
+        }).toPromise();
+
         try {
-          await this.wargaService.storeWarga({
-            nik: this.f.nik.value ?? Math.floor(Math.random() * 10000) + '',
-            email: this.f.email.value,
-            nama_warga: this.f.username.value,
-            nomor_telepon: '1234567890',
-            warga_id: 0,
-            alamat: 'Salemba'
-          }).toPromise();
           await this.userManagementService.createUser({
             email: this.f.email.value,
             password: this.f.password.value,
