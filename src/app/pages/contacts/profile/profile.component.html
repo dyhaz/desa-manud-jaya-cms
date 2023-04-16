@@ -42,7 +42,7 @@
 <!--                  </div>-->
                 </div>
                 <div class="mt-4">
-                  <a href="javascript: void(0);" (click)="openModal()" class="btn btn-primary btn-sm">Change Password <i
+                  <a href="javascript: void(0);" (click)="openModal()" class="btn btn-primary btn-sm">Ubah Kata Sandi <i
                       class="mdi mdi-arrow-right ms-1"></i></a>
                 </div>
               </div>
@@ -116,7 +116,13 @@
     <div class="col-xl-8">
       <div class="card">
         <div class="card-body">
-          <h4 class="card-title mb-4">Biodata</h4>
+          <div>
+            <h4 class="card-title mb-4">Biodata</h4>
+
+            <button class="btn btn-outline-secondary btn-sm float-right" (click)="editBiodata()">
+              <i class="fas fa-pencil-alt"></i>
+            </button>
+          </div>
 
           <!--          <p class="text-muted mb-4">Hi I'm Cynthia Price,has been the industry's standard dummy text To an English-->
           <!--            person, it will seem like simplified English, as a skeptical Cambridge.</p>-->
@@ -234,4 +240,7 @@
 </div>
 <ng-template #content role="document" let-modal>
   <app-change-password-form [modal]="modal"></app-change-password-form>
+</ng-template>
+<ng-template #biodata role="document" let-modal>
+  <app-profile-form [modal]="modal"></app-profile-form>
 </ng-template>

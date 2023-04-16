@@ -17,9 +17,10 @@ import {
   ChangePasswordFormComponent
 } from '@pages/contacts/profile/change-password-form/change-password-form.component';
 import { UserManagementService } from '@core/http/api';
+import { InfoPribadiFormComponent } from "@pages/contacts/profile/info-pribadi-form/info-pribadi-form.component";
 
 @NgModule({
-  declarations: [UsergridComponent, UserlistComponent, ProfileComponent, ChangePasswordFormComponent],
+  declarations: [UsergridComponent, UserlistComponent, ProfileComponent, ChangePasswordFormComponent, InfoPribadiFormComponent],
   imports: [
     CommonModule,
     ContactsRoutingModule,

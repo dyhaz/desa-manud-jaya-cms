@@ -8,7 +8,7 @@
               <div class="col-7">
                 <div class="text-primary p-4">
                   <h5 class="text-primary">Lock screen</h5>
-                  <p>Enter your password to unlock the screen!</p>
+                  <p>Masukkan kata sandi untuk membuka !</p>
                 </div>
               </div>
               <div class="col-5 align-self-end">
@@ -30,17 +30,17 @@
               <form>
 
                 <div class="user-thumb text-center mb-4">
-                  <img src="assets/images/users/avatar-1.jpg" class="rounded-circle img-thumbnail avatar-md"
+                  <img [src]="domSanitizer.bypassSecurityTrustResourceUrl(!currentUser?.photo?.includes('https://') ? 'data:image/png;base64, ' + currentUser?.photo : currentUser?.photo)" class="rounded-circle img-thumbnail avatar-md"
                     alt="thumbnail">
-                  <h5 class="font-size-15 mt-3">Maria Laird</h5>
+                  <h5 class="font-size-15 mt-3">{{ currentUser?.name }}</h5>
                 </div>
                 <div class="mb-3">
-                  <label for="userpassword">Password</label>
-                  <input type="password" class="form-control" id="userpassword" placeholder="Enter password">
+                  <label for="userpassword">Kata sandi</label>
+                  <input type="password" class="form-control" id="userpassword" name="password" [(ngModel)]="password" placeholder="Kata sandi">
                 </div>
 
                 <div class="text-end">
-                    <button class="btn btn-primary w-md" type="submit">Unlock</button>
+                    <button class="btn btn-primary w-md" type="submit" [disabled]="!password" (click)="unlock()">Unlock</button>
                   </div>
 
               </form>
@@ -49,7 +49,7 @@
           </div>
         </div>
         <div class="mt-5 text-center">
-          <p>Not you ? return <a routerLink="/account/login-1" class="fw-medium text-primary"> Sign In </a> </p>
+<!--          <p>Not you ? return <a routerLink="/account/login-1" class="fw-medium text-primary"> Sign In </a> </p>-->
           <p>© {{year}} Desa Manud Jaya</p>
         </div>
       </div>

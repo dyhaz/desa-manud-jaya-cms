@@ -17,6 +17,7 @@ import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
  */
 export class ProfileComponent implements OnInit {
   @ViewChild('content') editmodal: TemplateRef<any>;
+  @ViewChild('biodata') biodataModal: TemplateRef<any>;
 
   // bread crumb items
   breadCrumbItems: Array<{}>;
@@ -59,5 +60,11 @@ export class ProfileComponent implements OnInit {
 
   openModal() {
     this.modalService.open(this.editmodal);
+  }
+
+  editBiodata() {
+    this.modalService.open(this.biodataModal, {
+      size: 'xl'
+    });
   }
 }
