@@ -38,7 +38,7 @@
                                 <img [src]="loginPhoto && !loginPhoto.includes('https://') ? 'data:image/jpeg;base64,' + loginPhoto : loginPhoto" alt="" class="img-thumbnail rounded-circle">
                             </div>
                             <h5 class="font-size-15 text-truncate">{{ loginName }}</h5>
-                            <p class="text-muted mb-0 text-truncate">{{ user?.user_level && user?.user_level?.includes('aparat') ? 'Admin' : 'Warga' }}</p>
+                            <p class="text-muted mb-0 text-truncate">{{ user?.user_level && user?.user_level?.includes('aparat') ? 'Perangkat Desa' : 'Warga' }}</p>
                         </div>
 
                         <div class="col-sm-8">
