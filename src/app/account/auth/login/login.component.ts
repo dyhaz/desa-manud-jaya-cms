@@ -93,7 +93,9 @@ export class LoginComponent implements OnInit {
     setTimeout(async () => {
       Swal.close();
       // Do something with the loaded data
-      await Swal.fire('Error', "Sorry, we were unable to log you in. Please try again later or contact our support team if the problem persists.");
+      const link = '<a href=\'' + window.location.origin + '\'>muat ulang</a>';
+      const htmlMessage = `Terjadi kesalahan saat proses login SSO. Silakan coba lagi atau ${link} halaman jika masalah masih berlanjut.`;
+      await Swal.fire('Error', htmlMessage);
     }, 10000);
     this.oauthService.initCodeFlow();
   }
