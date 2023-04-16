@@ -165,4 +165,28 @@ email?: string,
         });
     }
 
+    /**
+     * Get total requested and approved permits by user email
+     * Returns total requested and approved permits by user email from request_perizinan table
+     * @param email User email
+     * @returns any Success
+     * @throws ApiError
+     */
+    public getPerizinanByUserEmail(
+email: string,
+): Observable<{
+data?: any;
+}> {
+        return __request(OpenAPI, this.http, {
+            method: 'GET',
+            url: '/api/perizinan/summary/{email}',
+            path: {
+                'email': email,
+            },
+            errors: {
+                404: `Data not found`,
+            },
+        });
+    }
+
 }

@@ -6,7 +6,7 @@ import { EventService } from '../../../core/services/event.service';
 
 import { ConfigService } from '../../../core/services/config.service';
 import { Router } from "@angular/router";
-import { DashboardService, WargaService } from "@core/http/api";
+import { DashboardService, PerizinanService, WargaService } from '@core/http/api';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -31,6 +31,8 @@ export class DefaultComponent implements OnInit {
   public loginName = '';
   public loginPhoto = '';
   public user: any;
+  public totalPengajuan = 0;
+  public totalDisetujui = 0;
 
   @ViewChild('content') content;
   constructor(
@@ -39,7 +41,8 @@ export class DefaultComponent implements OnInit {
     private eventService: EventService,
     private router: Router,
     private dashboardService: DashboardService,
-    private wargaService: WargaService
+    private wargaService: WargaService,
+    private perizinanService: PerizinanService
   ) {
   }
 
@@ -81,12 +84,23 @@ export class DefaultComponent implements OnInit {
       this.loginPhoto = currentUser.photo;
       this.user = currentUser;
     }
+
+    this.getPerizinanStatus();
   }
 
   ngAfterViewInit() {
     setTimeout(() => {
       this.openModal();
     }, 2000);
+  }
+
+  public async getPerizinanStatus() {
+    try {
+      const result = await this.perizinanService.getPerizinanByUserEmail(this.user.email).toPromise();
+      this.totalPengajuan = result.data.total_diajukan;
+      this.totalDisetujui = result.data.total_disetujui;
+    } catch (e) {
+    }
   }
 
   /**
