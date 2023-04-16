@@ -47,6 +47,7 @@
 <!--                  <th></th>-->
                   <th sortable="name" (sort)="onSort($event)">Nama</th>
                   <th sortable="email" (sort)="onSort($event)">Email</th>
+                  <th sortable="user_level" (sort)="onSort($event)">Peran</th>
                   <th sortable="photo" (sort)="onSort($event)">Foto</th>
                   <th>Actions</th>
                 </tr>
@@ -63,6 +64,9 @@
                   </td>
                   <td>
                     <ngb-highlight [result]="table.email" [term]="service.searchTerm"></ngb-highlight>
+                  </td>
+                  <td>
+                    <ngb-highlight [result]="table.user_level?.includes('aparat') ? 'Perangkat Desa' : 'Warga'" [term]="service.searchTerm"></ngb-highlight>
                   </td>
                   <td>
                     <div class="row">

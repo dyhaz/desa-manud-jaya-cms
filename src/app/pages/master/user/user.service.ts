@@ -45,6 +45,7 @@ function sort(tables: Table[], column: string, direction: string): Table[] {
  */
 function matches(tables: Table, term: string, pipe: PipeTransform) {
   return tables.name?.toLowerCase()?.includes(term.toLowerCase())
+    || (tables.user_level?.includes('aparat') ? 'Perangkat Desa' : 'Warga').toLowerCase()?.includes(term)
     || tables.email?.toLowerCase()?.includes(term)
     || tables.created_at?.toLowerCase()?.includes(term)
     || tables.photo?.toLowerCase()?.includes(term)
