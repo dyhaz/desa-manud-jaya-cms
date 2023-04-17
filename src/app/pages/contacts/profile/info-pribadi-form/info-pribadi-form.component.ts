@@ -3,6 +3,7 @@ import { AssetsService, UserManagementService, WargaService } from '@core/http/a
 import Swal from 'sweetalert2';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { nikValidator } from "@core/helpers/nik.validator";
+import { environment } from "@environments/environment";
 
 @Component({
   selector: 'app-profile-form',
@@ -58,6 +59,7 @@ export class InfoPribadiFormComponent implements OnInit {
         }).toPromise();
         await this.userService.updateUser({
           ...this.user,
+          photo: environment.apiConfig.baseUrl + '/api/assets/' + file.foto,
           phone: this.formData.get('phone').value,
         }, this.user.id).toPromise();
       });

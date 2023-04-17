@@ -87,6 +87,7 @@ email: string;
 password: string;
 phone?: string;
 user_level?: string;
+photo?: string;
 },
 id?: any,
 ): Observable<any> {
