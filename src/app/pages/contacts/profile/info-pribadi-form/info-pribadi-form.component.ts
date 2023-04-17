@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { AssetsService } from '@core/http/api';
+import { AssetsService, UserManagementService, WargaService } from '@core/http/api';
 import Swal from 'sweetalert2';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
@@ -18,9 +18,13 @@ export class InfoPribadiFormComponent implements OnInit {
   fileKTP: any;
   filePhoto: any;
 
+  user: any;
+
   constructor(
     private assetService: AssetsService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private wargaService: WargaService,
+    private userService: UserManagementService
   ) {
   }
 
@@ -34,14 +38,28 @@ export class InfoPribadiFormComponent implements OnInit {
       noKTP: ['', [Validators.required]],
       phone: ['']
     });
+    this.user = JSON.parse(localStorage.getItem('currentUser'));
   }
 
   async save() {
     try {
       Swal.showLoading();
-      this.uploadFile().then((fileName) => {
+      this.uploadFile().then(async (file: { ktp: string, foto: string }) => {
         // Add save biodata here
-      })
+        await this.wargaService.storeWarga({
+          email: this.user.email,
+          alamat: this.formData.get('alamat').value,
+          nik: this.formData.get('noKTP').value,
+          nama_warga: this.formData.get('namaLengkap').value,
+          nomor_telepon: this.formData.get('phone').value,
+          warga_id: 0,
+          news_subscribe: false
+        }).toPromise();
+        await this.userService.updateUser({
+          ...this.user,
+          phone: this.formData.get('phone').value,
+        }, this.user.id).toPromise();
+      });
       console.log(this.formData);
       Swal.hideLoading();
     } catch (e) {
@@ -53,10 +71,16 @@ export class InfoPribadiFormComponent implements OnInit {
   uploadFile() {
     return new Promise<any>(async (resolve, reject) => {
       try {
-        const result = await this.assetService.uploadAssetFile({
+        const result1 = await this.assetService.uploadAssetFile({
           file: this.fileKTP
         }).toPromise();
-        resolve(result.data);
+        const result2 = await this.assetService.uploadAssetFile({
+          file: this.filePhoto
+        }).toPromise();
+        resolve({
+          ktp: result1.data,
+          foto: result2.data
+        });
       } catch (e) {
         reject(e.toString());
       }
