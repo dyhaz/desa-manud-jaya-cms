@@ -203,12 +203,11 @@ export class PerizinanTableService {
           Swal.showLoading();
           result = await this.perizinanService.getPerizinanByEmail(this.user.email, this.status).toPromise();
           this.tableData = result.data;
+          Swal.hideLoading();
+          Swal.clickConfirm();
         } catch (e) {
           Swal.hideLoading();
           await Swal.fire('Error', `Silakan mengisi <a href="/contacts/profile">form data diri</a> terlebih dahulu sebelum melakukan pengajuan`);
-        } finally {
-          Swal.hideLoading();
-          Swal.clickConfirm();
         }
       }
 
