@@ -34,6 +34,8 @@ export class DefaultComponent implements OnInit {
   public totalPengajuan = 0;
   public totalDisetujui = 0;
 
+  public loading = false;
+
   @ViewChild('content') content;
   constructor(
     private modalService: NgbModal,
@@ -86,6 +88,14 @@ export class DefaultComponent implements OnInit {
     }
 
     this.getPerizinanStatus();
+
+    /**
+     * Fake loading
+     */
+    this.loading = true;
+    setTimeout(() => {
+      this.loading = false;
+    }, 2000);
   }
 
   ngAfterViewInit() {

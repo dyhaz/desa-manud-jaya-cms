@@ -17,6 +17,7 @@ import { CryptoComponent } from './crypto/crypto.component';
 import { BlogComponent } from './blog/blog.component';
 import { DashboardService } from '@core/http/api/services/DashboardService';
 import { NgxChartistModule } from "ngx-chartist";
+import { AngularTwitterTimelineModule } from "angular-twitter-timeline";
 
 @NgModule({
   declarations: [DefaultComponent, SaasComponent, CryptoComponent, BlogComponent],
@@ -33,7 +34,8 @@ import { NgxChartistModule } from "ngx-chartist";
         NgApexchartsModule,
         SharedModule,
         SimplebarAngularModule,
-        NgxChartistModule
+        NgxChartistModule,
+        AngularTwitterTimelineModule
     ],
   providers: [
     DashboardService

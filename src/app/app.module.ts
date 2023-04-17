@@ -36,6 +36,7 @@ import {
 import { OAuthModule } from 'angular-oauth2-oidc';
 import { FormsModule } from "@angular/forms";
 import { DragulaModule } from 'ng2-dragula';
+import { AngularTwitterTimelineModule } from "angular-twitter-timeline";
 
 if (environment.defaultauth === 'firebase') {
   initFirebaseBackend(environment.firebaseConfig);
@@ -75,6 +76,7 @@ export function createTranslateLoader(http: HttpClient): any {
         SharedModule,
         ScrollToModule.forRoot(),
         NgbModule,
+        AngularTwitterTimelineModule,
         OAuthModule.forRoot({
             resourceServer: {
                 allowedUrls: ['http://localhost:4200', 'https://simanud.asia', 'https://portal.simanud.asia', 'https://admin.simanud.asia'],
