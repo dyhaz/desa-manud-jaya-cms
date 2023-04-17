@@ -62,9 +62,9 @@ export class InfoPribadiFormComponent implements OnInit {
           photo: environment.apiConfig.baseUrl + '/api/assets/' + file.foto,
           phone: this.formData.get('phone').value,
         }, this.user.id).toPromise();
+        Swal.hideLoading();
       });
       console.log(this.formData);
-      Swal.hideLoading();
     } catch (e) {
       Swal.hideLoading();
       Swal.fire('Error', e.toString());
