@@ -58,7 +58,7 @@ export class InfoPribadiFormComponent implements OnInit {
               nama_warga: this.formData.get('namaLengkap').value,
               nomor_telepon: this.formData.get('phone').value,
               news_subscribe: false
-            })
+            }).toPromise();
           } else {
             await this.wargaService.storeWarga({
               email: this.user.email,
