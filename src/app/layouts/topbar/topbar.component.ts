@@ -168,6 +168,10 @@ export class TopbarComponent implements OnInit {
   }
 
   async openPerizinanPage() {
-    await this.router.navigate(['/master/perizinan']);
+    if (this.userLevel.indexOf('aparat') !== -1) {
+      await this.router.navigate(['/master/perizinan']);
+    } else {
+      await this.router.navigate(['/warga/perizinan']);
+    }
   }
 }
