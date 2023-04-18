@@ -48,20 +48,29 @@ export class InfoPribadiFormComponent implements OnInit {
       Swal.showLoading();
       this.uploadFile().then(async (file: { ktp: string, foto: string }) => {
         // Add save biodata here
-        await this.wargaService.storeWarga({
-          email: this.user.email,
-          alamat: this.formData.get('alamat').value,
-          nik: this.formData.get('noKTP').value,
-          nama_warga: this.formData.get('namaLengkap').value,
-          nomor_telepon: this.formData.get('phone').value,
-          warga_id: 0,
-          news_subscribe: false
-        }).toPromise();
-        await this.userService.updateUser({
-          ...this.user,
-          photo: environment.apiConfig.baseUrl + '/api/assets/' + file.foto,
-          phone: this.formData.get('phone').value,
-        }, this.user.id).toPromise();
+        try {
+          await this.wargaService.storeWarga({
+            email: this.user.email,
+            alamat: this.formData.get('alamat').value,
+            nik: this.formData.get('noKTP').value,
+            nama_warga: this.formData.get('namaLengkap').value,
+            nomor_telepon: this.formData.get('phone').value,
+            warga_id: 0,
+            news_subscribe: false
+          }).toPromise();
+        } catch (e) {
+          await Swal.fire('Error', 'Kesalahan saat menyimpan NIK');
+        }
+
+        try {
+          await this.userService.updateUser({
+            ...this.user,
+            photo: environment.apiConfig.baseUrl + '/api/assets/' + file.foto,
+            phone: this.formData.get('phone').value,
+          }, this.user.id).toPromise();
+        } catch (e) {
+          await Swal.fire('Error', 'Kesalahan saat update pengguna');
+        }
         Swal.hideLoading();
       });
       console.log(this.formData);
