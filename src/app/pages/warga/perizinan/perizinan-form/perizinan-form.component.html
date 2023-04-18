@@ -66,5 +66,5 @@
   </div>
 </div>
 <div class="modal-footer">
-  <button type="button" class="btn btn-success" (click)="approve()">Save</button>
+  <button type="button" class="btn btn-success" [disabled]="mode === 'edit' && perizinan.status_request === 'Disetujui'" (click)="approve()">Simpan</button>
 </div>
