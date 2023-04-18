@@ -49,15 +49,27 @@ export class InfoPribadiFormComponent implements OnInit {
       this.uploadFile().then(async (file: { ktp: string, foto: string }) => {
         // Add save biodata here
         try {
-          await this.wargaService.storeWarga({
-            email: this.user.email,
-            alamat: this.formData.get('alamat').value,
-            nik: this.formData.get('noKTP').value,
-            nama_warga: this.formData.get('namaLengkap').value,
-            nomor_telepon: this.formData.get('phone').value,
-            warga_id: 0,
-            news_subscribe: false
-          }).toPromise();
+          const result = await this.wargaService.filterWarga('','',this.user.email).toPromise();
+          if (result.data.length > 0) {
+            await this.wargaService.updateWarga(result.data[0].warga_id, {
+              email: this.user.email,
+              alamat: this.formData.get('alamat').value,
+              nik: this.formData.get('noKTP').value,
+              nama_warga: this.formData.get('namaLengkap').value,
+              nomor_telepon: this.formData.get('phone').value,
+              news_subscribe: false
+            })
+          } else {
+            await this.wargaService.storeWarga({
+              email: this.user.email,
+              alamat: this.formData.get('alamat').value,
+              nik: this.formData.get('noKTP').value,
+              nama_warga: this.formData.get('namaLengkap').value,
+              nomor_telepon: this.formData.get('phone').value,
+              warga_id: 0,
+              news_subscribe: false
+            }).toPromise();
+          }
         } catch (e) {
           await Swal.fire('Error', 'Kesalahan saat menyimpan NIK');
         }
