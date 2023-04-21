@@ -136,7 +136,8 @@ export class PerizinanFormComponent implements OnInit {
           status_request: 'Menunggu Persetujuan',
           nama: '',
           tanggal_request: this.perizinan.tanggal_request,
-          warga_id: warga.warga_id
+          warga_id: warga.warga_id,
+          lampiran: this.perizinan.lampiran
         }).toPromise();
         Swal.fire('Updated!', 'Saved successfully.', 'success');
         this.dismiss.emit();
@@ -181,9 +182,13 @@ export class PerizinanFormComponent implements OnInit {
   }
 
   downloadLampiran(lampiran: string) {
-    lampiran = lampiran.replace('data:', '')
-      .replace(/^.+,/, '');
-    const blob = new Blob([atob(lampiran)], {type: 'application/pdf'});
-    saveAs(blob, 'lampiran.pdf');
+    try {
+      lampiran = lampiran.replace('data:', '')
+        .replace(/^.+,/, '');
+      const blob = new Blob([atob(lampiran)], {type: 'application/pdf'});
+      saveAs(blob, 'lampiran.pdf');
+    } catch (e) {
+      Swal.fire('Error', 'Lampiran tidak ditemukan')
+    }
   }
 }
