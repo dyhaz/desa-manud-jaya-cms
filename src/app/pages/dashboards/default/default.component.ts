@@ -8,6 +8,7 @@ import { ConfigService } from '../../../core/services/config.service';
 import { Router } from "@angular/router";
 import { DashboardService, PerizinanService, WargaService } from '@core/http/api';
 import Swal from 'sweetalert2';
+import { Apollo, gql } from 'apollo-angular';
 
 @Component({
   selector: 'app-default',
@@ -36,6 +37,8 @@ export class DefaultComponent implements OnInit {
 
   public loading = false;
 
+  public error: any;
+
   @ViewChild('content') content;
   constructor(
     private modalService: NgbModal,
@@ -44,7 +47,8 @@ export class DefaultComponent implements OnInit {
     private router: Router,
     private dashboardService: DashboardService,
     private wargaService: WargaService,
-    private perizinanService: PerizinanService
+    private perizinanService: PerizinanService,
+    private apollo: Apollo
   ) {
   }
 
@@ -88,6 +92,26 @@ export class DefaultComponent implements OnInit {
     }
 
     this.getPerizinanStatus();
+
+    this.apollo
+      .watchQuery({
+        query: gql`
+          query {
+            feeds {
+              id,
+              title,
+              content,
+              user_name,
+              photo
+            }
+          }
+        `,
+      })
+      .valueChanges.subscribe((result: any) => {
+      debugger;
+      this.loading = result.loading;
+      this.error = result.error;
+    });
 
     /**
      * Fake loading

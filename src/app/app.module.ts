@@ -37,6 +37,7 @@ import { OAuthModule } from 'angular-oauth2-oidc';
 import { FormsModule } from "@angular/forms";
 import { DragulaModule } from 'ng2-dragula';
 import { AngularTwitterTimelineModule } from "angular-twitter-timeline";
+import { GraphQLModule } from './graphql.module';
 
 if (environment.defaultauth === 'firebase') {
   initFirebaseBackend(environment.firebaseConfig);
@@ -84,7 +85,8 @@ export function createTranslateLoader(http: HttpClient): any {
             }
         }),
         DragulaModule.forRoot(),
-        FormsModule
+        FormsModule,
+        GraphQLModule
     ],
   bootstrap: [AppComponent],
   providers: [
